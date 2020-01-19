@@ -1,0 +1,180 @@
+html,
+body {
+	margin: 0;
+	padding: 0;
+	font-family: "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;
+	font-size: 15px;
+	color: #fff;
+	background: #222;
+}
+h1 {
+	margin: 0 0 15px;
+	padding: 0 10px;
+	font-size: 30px;
+	font-weight: bold;
+	line-height: 30px;
+}
+a {
+	color: #fff;
+	text-decoration: none;
+}
+a:hover {
+	color: #00ABEB;
+}
+/* Not used since canvas is scaled in js */
+img,
+canvas {
+	max-width: 300px;
+}
+p {
+	padding: 0 10px;
+	line-height: 22px;
+	color: #ccc;
+}
+p.ul {
+	margin: 0;
+	padding: 0;
+	font-size: 18px;
+	border-top: 1px solid #333;
+}
+p.ul a.li {
+	display: block;
+	padding: 0 10px;
+	line-height: 40px;
+	text-decoration: none;
+	color: #fff;
+	border-bottom: 1px solid #333;
+	-webkit-transition: padding 0.1s linear;
+}
+p.ul a.li.last {
+	color: #666;
+	border-bottom: none;
+}
+p.ul a.li:hover {
+	padding: 0 10px 0 15px;
+	color: #fff;
+	background: #0A82AE;
+	-webkit-box-shadow: 0 0 10px rgba(0,0,0,0.5) inset;
+}
+a.back_float {
+	position: absolute;
+	margin: 10px 0 0;
+	padding: 0 15px;
+	right: 10px;
+	font-size: 18px;
+	line-height: 40px;
+	background: #000;
+	color: #aaa;
+	z-index: 100;
+	opacity: 0;
+	-webkit-border-radius: 5px;
+	-webkit-transition-property: margin, opacity;
+	-webkit-transition-duration: 0.5s, 0.1s;
+	-webkit-transition-timing-function: ease-out, ease-out;
+}
+a.back_float:hover {
+	color: #fff;
+	background: #0A82AE;
+	-webkit-box-shadow: 0 0 10px rgba(0,0,0,0.5) inset;
+}
+div.page {
+	position: absolute;
+	/*padding: 10px;*/
+	padding: 10px 0;
+	/*width: 300px;*/
+	width: 100%;
+	min-height: 460px;
+	overflow: hidden;
+	background: #222;
+	-webkit-transition: -webkit-transform 0.25s ease-out;
+}
+div.page.left {
+	-webkit-transform: translateX(-100%);
+}
+div.page.right {
+	-webkit-transform: translateX(100%);
+}
+div.page form {
+	padding: 0 10px;
+}
+.fadein {
+	opacity: 1.0 !important;
+}
+
+/* main */
+
+#title,
+#main_menu {
+	opacity: 0;
+	-webkit-transition: opacity 0.5s linear;
+}
+a.qufoto {
+	position: absolute;
+	bottom: 10px;
+	left: 10px;
+	font-size: 14px;
+	opacity: 0;
+	-webkit-transition: opacity 1.0s linear;
+}
+
+/* Portfolio */
+
+div.portfolio {
+	padding: 0 10px;
+	opacity: 0;
+	-webkit-transition: opacity 0.5s linear;
+	-webkit-transform-style: preserve-3d;
+}
+div.portfolio img,
+div.portfolio canvas {
+	margin: 0 0 5px;
+}
+/* Not used since canvas is scaled in js */
+body.tablet div.portfolio img,
+body.tablet div.portfolio canvas {
+	max-width: 748px;
+}
+div.portfolio p {
+	padding: 0;
+}
+div.portfolio p.title {
+	margin: 0;
+	color: #fff;
+}
+div.portfolio p.description {
+	margin: 0 0 20px;
+	font-size: 13px;
+	line-height: 17px;
+}
+
+/* Contact */
+
+div.input_wrap {
+	margin-right: 20px;
+}
+input.contact,
+textarea.contact {
+	display: block;
+	margin: 0 0 10px;
+	padding: 10px;
+	/*width: 280px;*/
+	width: 100%;
+	font-family: "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;
+	font-size: 13px;
+	color: #fff;
+	background: #181818;
+	border: none;
+	-webkit-border-radius: 5px;
+	-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+}
+textarea.contact {
+	height: 160px;
+}
+
+
+
+
+
+
+
+

@@ -1,0 +1,31 @@
+<% topics = [
+	["faq", "FAQ"],
+	["user_guide", "User guide"],
+	["getting_started", "Getting Started"],
+#	["customize", "Customizing Your Site"],
+	["domains", "Domains"],
+	["email", "Email Addresses"],
+	["analytics", "Google Analytics"],
+	["seo", "Search Engines"],
+	["referrals", "Referral Program"],
+	["about", "About Us"],
+	["contact", "Contact Us"]
+] %>
+
+<div class="column_nav">
+    <ul>
+    	<li class="first">Help Topics</li>
+        <% topics.each do |topic| %>
+            <li><a href="/<%= topic.first %>"<%= 'class="selected"' if params['action'] == topic.first %>><%= topic.last %></a></li>
+        <% end %>
+		<li class="last"></li>
+		<li class="big break"></li>
+		<li class="first">Interviews & News</li>
+		<li><a href="/interviews">Interviews</a></li>
+		<li><a href="/news">News</a></li>
+		<li class="last"></li>
+    </ul>
+	<p class="btn green sign_up">
+		<a href="/signup">Get started &raquo;</a>
+	</p>
+</div>

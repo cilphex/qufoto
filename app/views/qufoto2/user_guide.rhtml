@@ -1,0 +1,21 @@
+<h1>Qufoto user guide</h1>
+<p>Type a specific question below and we'll search our help topics for you.
+Or click "show all topics" to browse all of them yourself.</p>
+
+<p class="query">
+	<a class="show_all" href="#" onclick="UserGuide.showAll(); return false;">show all topics</a>
+	What do you want to know?
+</p>
+<input id="query" type="text"/>
+<p class="query_example">e.g. "How do I change my password?"
+
+<div id="query_results_wrap" style="display: none;">
+	<h2 id="matches">Matching topics</h2>
+	<div id="query_results"></div>
+	<div id="no_results">No results!  Be more specific, or <a href="/contact">send us a message</a> instead.</div>
+	<div id="maybe_results"><em>Keep typing...</em></div>
+</div>
+
+<script>
+	UserGuide.initialize('query', true);
+</script>

@@ -1,0 +1,59 @@
+<h1>Thanks!</h1>
+
+<p id="reference">
+	How'd you hear about us?
+	<select id="referrer" name="referrer" onChange="checkReferrer();">
+		<option value="0">Select</option>
+		<option value="0">-</option>
+		<option value="1">Facebook Advertisement</option>
+		<option value="7">Bing (Advertisement)</option>
+		<option value="3">Google (Advertisement)</option>
+		<option value="2">Google (Search result)</option>
+		<option value="4">Another Qufoto user</option>
+		<option value="5">A webpage</option>
+		<option value="6">Other</option>
+	</select>
+	<span id="specify_reference" style="display: none;">
+		Please specify:
+		<input type="text" id="referrer_detail" name="referrer_detail"/>
+	</span>
+	<a href="#" onClick="sendReferrer();">Send</a>
+	<input type="hidden" id="user" name="user" value="<%= @name %>"/>
+	<input type="hidden" id="email" name="email" value="<%= @email %>"/>
+</p>
+
+<% if @tx %>
+    <p>Thanks for your subscribing, <%= @name %>! Your 
+    transaction has been completed, and a receipt for your purchase has been emailed 
+    to you. You may log into your account at <a href="http://www.paypal.com">www.paypal.com</a> 
+    to view details of this transaction.</p>
+    
+    <p>Please allow 24 hours for your account to be set up. Your username and 
+    password will be sent to <%= @email %>.
+    If you will be using a domain that you already own, please see our help document on
+    <a href="/domains">redirecting domains</a>.</p>
+	
+	<script src="//ah8.facebook.com/js/conversions/tracking.js"></script><script type="text/javascript">
+		try {
+			FB.Insights.impression({
+				'id': 6002568808800,
+				'h': 'ac737989ae',
+				'value': 1
+			});
+		} catch (e) {}
+	</script>
+<% else %>
+    <p>Thank you for your payment. Your transaction has been completed, and a receipt 
+    for your purchase has been emailed to you. You may log into your account at 
+    <a href="http://www.paypal.com">www.paypal.com</a> to view details of this 
+    transaction.</p>
+    
+    <p>Please allow 24 hours for your account to be set up. Your username and 
+    password will be sent to your PayPal email address.  If you will be using a domain
+    that you already own, please see our help document on <a href="/domains">redirecting
+    domains</a>.</p>
+<% end %>
+
+<!-- custom: <%= @custom %>, item_name: <%= @item_name %> -->
+
+<p>If you are re-subscribing, upgrading or downgrading your account, please disregard this message.</p>

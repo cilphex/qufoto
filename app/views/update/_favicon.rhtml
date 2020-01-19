@@ -1,0 +1,29 @@
+<div id="help" style="display: none;">
+    A "favicon" is the small image that is displayed on the tab of your web browser 
+    when someone visits your website. Literally, it is short for "favorites icon." 
+    You can use the tutorial on 
+    <a href="http://www.photoshopsupport.com/tutorials/jennifer/favicon.html">this webpage</a>
+    to create your own favicon using photoshop.  When you upload a new favicon, it 
+    may take a few hours for the change to take effect.  The file you upload must end
+    in ".ico".
+</div>
+
+<%
+    favicon = "favicon" + current_user.id.to_s + ".ico"
+%>
+
+<center>
+    <%# if s3_contains(favicon) %>
+    <% if current_user.info.favicon %>
+        Current favicon: <%= image_tag(s3_file(favicon_s3_path(current_user))) %>
+        &nbsp;
+        [<%= link_to "delete", :action => "delete_favicon" %>]
+    <% else %>
+        No favicon has been uploaded
+    <% end %>
+    
+    <%= form_tag({:action => 'update_favicon'}, :multipart => true, :style => "margin: 30px 0;") %>
+        <%= file_field_tag "tmp_file", :size => 42 %><br><br>
+        <%= submit_tag "Upload New", :class => "highlight", :style => "width: 300px;", :onclick => "$('loadImage').show();" %>
+    </form>
+</center>

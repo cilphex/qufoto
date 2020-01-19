@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+	<head>
+		<title>Reisenfolde Media</title>
+		<meta name="description" content="Clean lines.">
+        <meta name="keywords" content="reisenfolde media, reisenfolde, craig hammell, cilphex, qufoto">
+		<link rel="shortcut icon" href="/images/reisenfolde/reisenfolde.ico">
+		<link href="/stylesheets/reisenfolde/reisenfolde.css" media="screen" rel="Stylesheet" type="text/css" />
+		<script src="http://ajax.googleapis.com/ajax/libs/prototype/1.6.0.2/prototype.js" type="text/javascript"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/scriptaculous/1.8.1/scriptaculous.js?load=effects" type="text/javascript"></script>
+        <script src="/javascripts/application.js" type="text/javascript"></script>
+	</head>
+	<body>
+		<div id="container">
+			<div id="header">
+			    <a href="/r"><img src="/images/reisenfolde/title.png" /></a>
+			</div>
+			<div id="separator"></div>
+			<div id="content">
+				<div id="nav">
+					<ul id="navmenu">
+						<li>>>></li>
+						<li class="iesucks"><a href="/r/projects" id="projects">Projects</a></li>
+						<li class="iesucks"><a href="/r/people" id="people">People</a></li>
+						<li><a href="/r/contact" id="contact">Contact</a></li>
+						<li><<<</li>
+					</ul>
+				</div>
+				<%= @content_for_layout %>
+			</div>
+		</div>
+		
+		<!-- half of this bullshit would not be necessary if IE6/7 worked properly -->
+		<script type="text/javascript">
+		    $$('#navmenu > li:first-child')[0].setStyle ({padding:'0 9px 0 0'});
+		    $$('#navmenu > li:not(:last-child)').each (function (e) {
+                e.setStyle ({display:'none'});
+		    });
+			$$('#navmenu > li.iesucks').each (function (e) {
+			    e.insert({bottom: '<span>/</span>'});
+			});
+			var colors = [ '#00D119', '#FF8A00', '#228AFF', '#FF009C' ];
+			var x = 0;
+			function menuColor () {
+				$$('#navmenu > li:first-child')[0].morph ({ color:colors[x] }, {duration:2.0});
+				$$('#navmenu > li:last-child')[0].morph ({ color:colors[x] }, {duration:2.0});
+				x++;
+				x = x % colors.length;
+				setTimeout ("menuColor ()", 2200);
+			}
+			menuColor ();
+			Event.observe ($$('#navmenu > li:last-child')[0], 'mouseover', function () {
+				$$('#navmenu > li:last-child')[0].hide ();
+				$$('#navmenu > li:not(:last-child)').each (function (e) {
+					new Effect.Appear (e, {duration:0.2});
+				});
+			});
+			Event.observe ($$('#navmenu > li:first-child')[0], 'mouseover', function () {
+				$$('#navmenu > li:not(:last-child)').each (function (e) {
+					e.hide ();
+				});
+				new Effect.Appear ($$('#navmenu > li:last-child')[0], {duration:0.2});
+			});
+		</script>
+		
+		<script type="text/javascript">
+            <!-- Fix shit in IE6, including every PNG on the page -->
+            var version = parseFloat (navigator.appVersion.split ('MSIE')[1]);
+            if (version >= 5.5 && version < 7) { //>
+                $('content').setStyle ({background:'none'});
+                $('separator').setStyle ({background:'none',borderBottom:'1px solid #333'});
+                $$('img').each (function (e) {
+                    if (e.src.endsWith ('.png')) {
+                        var oldPadding = e.style.padding;         
+                        e.style.padding = '0px';
+                        var oldWidth = e.width;
+                        var oldHeight = e.height;
+                        var oldSrc = e.src;
+                        
+                        e.src = '/images/spacer.png';
+                        e.setStyle ({
+                            width:oldWidth+'px',
+                            height:oldHeight+'px',
+                            margin:oldPadding,
+                            'filter':"progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + oldSrc + "', sizingMethod='scale')"
+                        });
+                    }
+                });
+            }
+        </script>
+		
+		<script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            _uacct = "UA-971952-30";
+            urchinTracker();
+        </script>
+	</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+		
+<html>
+    <head>
+        <title><%= "Qufoto - " + (@title or "Websites for Photographers") %></title>
+        <meta name="description" content="Professional flash-based websites for commercial photographers and photojournalists.  Easy to use and controlled by you.  Get started in 24 hours.">
+        <meta name="keywords" content="websites for photographers, photography websites, art websites, qufoto, photo portfolio, photographer portfolio, online portfolio, portfolio websites">
+        <script src="http://ajax.googleapis.com/ajax/libs/prototype/1.6.0.2/prototype.js" type="text/javascript"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/scriptaculous/1.8.1/scriptaculous.js?load=effects,dragdrop" type="text/javascript"></script>
+        <script src="/javascripts/qufoto2.js" type="text/javascript"></script>
+		<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=cilphex"></script>
+        <link href="/stylesheets/qufoto2.css" media="screen" rel="stylesheet" type="text/css"/>
+		<link rel="shortcut icon" href="/favicon.ico"/>
+		<%= @extra_head if @extra_head %>
+    </head>
+    <body class="<%= @body_class %>">
+    	<div class="head clearfix">
+            <a class="logo" href="/" alt="Qufoto" title="Websites for photographers"></a>
+            <ul class="main">
+				<% @pages.each_with_index do |page, i| %>
+					<% if page[:top] %>
+						<%
+							first = 'first' if i == 0
+							last = 'last' if i == @pages.length - 1
+							selected = 'selected' if page[:path] == @page
+						%>
+						<li class="<%= first.to_s + ' ' + last.to_s + ' ' + selected.to_s %>"><a href="/<%= page[:path] %>"><%= page[:title] %></a></li>
+					<% end %>
+				<% end %>
+            </ul>
+			<% if @body_class == 'landing' %>
+				<h1 class="subtitle">Photography websites</h1>
+			<% else %>
+            	<div class="subtitle">Photography websites</div>
+			<% end %>
+        </div>
+        <div id="content">
+            <div class="main_content clearfix">
+                <% if @page == 'faq' or @page == 'press' or @help %>
+                    <%= render :partial => "help_nav" %>
+                    <div class="column_content">
+                        <%= @content_for_layout %>
+                    </div>
+                <% else %>
+                    <%= @content_for_layout %>
+                <% end %>
+            </div>
+        </div>
+		<div class="footer">
+        	<ul class="clearfix">
+                <% @pages.each_with_index do |page, i| %>
+					<% if page[:bottom] %>
+						<%
+							first = 'first' if i == 0
+							last = 'last' if i == @pages.length - 1
+							selected = 'selected' if page[:path] == @page
+						%>
+						<li class="<%= first.to_s + ' ' + last.to_s + ' ' + selected.to_s %>"><a href="/<%= page[:path] %>"><%= page[:title] %></a></li>
+					<% end %>
+				<% end %>
+            </ul>
+            <p class="title">&copy; Qufoto 2010. Websites for photographers.</p>
+        </div>
+        
+        <%= render :partial => :analytics.to_s %>
+    </body>
+</html>

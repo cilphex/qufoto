@@ -1,0 +1,63 @@
+<!--
+<center>
+    <span class="pink">New:</span> Chat with us!&nbsp;
+    <iframe src="http://www.google.com/talk/service/badge/Show?tk=z01q6amlqtoe60sa0d38k6og1j407udp1jjgdn4vplqu0lot6ahh6qfinni4r6jnm24kshpsere10lr3kbsgkcinbk3rmj3pkg8d3jj8m45fe3dj4ipjv8uirglrdadoi1aranghf6gereqg9dg8iah33l7uo77lu0nkccf24&amp;w=200&amp;h=60" frameborder="0" allowtransparency="true" width="200" height="60"></iframe>
+    <br><br>
+    <span>If the bubble says away, <i>we're away</i>, and will not respond!</span>
+</center>
+
+<hr style="margin-top: 40px;">
+-->
+
+<div id="comment">
+    <%= form_remote_tag( 
+        :html => {:id => "commentForm"},
+        :update => "comment", 
+        :url => {:action => "send_comment"}, 
+        :loading => "disableField('commentForm'); $('sending_image').show()",
+        :complete => "$('sending_image').hide()") %>
+        <table style="margin-left: 95px;">
+            <tr>
+                <td>
+                    &nbsp;
+                </td><td style="padding-bottom: 16px; text-align: left;">
+                    Have a question?  Fill out the information below and we'll respond as<br>
+                    soon as possible.
+                </td>
+            </tr><tr>
+                <td align=right valign=top style="padding: 4px 8px 0 0;">
+                    Name
+                </td><td valign=top>
+                    <%= text_field "name", nil, "maxlength" => 50 %>
+                </td>
+            </tr><tr>
+                <td align=right valign=top style="padding: 4px 8px 0 0;">
+                    Email
+                </td><td valign=top>
+                    <%= text_field "email", nil, "maxlength" => 50 %>
+                </td>
+            </tr><tr>
+                <td align=right valign=top style="padding: 4px 8px 0 0;">
+                    Comments
+                </td><td valign=top>
+                    <%= text_area "body", nil %>
+                </td>
+            </tr><tr>
+                <td>
+                    &nbsp;
+                </td><td valign=top>
+                    <%= submit_tag "Send comment", :id => "sendComment", :class => "highlight" %>
+                </td>
+            </tr><tr>
+                <td>
+                    &nbsp;
+                </td><td align=center style="display: none;" id="sending_image">
+                    <img src="images/ajax-loader_black.gif">
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+    
+    
+    

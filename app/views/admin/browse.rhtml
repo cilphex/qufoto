@@ -1,0 +1,57 @@
+<% if params['error'] != nil %>
+    <h5 class="error"><%= params['error'] %></h5> 
+<% end %>
+
+<h5>Browse users</h5>
+
+<table style="margin-bottom: 18px; width: 100%;">
+    <tr>
+        <td align=right style="width: 50px;">
+            Search
+        </td><td style="width: 150px;">
+            <%= text_field_tag "searchtext", nil, :style => "width: 140px;" %>
+        </td><td align=left>
+            <%= image_tag "ajax-loader.gif", :id => "spinner", :style => "display: none;" %>
+        </td><td align=right>
+            <div style="display: inline; padding: 1px 8px 1px 8px;">
+                <%= link_to_remote "All",
+                    :url => {:action => "user_lookup"},
+                    :update => "results",
+                    :loading => "$('loadImage').show();",
+                    :complete => "$('loadImage').hide();" %>
+            </div>
+            <div style="display: inline; background: #FFEBF8; border: 1px solid #CCCCCC; padding: 1px 8px 1px 8px; margin-right: 8px;">
+                <%= link_to_remote "New",
+                    :url => {:action => "user_lookup", :status => "New"},
+                    :update => "results",
+                    :loading => "$('loadImage').show();",
+                    :complete => "$('loadImage').hide();" %>
+            </div>
+            <div style="display: inline; background: #FFFFFF; border: 1px solid #CCCCCC; padding: 1px 8px 1px 8px; margin-right: 8px;">
+                <%= link_to_remote "Subscribed",
+                    :url => {:action => "user_lookup", :status => "Subscribed"},
+                    :update => "results",
+                    :loading => "$('loadImage').show();",
+                    :complete => "$('loadImage').hide();" %>
+            </div>
+            <div style="display: inline; background: #EBEFFF; border: 1px solid #CCCCCC; padding: 1px 8px 1px 8px;">
+                <%= link_to_remote "Suspended",
+                    :url => {:action => "user_lookup", :status => "Suspended"},
+                    :update => "results",
+                    :loading => "$('loadImage').show();",
+                    :complete => "$('loadImage').hide();" %>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<%= observe_field "searchtext",
+    :frequency => 0.5,
+    :update => "results",
+    :loading => "Element.show('spinner')",
+    :complete => "Element.hide('spinner')",
+    :url => {:action => "user_lookup"} %>
+
+<div id="results">
+    <%= render :partial => "user_lookup" %>
+</div>

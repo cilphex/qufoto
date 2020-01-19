@@ -1,0 +1,15 @@
+<% if current_user.comments.length == 0 %>
+    <p>You have received no messages yet.</p>
+<% else %>
+    <% current_user.comments.each do |c| %>
+        <div id="message_<%= c.id %>" class="message">
+            <a href="#" onClick="deleteMessage(<%= c.id %>); return false;" style="float: right;">Delete</a>
+            <a href="#" onClick="$('messagebody_<%= c.id %>').toggle(); return false;">
+                From <%= c.sender %> (<%= c.replyTo %>) on <%= c.date.strftime("%b %d, %y at %I:%M%p") %>
+            </a>
+            <div id="messagebody_<%= c.id %>" style="display: none;">
+                <p><%= c.body.gsub(/\n/, '</p><p>') %></p>
+            </div>
+        </div>
+    <% end %>
+<% end %>

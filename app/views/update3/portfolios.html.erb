@@ -1,0 +1,22 @@
+<h1>Portfolios</h1>
+
+<ul id="portfolios" class="portfolios">
+	<% @portfolios.each do |p| %>
+		<%= render :partial => 'portfolio_row', :locals => {:p => p} %>
+	<% end %>
+</ul>
+
+<div class="new">
+	<input id="new_portfolio_title" type="text" maxlength="30" placeholder="Add a new portfolio" class="new_portfolio"/>
+	<a id="p_go" class="create btn disabled" href="javascript:Portfolio.create()">Create</a>
+	<span id="p_error" class="error" style="display: none;"></span>
+</div>
+
+<iframe id="upload_iframe" class="upload_iframe" name="upload_iframe" src="about:blank"></iframe>
+
+<script>
+	Portfolio.initialize();
+</script>
+
+
+

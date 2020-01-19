@@ -1,0 +1,629 @@
+body {
+    margin: 0;
+    font-family: verdana, arial, sans-serif;
+    font-size: 11px;
+    color: #444444;
+    background: #fff;
+}
+.clearfix:after {
+	content:".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+/* Hides from IE-Mac \*/
+* html .clearfix {
+	height: 1%;
+}
+a,
+a:link,
+a:visited {
+	color: #228AFF;
+	text-decoration: none;
+    outline: none;
+}
+a:active,
+a:hover {
+	color: #228AFF;
+	text-decoration: underline;
+}
+h3 {
+    font-size: 14px;
+}
+h4 {
+    margin: 0;
+    padding: 0;
+    display: inline;
+    font-size: 13px;
+}
+img {
+    border: none;
+}
+form {
+    margin: 0;
+    padding: 0;
+}
+input, textarea, select {
+    border: 1px solid #CBCBCB;
+    font-family: verdana, arial, sans-serif;
+    font-size: 11px;
+    background: #FFF;
+    color: #444;
+}
+input.highlight:hover {
+    cursor: pointer;
+    background: #FFD5EA;
+}
+input.clickable:hover {
+    cursor: pointer;
+}
+hr {
+    margin: 20px 0;
+    height: 1px;
+    color: #FFFFFF;
+    background-color: #FFFFFF;
+    border-top: 1px dotted #DDDDDD;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+}
+.centered {
+    width:672px;
+    margin-right:auto;
+    margin-left:auto;
+    padding:0px 12px;
+    text-align:left;
+}
+#banner {
+    height: 66px;
+    background: url(/images/qufoto.jpg) 575px 4px no-repeat;
+}
+#site {
+    float: left;
+    padding: 8px 16px;
+    font-size: 17px;
+    background: #f3f3f3;
+}
+#navigation {
+    position: fixed;
+	margin-left: -445px;
+	padding-right: 12px;
+	left: 50%;
+    width: 80px;
+    text-align: right;
+    line-height: 18px;
+    border-right: 1px dotted #CCCCCC;
+}
+#navigation ul {
+    list-style: none;
+    text-align: right;
+    line-height: 20px;
+}
+#content {
+    margin-bottom: 40px;
+    border-left: 1px solid #CCCCCC;
+}
+h5,
+#section {
+    margin: 0px 0px 16px 0px;
+    font-size: 11px;
+    font-weight: normal;
+    padding: 3px 10px 3px 4px;
+    background: #F3F3F3;
+}
+#loader {
+    position: fixed;
+    margin-left: -50px;
+    top: 50%;
+    left: 100%;
+}
+#help {
+    margin: 0 0 40px 0;
+    padding: 10px;
+    background: #FFEEFF;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+#help li {
+    margin-bottom: 6px;
+}
+.note {
+    clear: both;
+    margin: 15px 0;
+    padding: 8px;
+    color: #777;
+    background: #f6f6f6;
+    border-top: 1px dotted #ddd;
+    border-bottom: 1px dotted #ddd;
+}
+
+/*------------------------------------------------------------- Admin.css above, Update.css below -------------------------------------------------------------*/
+
+.small { font-size: 13px; }
+.big { font-size: 42px; }
+.grey { color: #888; }
+.orange { color: #FF8A00; }
+.pink { color: #FF009C !important; }
+.green { color: #00D119; }
+/* .blue { color: #228AFF; } */
+.notice { padding: 8px; background: #DEEEFF; }
+.bold { font-weight: bold; }
+.italic { font-style: italic; }
+.normal { font-weight: normal; }
+
+table {
+    font-size: 11px;
+}
+#section {
+	-moz-border-radius-topright: 5px;
+	-moz-border-radius-bottomright: 5px;
+	-webkit-border-top-right-radius: 5px;
+	-webkit-border-bottom-right-radius: 5px;
+}
+#section span.status span.success {
+	font-style: italic;
+	color: #00BB00;
+}
+#section span.status span.error {
+	font-style: italic;
+	font-weight: bold;
+	color: #EE0000;
+}
+#submenu {
+    list-style: none;
+    padding: 0px;
+    margin: 0 0 40px 0;
+    height: 20px;
+}
+#partial {
+}
+li.button {
+    float: left;
+    margin: 0 3px 0 0;
+    padding: 3px 9px;
+    background: #f3f3f3;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+div.button:hover,
+li.button:hover {
+    cursor: pointer;
+    color: #fff;
+    background: #a4d4ff;
+}
+li.button_selected {
+    color: #fff;
+    background: #ffbbeb;
+}
+.break {
+    clear: both;
+    margin: 0;
+    padding: 0;
+    color: #fff;
+    border: none;
+}
+#biotext,
+#js_text {
+    margin: 0 0 20px 0;
+    width: 100%;
+    height: 200px;
+}
+.post {
+    margin-bottom: 14px;
+    padding: 14px;
+    border-bottom: 1px solid #ccc;
+}
+.thumbs {
+     float: left; 
+     padding: 0; 
+     list-style: none;
+}
+.thumbs li {
+    float: left; 
+    margin: 0px 2px 2px 0px; 
+    padding: 0; 
+}
+#sortableThumbs {
+    margin: 0;
+    padding: 0;
+}
+#sortableThumbs li {
+    width: 106px;
+    height: 106px;
+    background: #fff;
+    border: 1px solid #ccc;
+}
+.thumbs .handle {
+    width: 86px; 
+    height: 16px;
+    padding-top: 2px;
+    cursor: move;
+    text-align: center; 
+    background: #fff;
+    border-top: 1px solid #aaa;
+    border-bottom: 1px solid #aaa;
+}
+.thumbs .delete {
+    float: left;
+    width: 20px;
+    height: 16px;
+    padding-top: 2px;
+    background: #ae5151;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    border-top: 1px solid #aaa;
+    border-bottom: 1px solid #aaa;
+}
+.thumbs .delete a,
+.thumbs .delete a:link,
+.thumbs .delete a:visited,
+.thumbs .delete a:active {
+	color: #fff;
+	text-decoration: none;
+}
+.thumbs .delete a:hover {
+	color: #fff;
+	text-decoration: underline;
+}
+#listThumbs {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+#listThumbs li {
+    margin: 0 0 6px 0;
+    padding: 1px;
+    height: 100px;
+    border: 1px solid #ccc;
+}
+#listThumbs input,
+#listThumbs textarea {
+    padding: 4px 0px;
+    width: 400px;
+}
+#listThumbs input {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid #cbcbcb;
+}
+#listThumbs textarea {
+    height: 60px;
+    border: none;
+    overflow: hidden;
+}
+.listThumb {
+    cursor: move;
+    width: 100px; 
+    height: 100px; 
+    text-align: center; 
+    background-color: #ddd;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+.listButton {
+    margin-top: 15px !important;
+    width: 70px !important;
+    border: 1px solid #cbcbcb !important;
+}
+
+div.bgtype_2_details {
+    display: inline;
+}
+div.spaced_selects select {
+    margin-right: 15px;
+}
+#blue_dot {
+    width: 200px;
+    height: 200px;
+    background: transparent url(/images/blue_dot.png);
+    border: 4px solid #ccc;
+}
+#blue_dot.pos_0 {background-position: center center;}
+#blue_dot.pos_1 {background-position: top left;}
+#blue_dot.pos_2 {background-position: top center;}
+#blue_dot.pos_3 {background-position: top right;}
+#blue_dot.pos_4 {background-position: center left;}
+#blue_dot.pos_5 {background-position: center right;}
+#blue_dot.pos_6 {background-position: bottom left;}
+#blue_dot.pos_7 {background-position: bottom center;}
+#blue_dot.pos_8 {background-position: bottom right;}
+#blue_dot.repeat_0 {background-repeat: no-repeat;}
+#blue_dot.repeat_1 {background-repeat: repeat;}
+#blue_dot.repeat_2 {background-repeat: repeat-x;}
+#blue_dot.repeat_3 {background-repeat: repeat-y;}
+a.gradient {
+    float: left;
+    margin: 0 10px 0 0;
+    width: 50px;
+    height: 50px;
+    border: 2px solid #ccc;
+}
+a.gradient:active,
+a.gradient:hover {
+    border: 2px solid #62acff;
+}
+a.gradient.selected {
+    border: 2px solid #228aff;
+}
+a.gradient.preview_0 {background: url(/images/gradient_small_0.png);}
+a.gradient.preview_1 {background: url(/images/gradient_small_1.png);}
+a.gradient.preview_2 {background: url(/images/gradient_small_2.png);}
+a.gradient.preview_3 {background: url(/images/gradient_small_3.png);}
+a.gradient.preview_4 {background: url(/images/gradient_small_4.png);}
+
+/*----------------- Portfolios page --------------------------*/
+
+div.portfolios {
+	margin-bottom: 40px;
+}
+div.portfolio_list {
+	
+}
+div.portfolio_list div.portfolio {
+	border-bottom: 1px solid #ddd;
+}
+div.portfolio_list div.portfolio:last-child {
+	border: none;
+}
+div.portfolio_list div.portfolio div.top {
+}
+div.portfolio_list div.portfolio div.top:hover {
+	background: #fafafa;
+}
+div.portfolio_list div.portfolio div.handle {
+	float: left;
+	margin: 5px 10px 0 0;
+	width: 14px;
+	height: 20px;
+	background: url(/images/grip_dot.png) 0 0;
+	cursor: move;
+}
+div.portfolio_list div.portfolio span.visibility,
+div.portfolio_list div.portfolio span.count {
+	float: right;
+	padding-left: 30px;
+	line-height: 30px;
+}
+div.portfolio_list div.portfolio a.title {
+	display: block;
+	float: left;
+	line-height: 30px;
+}
+div.portfolio_list div.portfolio div.bottom {
+	clear: left;
+	padding: 10px 21px;
+	border-left: 1px solid #eee;
+}
+div.portfolio_list div.portfolio div.bottom div.section {
+	line-height: 30px;
+	border-bottom: 1px dotted #ddd;
+}
+div.portfolio_list div.portfolio div.bottom div.section.last {
+	text-align: right;
+	border: none;
+}
+div.portfolio_list div.portfolio div.bottom input[type="text"] {
+	margin-right: 10px;
+	width: 150px;
+}
+div.portfolio_list div.portfolio div.bottom div.section label {
+	padding-right: 20px;
+}
+div.portfolio_list div.portfolio div.bottom div.section input.radio {
+	margin-left: 0;
+}
+div.portfolio_list div.portfolio div.bottom div.section span.first {
+	float: left;
+	width: 100px;
+}
+div.portfolio_list div.portfolio div.bottom div.section span.upload {
+	padding-left: 30px;
+}
+div.portfolio_list div.portfolio div.bottom div.section span.upload form {
+	display: inline;
+	padding-right: 15px;
+}
+div.portfolio_list div.portfolio div.bottom div.section span.password {
+	padding-left: 10px;
+}
+div.add_portfolio {
+	text-align: center;
+}
+div.add_portfolio input {
+	margin: 0 5px;
+}
+
+/*----------------- Layout page --------------------------*/
+
+div#layoutimages img {
+	width: 400px;
+	height: 252px;
+}
+form.template_form input {
+	margin: 0 0 2px;
+	padding: 3px 0;
+	width: 160px;
+	cursor: pointer;
+}
+form.template_form input:hover {
+	background: #e8f4ff;
+}
+
+/*----------------- Upload v2 --------------------------*/
+
+form.upload_form {
+	
+}
+form.upload_form input,
+form.upload_form textarea,
+form.upload_form select {
+	float: left;
+	width: 300px;
+	margin-bottom: 8px;
+}
+form.upload_form label {
+	clear: left;
+	float: left;
+	margin-right: 10px;
+	width: 80px;
+	line-height: 16px;
+	text-align: right;
+	cursor: pointer;
+}
+form.upload_form input.highlight {
+	clear: left;
+	margin: 0 0 0 90px;
+	width: 80px;
+}
+div.uploads {
+	
+}
+iframe.upload_iframe {
+	margin: 0;
+	padding: 0; 
+	width: 1px;
+	height: 1px;
+	border: none;
+}
+
+/*------------------------------------------------------------*/
+/*----------------- Definite shit above here -----------------*/
+/*------------------------------------------------------------*/
+
+
+#portfolioListTable {
+    width: 100%;
+    border-top: 1px solid #ddd;
+}
+
+#portfolioListTable td {
+    padding: 4px 12px 4px 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+#portfolioListTable .header {
+    font-weight: bold;
+    background: #F3F3F3;
+}
+
+/* Get rid of the above portfolio stuff after the new version of the page is done. */
+
+#uploadImageTable {
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+#uploadImageTable td {
+    border-bottom: 1px dotted #DDDDDD;
+}
+
+#imageDetails input,
+#imageDetails textarea,
+#imageDetails select,
+#uploadImageTable input,
+#uploadImageTable textarea,
+#uploadImageTable select {
+    width: 300px;
+}
+
+#imageDetails textarea,
+#uploadImageTable textarea {
+    height: 100px;
+}
+
+#uploadImageTable .header {
+    font-weight: bold;
+    background: #DDDDDD;
+    border-right: 1px solid #FFFFFF;
+}
+
+#uploadImageTable .label {
+    padding-top: 5px;
+    padding-right: 8px;
+    text-align: right;
+}
+
+#uploadframe {
+}
+
+#imageDetails {
+    margin-top: 10px;
+    border-top: 1px dotted #CBCBCB;
+}
+
+.paddedTable td {
+    padding-right: 12px;
+}
+
+#layoutimages {
+    float: right;
+    margin: 0 0 20px 20px;
+}
+
+#layoutimages img {
+    border: 1px solid #CBCBCB;
+}
+
+#loader {
+    position: fixed; 
+    bottom: 6px; 
+    right: 6px; 
+    width: 16px; 
+    height: 16px; 
+    text-align: right;
+}
+
+.thumbHandle,
+.rowHandle {
+    cursor: move;
+}
+
+.helpHeader {
+    width: 100%;
+    background: #F3F3F3;
+    border-top: 1px solid #CCCCCC;
+}
+
+.hidden {
+    display: none;
+}
+
+.blue {
+    color: #000000;
+    background: #D5EBFF;
+}
+
+.error {
+    margin-top: 0px !important;
+    font-weight: bold;
+    color: white;
+    background: #FFB3E1;
+    border-top: 1px solid red;
+    border-bottom: 1px solid red;
+}
+
+.colorpreview {
+     width: 14px; 
+     height: 100%; 
+     border: 1px solid black;
+}
+
+#commentForm input,
+#commentForm textarea {
+    width: 400px;
+}
+
+#commentForm textarea {
+    height: 200px;
+}
+
+.message {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px dotted #ddd;
+}
+

@@ -1,0 +1,20 @@
+<% topics = [
+    ["getting_started", "Getting started"], 
+    ["domains", "Domains"],
+    ["multimedia", "Multimedia (Pro)"],
+    ["analytics", "Google Analytics"],
+    ["referrals", "Referral Program"],
+    ["upgrade", "May 2008 upgrade"]
+    ] %>
+
+<div class="helper">
+    <div class="header">Help topics</div>
+    <ul>
+        <% topics.each do |topic| %>
+            <li>
+            <%= "<div class='selected'>> </div>" if params['action'] == topic.first %>
+            <%= "<a href='/#{topic.first}'>#{topic.last}</a>" %>
+            </li>
+        <% end %>
+    </ul>
+</div>

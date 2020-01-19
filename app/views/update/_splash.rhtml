@@ -1,0 +1,40 @@
+<div id="help" style="display: none;">
+    A splash image is an image that is displayed when visitors first come to your website.  It is the only thing
+    displayed, and then visitors click it to go and see your pictures.  It is an introduction.  Your splash image
+    can be a maximum of 900 wide by 600 pixels high.  Anything exceeding these dimensions will be scaled down 
+    accordingly.<br><br>
+    
+    <b>Mac users:</b> When saving your JPG splash image for the internet using Photoshop, you must have
+    "ICC Profile: sRGB IEC61966-2.1" checked to ensure that the background color of your splash image matches
+    the background color you have selected for your website.
+</div>
+
+<%
+    sptrueblue = current_user.info.splashdisplay == true ? " blue" : ""
+    spfalseblue = current_user.info.splashdisplay == true ? "" : " blue"
+    splash = "splash" + current_user.id.to_s + ".jpg"
+%>
+        
+<center>
+    <%# if s3_contains(splash) %>
+    <% if current_user.info.splash? %>
+        <%= link_to image_tag(url_for(:controller => "image", :action => :resize_s3_image, :file => splash, :width => 600, :height => 600), :style => "border: 4px solid #ccc;"), s3_file(splash_s3_path(current_user)), :popup => true %>
+        <br><br>
+        [<%= link_to "delete", :action => "delete_splash", :onclick => "$('loader').show();" %>]
+    <% else %>
+        No splash image has been uploaded
+    <% end %>
+    
+    <%= form_tag({:action => 'update_splash'}, :multipart => true, :style => "margin: 30px 0;") %>
+        <%= file_field_tag "tmp_file", :size => 42 %><br><br>
+        <%= submit_tag "Upload New", :class => "highlight", :style => "width: 300px;", :onclick => "$('loader').show();" %>
+    </form>
+    
+    <%= form_remote_tag :url => {:action => "splash_display"}, :update => "status", :loading => "$('loader').show();", :complete => "$('loader').hide();" %>
+        <%= hidden_field_tag "splashdisplay", current_user.info.splashdisplay, :id => "splashdisplay" %>
+        <%= submit_tag "Display splash", :onclick => "$('splashdisplay').value='true'; this.style.background='#D5EBFF'; $('spfalse').style.background='none';", :id => "sptrue", :class => "clickable#{sptrueblue}", :style => "width: 160px; margin-bottom: 4px;" %><br>
+        <%= submit_tag "Keep splash hidden", :onclick => "$('splashdisplay').value='false'; this.style.background='#D5EBFF'; $('sptrue').style.background='none';", :id => "spfalse", :class => "clickable#{spfalseblue}", :style => "width: 160px;" %>
+    </form>
+</center>
+
+

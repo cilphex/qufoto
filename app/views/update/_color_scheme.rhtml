@@ -1,0 +1,261 @@
+<%
+    @prolayout = current_user.info.template == 2 ? '' : 'none;'
+    @widelayout = current_user.info.template == 3 ? '' : 'none;'
+    @nonwidelayout = current_user.info.template == 3 ? 'none;' : ''
+%>
+
+<div id="help" style="display: none;">
+    Here you can change the basic colors of your website.
+	<ul>
+        <li><b>Background Color:</b> The overall background color of your website.</li>
+		<li style="display: <%= @nonwidelayout %>"><b>Inner background color:</b> The background color for the center box area of your site.</li>
+        <li><b>Text Color:</b> The color of the text displayed on your website.</li>
+        <li style="display: <%= @nonwidelayout %>"><b>Thumbnail Background Color:</b> The color used behind the scrolling thumbnails on your website.</li>
+        <li style="display: <%= @nonwidelayout %>"><b>Highlight Color:</b> The color of the horizontal lines above and beneath the main photo.</li>
+		<li style="display: <%= @nonwidelayout %>"><b>Description background color:</b> Background color of the "image info" box that shows photo captions.</li>
+        <li style="display: <%= @widelayout %>"><b>Highlight Color:</b> The color of the lines between and around your photos.</li>
+        <li style="display: <%= @widelayout %>"><b>Track Color:</b> The color of the track underneath your photos.</li>
+        <li style="display: <%= @widelayout %>"><b>Slider Color:</b> The color of the slider which is dragged to scroll through your portfolios.</li>
+        <li style="display: <%= @nonwidelayout %>"><b>Thumbnail background transparency:</b> The transparency of the color beneath the pop-out thumbnails.  0% means
+        there will be no color, and 100% means the color will be solid</li>
+    </ul>
+    You can type the six-digit hex code for a color in the textbox, or select a color by clicking
+    on the current color preview to the right of the textbox.
+</div>
+
+<%= form_remote_tag :url => {:action => "update_colors"}, :update => "status", :multipart => true, :html => {:name => "colorform", :class => "clearfix"}, :loading => "$('loader').show();", :complete => "$('loader').hide();" %>
+    <%= hidden_field_tag "innerbgalpha", current_user.info.innerbgalpha, :id => "innerbgalpha" %>
+    <%= hidden_field_tag "thumbbgalpha", current_user.info.thumbbgalpha, :id => "thumbbgalpha" %>
+    <table>
+        <tr>
+            <td style="padding-right: 12px;">
+                Background Color
+            </td><td>
+                #<%= text_field_tag "bgcolor", current_user.info.bgcolor, :maxlength => 6, :style => "width: 80px;", :onkeyup => "if (this.value.length == 6) { $('bgcolor_div').style.background='#' + this.value }", :onfocus => "$('status').innerHTML='';" %>
+            </td><td>
+                <%= link_to_function '<div id="bgcolor_div" class="colorpreview" style="background: #' + current_user.info.bgcolor + ';">&nbsp;</div>', "TCP.popup(document.forms['colorform'].elements['bgcolor'])" %>
+            </td><td>
+                &nbsp;
+            </td><td colspan=2 style="border-bottom: 1px dotted #C0C0C0;">
+                <b>Preset color schemes</b>
+            </td>
+        </tr><tr style="display: <%= @nonwidelayout %>">
+            <td style="padding-right: 12px;">
+                Inner background Color
+            </td><td>
+                #<%= text_field_tag "innerbgcolor", current_user.info.innerbgcolor, :maxlength => 6, :style => "width: 80px;", :onkeyup => "if (this.value.length == 6) { $('innerbgcolor_div').style.background='#' + this.value }", :onfocus => "$('status').innerHTML='';" %>
+            </td><td>
+                <%= link_to_function '<div id="innerbgcolor_div" class="colorpreview" style="background: #' + current_user.info.innerbgcolor + ';">&nbsp;</div>', "TCP.popup(document.forms['colorform'].elements['innerbgcolor'])" %>
+            </td><td>
+                &nbsp;
+            </td><td>
+                <%= link_to_function "Black", "preset_color('black'); return false;" %>
+            </td><td>
+                <%= link_to_function "Brown", "preset_color('brown'); return false;" %>
+            </td>
+        </tr><tr>
+            <td style="padding-right: 12px;">
+                Text Color
+            </td><td>
+                #<%= text_field_tag "textcolor", current_user.info.textcolor, :maxlength => 6, :style => "width: 80px;", :onkeyup => "if (this.value.length == 6) { $('textcolor_div').style.background='#' + this.value }", :onfocus => "$('status').innerHTML='';" %>
+            </td><td>
+                <%= link_to_function '<div id="textcolor_div" class="colorpreview" style="background: #' + current_user.info.textcolor + ';">&nbsp;</div>', "TCP.popup(document.forms['colorform'].elements['textcolor'])" %>
+            </td><td>
+                &nbsp;
+            </td><td>
+                <%= link_to_function "White", "preset_color('white'); return false;" %>
+            </td><td>
+                <%= link_to_function "Blue & Grey", "preset_color('bluegrey'); return false;" %>
+            </td>
+        </tr><tr>
+            <td style="padding-right: 12px;">
+                <div class="non-widelayout" style="display: <%= @nonwidelayout %>">Thumbnail Background Color</div>
+                <div class="widelayout" style="display: <%= @widelayout %>">Highlight Color</div>
+            </td><td>
+                #<%= text_field_tag "thumbbgcolor", current_user.info.thumbbgcolor, :maxlength => 6, :style => "width: 80px;", :onkeyup => "if (this.value.length == 6) { $('thumbbgcolor_div').style.background='#' + this.value }", :onfocus => "$('status').innerHTML='';" %>
+            </td><td>
+                <%= link_to_function '<div id="thumbbgcolor_div" class="colorpreview" style="background: #' + current_user.info.thumbbgcolor + ';">&nbsp;</div>', "TCP.popup(document.forms['colorform'].elements['thumbbgcolor'])" %>
+            </td><td style="padding-left: 16px;">
+                &nbsp;
+            </td><td>
+                <%= link_to_function "Tan", "preset_color('tan'); return false;" %>
+            </td><td>
+                &nbsp;
+            </td>
+        </tr><tr>
+            <td style="padding-right: 12px;">
+                <div class="non-widelayout" style="display: <%= @nonwidelayout %>">Highlight Color</div>
+                <div class="widelayout" style="display: <%= @widelayout %>">Track Color</div>
+            </td><td>
+                #<%= text_field_tag "highlightcolor", current_user.info.highlightcolor, :maxlength => 6, :style => "width: 80px;", :onkeyup => "if (this.value.length == 6) { $('highlightcolor_div').style.background='#' + this.value }", :onfocus => "$('status').innerHTML='';" %>
+            </td><td>
+                <%= link_to_function '<div id="highlightcolor_div" class="colorpreview" style="background: #' + current_user.info.highlightcolor + ';">&nbsp;</div>', "TCP.popup(document.forms['colorform'].elements['highlightcolor'])" %>
+            </td><td style="padding-left: 16px;">
+                &nbsp;
+            </td><td>
+                &nbsp;
+            </td><td>
+                &nbsp;
+            </td>
+        </tr><tr>
+            <td style="padding-right: 12px;">
+                <div class="non-widelayout" style="display: <%= @nonwidelayout %>">Description Background Color</div>
+                <div class="widelayout" style="display: <%= @widelayout %>">Slider Color</div>
+            </td><td>
+                #<%= text_field_tag "color5", current_user.info.color5, :maxlength => 6, :style => "width: 80px;", :onkeyup => "if (this.value.length == 6) { $('color5_div').style.background='#' + this.value }", :onfocus => "$('status').innerHTML='';" %>
+            </td><td>
+                <%= link_to_function '<div id="color5_div" class="colorpreview" style="background: #' + current_user.info.color5 + ';">&nbsp;</div>', "TCP.popup(document.forms['colorform'].elements['color5'])" %>
+            </td><td style="padding-left: 16px;">
+                &nbsp;
+            </td><td>
+                &nbsp;
+            </td><td>
+                &nbsp;
+            </td>
+        </tr>
+    </table>
+    
+    <div style="float: left; margin: 30px 25px 0 0; padding: 0 25px 0 0; border-right: 1px solid #ddd;">
+        Inner background transparency: <span id="innerbgalphapercent"><%= current_user.info.innerbgalpha %></span>%
+        <table style="margin-top: 15px;">
+            <tr>
+                <td align=left>
+                    Transparent <
+                </td><td style="padding: 0px 25px 6px 25px;">
+                    <div id="track2" style="width: 100px; background-color: #FFFFFF; height: 8px; border-bottom: 4px solid #CCCCCC;">
+                        <div id="handle2" style="width: 10px; height: 20px; background-color: #228AFF; cursor: move;">
+                        </div>
+                    </div>
+                    <script type="text/javascript" language="javascript">
+                        var slider1 = new Control.Slider('handle2', 'track2', {
+                            axis:'horizontal',
+                            disabled:false,
+                            sliderValue:<%= current_user.info.innerbgalpha %>,
+                            range:$R(0,100),
+                            values:[<% 0.upto(99) do |i| %><%= i.to_s + ", " %><% end %>100]
+                        });
+                        slider1.options.onSlide = function (v) {
+                            $('innerbgalphapercent').innerHTML = v;
+                        };
+                        slider1.options.onChange = function (v) {
+                            $('innerbgalpha').value = v;
+                            $('status').update ();
+                            $('innerbgalphapercent').innerHTML = v;
+                        };
+                    </script>
+                </td><td align=right>
+                    > Opaque
+                </td>
+            </tr>
+        </table>
+    </div>
+    
+    <div style="float: left; margin-top: 30px;">
+        Thumbnail background transparency: <span id="thumbbgalphapercent"><%= current_user.info.thumbbgalpha %></span>%
+        <table style="margin-top: 15px;">
+            <tr>
+                <td align=left>
+                    Transparent <
+                </td><td style="padding: 0px 25px 6px 25px;">
+                    <div id="track3" style="width: 100px; background-color: #FFFFFF; height: 8px; border-bottom: 4px solid #CCCCCC;">
+                        <div id="handle3" style="width: 10px; height: 20px; background-color: #228AFF; cursor: move;">
+                        </div>
+                    </div>
+                    <script type="text/javascript" language="javascript">
+                        var slider2 = new Control.Slider('handle3', 'track3', {
+                            axis:'horizontal',
+                            disabled:false,
+                            sliderValue:<%= current_user.info.thumbbgalpha %>,
+                            range:$R(0,100),
+                            values:[<% 0.upto(99) do |i| %><%= i.to_s + ", " %><% end %>100]
+                        });
+                        slider2.options.onSlide = function (v) {
+                            $('thumbbgalphapercent').update (v);
+                        };
+                        slider2.options.onChange = function (v) {
+                            $('thumbbgalpha').value = v;
+                            $('status').update ();
+                            $('thumbbgalphapercent').update (v);
+                        };
+                    </script>
+                </td><td align=right>
+                    > Opaque
+                </td>
+            </tr>
+        </table>
+    </div>
+    
+    <%= submit_tag "Save", :class=> "highlight", :style => "float: right; margin: 30px 0 0 0;" %>
+</form>
+
+<hr>
+<%= form_remote_tag :url => {:action => "update_background_details"}, :update => "status", :loading => "$('loader').show();", :complete => "$('loader').hide();" %>
+    <div class="spaced_selects">
+        Background style:
+        <select id="bgtype" name="bgtype" onChange="bg_type(this.value); return false;">
+            <% {'Solid color' => 0, 'Gradient' => 1, 'Image' => 2}.each do |key, value| %>
+                <option value="<%= value %>"<%= " selected" if current_user.info.bgtype == value %>><%= key %></option>
+            <% end %>
+        </select>
+        <div id="bgtype_2_details" class="bgtype_2_details" style="<%= 'display: none;' if current_user.info.bgtype != 2 %>">
+            Position:
+            <select id="bgpos" name="bgpos" onChange="bg_pos(this.value); return false;">
+                <% {'Center' => 0, 'Top left' => 1, 'Top center' => 2, 'Top right' => 3, 'Middle left' => 4, 'Middle right' => 5, 'Bottom left' => 6, 'Bottom center' => 7, 'Bottom right' => 8}.each do |key, value| %>
+                    <option value="<%= value %>"<%= " selected" if current_user.info.bgpos == value %>><%= key %></option>
+                <% end %>
+            </select>
+            Repeat:
+            <select id="bgrepeat" name="bgrepeat" onChange="bg_repeat(this.value); return false;">
+                <% {'No repeat' => 0, 'Repeat' => 1, 'Repeat-x' => 2, 'Repeat-y' => 3}.each do |key, value| %>
+                    <option value="<%= value %>"<%= " selected" if current_user.info.bgrepeat == value %>><%= key %></option>
+                <% end %>
+            </select>
+        </div>
+        <input type="hidden" id="bggradient" name="bggradient" value="<%= current_user.info.bggradient %>"/>
+        <%= submit_tag "Save", :class=> "highlight" %>
+    </div>
+</form>
+
+<div id="bgtype_1" class="clearfix" style="margin: 20px 0 0 0; <%= 'display: none;' if current_user.info.bgtype != 1 %>">
+    <% 0.upto 4 do |i| %>
+        <a href="#" id="gradient_<%= i %>" class="gradient preview_<%= i %> <%= 'selected' if current_user.info.bggradient == i %>" onClick="bg_gradient(<%= i %>); return false;"></a>
+    <% end %>
+</div>
+<div id="bgtype_2" style="margin: 20px 0 0 0; <%= 'display: none;' if current_user.info.bgtype != 2 %>">
+    <table cellspacing="0" style="width: 100%; text-align: center;">
+        <tr>
+            <td rowspan="2">
+                &nbsp;
+            </td><td style="width: 208px; line-height: 30px;">
+                Current background image
+            </td><td rowspan="2" width="30">
+                &nbsp;
+            </td><td style="width: 208px; line-height: 30px;">
+                Position
+            </td><td rowspan="2">
+                &nbsp;
+            </td>
+        </tr><tr>
+            <td>
+                <% if current_user.info.bgimage %>
+                    <%= link_to image_tag(url_for(:controller => "image", :action => :resize_s3_image, :file => "background#{current_user.id.to_s}.jpg", :width => 200, :height => 200), :style => "border: 4px solid #ccc;"), s3_file(background_s3_path(current_user)), :popup => true %>
+                <% else %>
+                    <p><b>None!</b></p>
+                    <p>Upload a new one</p>
+                <% end %>
+            </td><td>
+                <div id="blue_dot" class="pos_<%= current_user.info.bgpos %> repeat_<%= current_user.info.bgrepeat %>"></div>
+            </td>
+        </tr><tr>
+            <td colspan="5">
+                <%= form_tag({:action => 'update_background_image'}, :multipart => true, :style => "margin: 30px 0;") %>
+                    <%= file_field_tag "tmp_file", :size => 42 %><br><br>
+                    <%= submit_tag "Upload New", :class => "highlight", :style => "width: 300px;", :onclick => "$('loader').show();" %>
+                </form>
+            </td>
+        </td>
+    </table>
+</div>
+
+
+

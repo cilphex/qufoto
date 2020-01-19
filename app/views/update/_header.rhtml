@@ -1,0 +1,32 @@
+<% 
+    @sections = ["portfolios", "layout", "edit", "upload", "personal"] 
+    if @request.path_parameters["action"] == "index"
+        section = "portfolios"
+    else
+        section = @request.path_parameters["action"]
+    end
+%>
+<div id="header">
+    <ul>
+        <% if !logged_in? %>
+            <li>Login</li>
+        <% else %>
+            <% @sections.each do |s| %>
+                <li<%= " class='selected'" if s == section %>><%= if s != section then link_to s.capitalize, :action => s else s.capitalize end %></li>
+            <% end %>
+        <% end %>
+    </ul>
+    
+    <% if logged_in? %>
+        <div id="fullscreenArrows" style="float: right; margin: 4px 4px 0 0; display: <%= @wide == true ? 'none' : 'block' %>">
+            <%= link_to_remote image_tag("fullscreen_arrow.jpg"), 
+                :url => {:action => "fullscreen"}, 
+                :loading => "fullscreen();" %>
+        </div>
+        <div id="unfullscreenArrows" style="float: right; margin: 4px 4px 0 0; display: <%= @wide == true ? 'block' : 'none' %>">
+            <%= link_to_remote image_tag("unfullscreen_arrow.jpg"), 
+                :url => {:action => "unfullscreen"}, 
+                :loading => "unfullscreen();" %>
+        </div>
+    <% end %>
+</div>

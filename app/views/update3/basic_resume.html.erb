@@ -1,0 +1,28 @@
+<h1>Resume</h1>
+<p class="subtitle">Upload a PDF file to display on your site.  This will create a <em>Resume</em> tab
+on your site. You can rename the <em>Resume</em> page to something else under 
+<a href="/update3/layout_links">Layout > Links</a>.</p>
+
+<div class="resume">
+	<div id="uploaded" class="uploaded">
+		<div id="uploaded_true" style="<%= 'display: none;' if !current_user.info.resume? %>">
+			<a href="<%= s3_file(resume_s3_path(current_user)) %>" target="_blank">View current resume</a>
+			| <a href="javascript:void(0)" onclick="Basic.deleteResume()">Delete</a>
+		</div>
+		<div id="uploaded_false" style="<%= 'display: none;' if current_user.info.resume? %>">
+			No resume uploaded
+		</div>
+	</div>
+
+	<div class="foot">
+		<span class="right">
+			<a id="resume_visibility" class="visible_<%= current_user.info.resumedisplay %>" href="javascript:void(0)" onclick="Basic.toggleResumeVisibility()"><%= current_user.info.resumedisplay ? 'Visible' : 'Hidden' %></a>
+		</span>
+		<form id="resume_form" action="/update3/basic_resume_process" method="post" enctype="multipart/form-data" target="upload_iframe">
+			<span>Upload new</span>
+			<input type="file" name="tmp_file" onchange="$('resume_form').submit()" title="Upload a resume"/>
+		</form>
+	</div>
+</div>
+
+<iframe id="upload_iframe" class="upload_iframe" name="upload_iframe" src="about:blank"></iframe>

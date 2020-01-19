@@ -1,0 +1,16 @@
+lacey:
+  id: 1
+  name: Lacey Johnson
+  user: lacey
+  pass: sparkiedog
+  contactemail: laceyannphoto@gmail.com
+  website: laceyannphotography.com
+  grade: Pro
+  wide: false
+  directory: lacey
+  admin: false
+  signup: <%= Time.now.to_s(:db) %>
+  subscription: 0
+  status: Subscribed
+  
+  

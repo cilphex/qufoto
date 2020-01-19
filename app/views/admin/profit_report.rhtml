@@ -1,0 +1,146 @@
+<h5>Profit Report</h5>
+
+<table cellspacing=0 cellpadding=8>
+    <tr>
+        <td style="width: 140px; border-bottom: 1px dotted #CCCCCC;">
+            Gross monthly profit:
+        </td><td valign=top style="border-bottom: 1px dotted #CCCCCC;">
+            $<%= User.sum 'subscription', :conditions => "status != 'Suspended'" %>.00
+        </td>
+    </tr><tr>
+        <td>
+            Net monthly profit:<br>
+            <span class="caption">-(2.9% + $0.30) per transaction</span>
+        </td><td valign=top>
+            <b>$<%= ((User.sum 'subscription', :conditions => "status != 'Suspended'")*(0.971)) - ((User.count :conditions => "subscription > 0 AND status != 'Suspended'")*(0.30)) %></b>
+        </td>
+    </tr>
+</table>
+<br><br>
+
+<table cellspacing=0 cellpadding=8 id="profittable">
+    <tr style="background: #F3F3F3;">
+        <td>
+            <b>User types</b>
+        </td><td>
+            <b>User count</b>
+        </td><td>
+            <b>PPM/user</b>
+        </td><td>
+            <b>PPM/grade</b>
+        </td><td>
+            <b>Net PPM/user</b>
+        </td><td style="border-right: none;">
+            <b>Net PPM/grade</b>
+        </td>
+    </tr><tr>
+        <td>
+            <%= link_to_remote "Total Old subscribers:",
+                :url => {:action => "user_lookup", :ppm => 13},
+                :update => "results",
+                :loading => "$('loadImage').show();",
+                :complete => "$('loadImage').hide();" %>
+        </td><td>
+            <%= oldusers = User.count :conditions => "subscription = 13 AND status != 'Suspended'" %>
+        </td><td>
+            $13.00
+        </td><td>
+            $<%= oldusers * 13 %>.00
+        </td><td>
+            $<%= oldprice = 12.32 %>
+        </td><td style="border-right: none;">
+            $<%= oldusers * oldprice %>
+        </td>
+    </tr><tr>
+        <td style="width: 140px;">
+            <%= link_to_remote "Total Lite subscribers:",
+                :url => {:action => "user_lookup", :ppm => 19},
+                :update => "results",
+                :loading => "$('loadImage').show();",
+                :complete => "$('loadImage').hide();" %>
+        </td><td>
+            <%= liteusers = User.count :conditions => "subscription = 19 AND status != 'Suspended'" %>
+        </td><td>
+            $19.00
+        </td><td>
+            $<%= liteusers * 19 %>.00
+        </td><td>
+            $<%= liteprice = 18.14 %>
+        </td><td style="border-right: none;">
+            $<%= liteusers * liteprice %>
+        </td>
+    </tr><tr>
+        <td>
+            <%= link_to_remote "Total Pro subscribers:",
+                :url => {:action => "user_lookup", :ppm => 34},
+                :update => "results",
+                :loading => "$('loadImage').show();",
+                :complete => "$('loadImage').hide();" %>
+        </td><td>
+            <%= prousers = User.count :conditions => "subscription = 34 AND status != 'Suspended'" %>
+        </td><td>
+            $34.00
+        </td><td>
+            $<%= prousers * 34 %>.00
+        </td><td>
+            $<%= proprice = 32.71 %>
+        </td><td style="border-right: none;">
+            $<%= prousers * proprice %>
+        </td>
+    </tr><tr>
+        <td>
+            <%= link_to_remote "Total free subscribers:",
+                :url => {:action => "user_lookup", :ppm => 0},
+                :update => "results",
+                :loading => "$('loadImage').show();",
+                :complete => "$('loadImage').hide();" %>
+        </td><td>
+            <%= leechers = User.count :conditions => "subscription < 1 AND status != 'Suspended'" %>
+        </td><td>
+            $0.00
+        </td><td>
+            $0.00
+        </td><td>
+            $0.00
+        </td><td style="border-right: none;">
+            $0.00
+        </td>
+    </tr><tr>
+        <td>
+            <%= link_to_remote "Other subscribers:",
+                :url => {:action => "user_lookup", :ppm => 99},
+                :update => "results",
+                :loading => "$('loadImage').show();",
+                :complete => "$('loadImage').hide();" %>
+        </td><td>
+            <%= oddballs = User.count :conditions => "subscription != 0 AND subscription != 13 AND subscription != 19 AND subscription != 34 AND status != 'Suspended'" %>
+        </td><td>
+            $<%= oddaverage = (oddtotal = User.sum('subscription', :conditions => "subscription != 0 AND subscription != 13 AND subscription != 19 AND subscription != 34 AND status != 'Suspended'") / oddballs) %>.00
+        </td><td>
+            $<%= oddtotal %>.00
+        </td><td>
+            $<%= oddnet = (oddaverage * 0.971 - 0.30) %>
+        </td><td style="border-right: none;">
+            $<%= oddballs * oddnet %>
+        </td>
+    </tr><tr>
+        <td>
+            <b>Totals</b>
+        </td><td>
+            <%= totals = User.count :conditions => "subscription != 0 AND status != 'Suspended'" %>
+        </td><td>
+            N/A
+        </td><td>
+            $<%= totalstotal = User.sum('subscription', :conditions => "subscription != 0 AND status != 'Suspended'") %>.00
+        </td><td>
+            N/A
+        </td><td style="border-right: none;">
+            $<%= totalstotal * 0.971 - totals * 0.30 %>
+        </td>
+    </tr>
+</table>
+
+<span class="caption">PPM = Price Per Month</span>
+
+<div id="results" style="margin-top: 30px;">
+</div>

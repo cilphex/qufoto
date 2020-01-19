@@ -1,0 +1,9 @@
+<h1>Select Qufoto Websites</h1>
+<!-- <%= @users.length %> -->
+
+<div class="user_list"> 	 	 
+	<% for user in @users %> 	 	 
+		<% title = user.info.title.to_s.empty? ? user.website : user.info.title %> 	 	 
+		<p><a href="http://<%= user.website %>" rel="nofollow"><%= title %></a></p> 	 	 
+	<% end %> 	 	 
+</div>

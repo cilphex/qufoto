@@ -1,0 +1,9 @@
+<script>
+	var response = {
+		status: <%= status %>
+	};
+	<% if status == 0 %>
+		response.url = '<%= "#{s3_file(resume_s3_path(current_user))}?rand=#{rand(1000000)}" %>';
+	<% end %>
+	window.parent.Basic.saveResume_cb(response);
+</script>

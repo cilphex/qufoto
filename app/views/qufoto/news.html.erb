@@ -1,0 +1,13 @@
+<h1>News & Updates</h1>
+
+<% @announcements.each do |a| %>
+	<div class="update">
+	    <h2><a href="/news/<%= a.id %>"><%= a.title %></a>&nbsp;<span class="darkgrey">| <%= a.posted.strftime("%b %d, %y") %></span></h2>
+	    <% a.body.split("\n").each do |p| %>
+	        <p><%= p %></p>
+	    <% end %>
+	</div>
+<% end %>
+
+
+

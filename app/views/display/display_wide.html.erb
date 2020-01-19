@@ -1,0 +1,96 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<meta name="description" content="<%= @user.info.description %>"/>
+        <meta name="keywords" content="<%= @user.info.keywords %>"/>
+        <meta name="verify-v1" content="<%= @user.info.verifyv1 %>"/>
+		<meta name="google-site-verification" content="<%= @user.info.verifyv1 %>"/>
+		<script src="http://ajax.googleapis.com/ajax/libs/prototype/1.6.0.2/prototype.js" type="text/javascript"></script>
+		<title><%= @user.info.title %></title>
+        <%= javascript_include_tag "swfobject" %>
+        <% if @user.info.display_favicon? %>
+            <link rel="shortcut icon" href="<%= s3_file(favicon_s3_path(@user)) %>">
+        <% end %>
+        <style type="text/css">
+            html, 
+            body {
+                margin: 0;
+                padding: 0;
+                height: 100%;
+                font-family: arial, verdana, sans-serif;
+                font-size: 10px;
+            }
+			#flashcontent {
+				width: 100%;
+				height: 100%;
+				text-align: center;
+			}
+            div.brand {
+				position: absolute;
+				padding: 5px 10px;
+				left: 0;
+				bottom: 0;
+			}
+			div.brand a,
+			div.brand a:visited,
+			div.brand a:active,
+			div.brand a:hover {
+				text-decoration: none;
+                <%= "color: ##{@user.info.textcolor};" %>
+			}
+			div.default {
+				margin: 100px auto 0;
+				width: 400px;
+				text-align: left;
+			}
+			div.default h1 {
+				margin: 0 0 5px;
+				font-weight: normal;
+			}
+        </style>
+	</head>
+	<body>
+		<div id="flashcontent">
+            <div class="default">
+                <h1><%= @user.info.title %></h1>
+				<p><%= @user.info.description %></p>
+                <p><strong>You must install Flash or upgrade your Flash player version.</strong></p>
+			</div>
+        </div>
+		<script type="text/javascript">
+			var host = 'qufoto.' + (document.location.host.indexOf('.local') != -1 ? 'local:3001' : 'com');
+            var so = new SWFObject("http://assets.qufoto.com/slideshow_pro_2.swf", "slideshow", "100%", "100%", "7", "#<%= @user.info.bgcolor %>");
+			var url_params = location.search.toQueryParams ();
+			so.addVariable("host", host);
+			so.addVariable("user", "<%= @user.user %>");
+            if (url_params.display_first) {
+				so.addVariable("display_first", url_params.display_first);
+			}
+            so.addParam("wmode", "transparent");
+            so.write("flashcontent");
+        </script>
+		
+		<% if !(@user.grade == "Pro" && @user.info.psslinkdisplay == false) %>
+			<% @link_text = ['Websites for photographers', 'Photography websites', 'Professional photography websites'][rand(3)] %>
+			<div class="brand">
+	            <a href="http://www.qufoto.com" title="<%= @link_text %>">Qufoto</a>
+			</div>
+		<% end %>
+		
+        <% if @user.info.analytics =~ /<script[\s\S]*<\/script>/ %>
+            <%= @user.info.analytics %>
+        <% end %>
+        
+          <script type="text/javascript">
+              var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+              document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+              var pageTracker = _gat._getTracker("UA-971952-64");
+              pageTracker._initData();
+              pageTracker._trackPageview();
+          </script>
+	</body>
+</html>
+
+

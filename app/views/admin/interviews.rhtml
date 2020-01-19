@@ -1,0 +1,23 @@
+<h5>Interviews</h5>
+
+<p><a href="/admin/interview">Create a new interview</a></p>
+
+<% if @interviews.empty? %>
+
+	<p>No interviews yet!</p>
+
+<% else %>
+	<ul id="interviews" class="interviews">
+		<% for i in @interviews %>
+			<li id="interview_<%= i.id %>">
+				<div class="handle"></div>
+				<a href="/admin/interview/<%= i.id %>"><%= i.interviewee.empty? ? 'No name' : i.interviewee %></a>
+				<span class="<%= i.enabled ? 'enabled' : 'disabled' %>"><%= i.enabled ? 'Enabled' : 'Disabled' %></span>
+			</li>
+		<% end %>
+	</ul>
+<% end %>
+
+<script>
+	Interviews.initialize();
+</script>

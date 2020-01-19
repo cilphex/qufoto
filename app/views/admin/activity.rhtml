@@ -1,0 +1,64 @@
+<h5>User activity</h5>
+
+<!-- Here add pink dots for online in the last minute, 2 minutes, 3 minutes, etc. -->
+
+<div id="online_users">
+	<b><%= @recent_users.length %> users online:</b>
+	<% @recent_users.each do |u| %>
+		<a href="/admin/user?id=<%= u.id %>"><%= u.user %></a>,  
+	<% end %>
+</div>
+
+<hr>
+
+<p>Most recently uploaded images:</p>
+<table id="recentImagesTable">
+    <tr>
+        <% x = 0 %>
+        <% @recentImages.each do |i| %>
+            <td id="recentImage_<%= x %>">
+                <img src='http://images.qufoto.com/<%= i.id %>_thumb.jpg'>
+            </td>
+            <% x += 1 %>
+        <% end %>
+    </tr><tr>
+        <% x = 0 %>
+        <% @recentImages.each do |i| %>
+            <td id="recentName_<%= x %>">
+                <%= link_to i.portfolio.user.name, {:action => "user", :id => i.portfolio.user.id} %><br>
+                <span class="caption"><%= i.uploaded.strftime("%I:%M %p, %A") if !i.uploaded.nil? %></span>
+            </td>
+            <% x += 1 %>
+        <% end %>
+    </tr>
+</table>
+
+<script type="text/javascript">
+    var RecentImages = {
+        oldImages: null,
+        newImages: null,
+        update: function (recent) {
+            this.newImages = recent.split('|');
+            for (x = 0; x < 5; x++) {   //>
+                this.newImages[x] = this.newImages[x].split('*');
+                if (this.oldImages != null && this.newImages[x][0] != this.oldImages[x][0]) {
+                    $('recentImage_' + x).innerHTML = "<img src='http://images.qufoto.com/" + this.newImages[x][0] + "_thumb.jpg'>"
+                    $('recentName_' + x).innerHTML = "<a href='/admin/user?id=" + this.newImages[x][1] + "'>" + this.newImages[x][2] + '</a><br>';
+                    $('recentName_' + x).innerHTML += '<span class="caption">' + this.newImages[x][3] + '</span>';
+                }
+            }
+            this.oldImages = this.newImages;
+        }
+    };
+</script>
+
+<!--
+< periodically_call_remote(
+    :url => {:action => "online_users"},
+    :update => "online_users",
+    :frequency => 300) >
+-->
+
+<%= periodically_call_remote(
+    :url => {:action => "recent_images"},
+    :frequency => 300) %>

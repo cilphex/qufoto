@@ -1,0 +1,136 @@
+html, 
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: arial, verdana, sans-serif;
+    font-size: 10px;
+}
+a {
+    outline: none;
+}
+img {
+    border: none;
+}
+table {
+    font-family: arial, verdana, sans-serif;
+    font-size: 10px;
+}
+#splash {
+    position: absolute;
+    margin-top: -300px;
+    margin-left: -450px;
+    top: 50%;
+    left: 50%;
+    width: 900px;
+    height: 600px;
+}
+#brand a,
+#brand a:link,
+#brand a:visited,
+#brand a:active {
+	text-decoration: none;
+}
+#brand a:hover {
+	text-decoration: underline;
+}
+#hiddenbrand a,
+#hiddenbrand a:link,
+#hiddenbrand a:visited,
+#hiddenbrand a:active {
+	text-decoration: none;
+}
+#hiddenbrand a:hover {
+	text-decoration: none;
+}
+#displaytable {
+    margin: 0; 
+    padding: 0;
+    width: 100%;
+    height: 100%; 
+}
+#bannercell {
+    height: 1px;
+}
+#flashcell {
+    text-align: center;
+}
+#maintenance {
+    position: absolute;
+    margin-left: -200px;
+    margin-top: -50px;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    height: 100px;    
+    font-size: 12px;
+    text-align: center;
+}
+body.pos_0 {background-position: center center;}
+body.pos_1 {background-position: top left;}
+body.pos_2 {background-position: top center;}
+body.pos_3 {background-position: top right;}
+body.pos_4 {background-position: center left;}
+body.pos_5 {background-position: center right;}
+body.pos_6 {background-position: bottom left;}
+body.pos_7 {background-position: bottom center;}
+body.pos_8 {background-position: bottom right;}
+body.repeat_0 {background-repeat: no-repeat;}
+body.repeat_1 {background-repeat: repeat;}
+body.repeat_2 {background-repeat: repeat-x;}
+body.repeat_3 {background-repeat: repeat-y;}
+body.bgimg_0 {background-color: #bfcad8; background-image: url(/images/gradient_0.png);}
+body.bgimg_1 {background-color: #000000; background-image: url(/images/gradient_1.png);}
+body.bgimg_2 {background-color: #1aa9c1; background-image: url(/images/gradient_2.png);}
+body.bgimg_3 {background-color: #789090; background-image: url(/images/gradient_3.png);}
+body.bgimg_4 {background-color: #394947; background-image: url(/images/gradient_4.png);}
+
+
+/* 404 page */
+
+body.error_404 {
+	font-size: 13px;
+	color: #555;
+	background: #eee;
+}
+body.error_404 a,
+body.error_404 a:link,
+body.error_404 a:visited {
+	text-decoration: none;
+	color: #338ebd;
+}
+body.error_404 a:active,
+body.error_404 a:hover {
+	color: #25749e;
+}
+body.error_404 div.content {
+	margin: 40px auto 0;
+	padding: 10px 20px;
+	width: 400px;
+	background: #fff;
+	box-shadow: 0 10px 50px rgba(0,0,0,0.1);
+}
+body.error_404 div.content h1 {
+	margin: 10px 0;
+	font-size: 25px;
+	font-weight: normal;
+}
+body.error_404 div.content p {
+	margin: 0 0 20px;
+}
+body.error_404 div.content p span.not_found {
+	color: #bd3b33;
+}
+body.error_404 div.site {
+	margin: 15px auto 40px;
+	width: 400px;
+}
+body.error_404 div.site p {
+	font-size: 11px;
+	text-shadow: 0 1px #fff;
+	color: #888;
+}
+body.error_404 div.site p.brand {
+	margin: 0;
+	float: right;
+}

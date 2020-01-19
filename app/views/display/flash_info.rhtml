@@ -1,0 +1,117 @@
+<html>
+    <head>
+        <meta name="robots" content="noindex">
+        <meta http-equiv="refresh" content="0;url=http://<%= @user.website %>">
+    </head>
+    <body>
+        <div style="display: none;">
+        <!--
+            &template=<%= @user.info.template %>
+            &transition=<%= @user.info.transition %>& 
+            &transitionspeed=<%= @user.info.transitionspeed %>&
+            &innerbgalpha=<%= @user.info.innerbgalpha %>&
+            &thumbbgalpha=<%= @user.info.thumbbgalpha %>& 
+            &arrowdisplay=<%= @user.info.arrowdisplay %>& 
+            &arrowsize=<%= @user.info.arrowsize %>& 
+            &arrowcolor=<%= @user.info.arrowcolor %>& 
+            &arrowalpha=<%= @user.info.arrowalpha %>& 
+            &audioplay=<%= @user.info.audioplay %>& 
+            &audioloop=<%= @user.info.audioloop %>& 
+            &title=<%= @user.info.toptext %>& 
+            &copyright=<%= @user.info.name == "" ? " " : "Copyright #{@user.info.name}" %>& 
+            <% if @user.info.biodisplay == true && @user.info.biography != "" %>
+                &biography=<font color='#<%= @user.info.textcolor %>'><%= @user.info.biography %></font>& 
+            <% end %>
+            <%# if s3_contains(biopic = "biopic" + @user.id.to_s + ".jpg") && @user.info.biopicdisplay == true %>
+            <% if @user.info.display_biopic? %>
+                &biopic=<%= s3_file(biopic_s3_path(@user)) %>& 
+            <% end %>
+            <%# if s3_contains(banner = "banner" + @user.id.to_s + ".jpg") && @user.info.bannerdisplay == true %>
+            <% if @user.info.display_banner? %>
+                &banner=<%= s3_file(banner_s3_path(@user)) %>& 
+            <% end %>
+            <% if @user.info.email != "" %>
+                &contact=<%= @user.info.email %>& 
+            <% end %>
+            <% if @user.info.contact_info != "" %>
+                &contact_info=<%= @user.info.contact_info %>& 
+            <% end %>
+            <%# if s3_contains(resume = "resume" + @user.id.to_s + ".pdf") && @user.info.resumedisplay == true %>
+            <% if @user.info.display_resume? %>
+                &resume=<%= s3_file(resume_s3_path(@user)) %>& 
+            <% end %>
+            &link1=<%= @user.info.link1 %>& 
+            &link2=<%= @user.info.link2 %>& 
+            &link3=<%= @user.info.link3 %>& 
+            &link1_address=<%= @user.info.link1_address %>& 
+            &link2_address=<%= @user.info.link2_address %>& 
+            &link3_address=<%= @user.info.link3_address %>& 
+            &link_portfolios=<%= @user.info.link_portfolios %>& 
+            &link_multimedia=<%= @user.info.link_multimedia %>& 
+            &link_biography=<%= @user.info.link_biography %>& 
+            &link_contact=<%= @user.info.link_contact %>& 
+            &link_resume=<%= @user.info.link_resume %>&
+			&link_clientaccess=<%= @user.info.link_clientaccess %>&
+            <%# if s3_contains(audio = "audio" + @user.id.to_s + ".mp3") %>
+            <% if @user.info.display_audio? %>
+                &audio=<%= s3_file(audio_s3_path(@user)) %>& 
+            <% end %>
+            &bgcolor=<%= @user.info.bgcolor %>&
+            &innerbgcolor=<%= @user.info.innerbgcolor %>&
+            &textcolor=<%= @user.info.textcolor %>& 
+            &thumbbgcolor=<%= @user.info.thumbbgcolor %>& 
+            &highlightcolor=<%= @user.info.highlightcolor %>& 
+            &color5=<%= @user.info.color5 %>& 
+            &totalportfolios=<%= @user.total_portfolios %>&
+             
+            
+            <% x = 0 %>
+            <% totalImage = 0 %>
+            
+            <%
+                case @user.info.template
+                    when 0, 1, 4
+                        imageType = "student"
+                    when 2
+                        imageType = "pro"
+                    when 3
+                        imageType = "370tall"
+                end
+            %>
+            
+            <% @user.portfolios.each do |p| %>
+              <% if p.hidden == false && p.images.length > 0 %>
+                 
+                &portfolio<%= x %>=<%= p.title %>& 
+                <%# if s3_contains(audio = "portfolio_audio" + p.id.to_s + ".mp3") && p.slideshow == true %>
+                <%# if @user.info.display_portfolio_audio? && p.slideshow? %>
+                <% if p.audio? && p.slideshow? %>
+                  &audiofile<%= x %>=<%= s3_file(portfolio_audio_s3_path(p)) %>& 
+                <% else %>
+                  &audiofile<%= x %>=false& 
+                <% end %>
+				&password<%= x %>=<%= p.password if p.private %>&
+                &totalpics<%= x %>=<%= p.images.length %>&  
+                    
+                <% p.images.each do |i| %>
+                  &title<%= totalImage %>=<%= i.title %>& 
+                  &caption<%= totalImage %>=<%= i.description %>& 
+                  &file<%= totalImage %>=<%= s3_photo(i.id, imageType).gsub("&", "|").gsub("%", "*") %>& 
+                  &file_thumb<%= totalImage %>=<%= s3_photo(i.id, "thumb") %>& 
+                  &duration<%= totalImage %>=<%= i.duration %>& 
+                  <% if i.rollover? %>
+                    &rollover<%= totalImage %>=<%= s3_photo(i.id, imageType + "_rollover").gsub("&", "|").gsub("%", "*") %>& 
+                  <% else %>
+                    &rollover=& 
+                  <% end %>
+                  <% totalImage = totalImage + 1 %>
+                <% end %>
+                <% x = x + 1 %>
+              <% end %>
+            <% end %>
+             
+            &end=true
+            -->
+        </div>
+    </body>
+</html>

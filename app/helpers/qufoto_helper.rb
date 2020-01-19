@@ -1,0 +1,2 @@
+module QufotoHelper
+end

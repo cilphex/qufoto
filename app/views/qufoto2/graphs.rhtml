@@ -1,0 +1,92 @@
+<% @help = true %>
+
+<script src="http://stathat.com/javascripts/embed.js"></script>
+
+<h1>StatHat Happin&rsquo; Haps</h1>
+<p class="subtitle">Some cool stuff for the cool cats.  Don't link to this page.</p>
+
+<style>
+	#stats h2 {
+		clear: left;
+		margin-top: 70px;
+	}
+	#stats a img {
+		border: none;
+	}
+	#stats div.stat {
+		margin: 0 0 20px;
+	}
+	#stats div.stat div.graph {
+		padding: 10px 0;
+		text-align: center;
+		background: -moz-linear-gradient(top, #fcfcfc, #f6f6f6);
+		background: -webkit-gradient(linear, left top, left bottom, from(#fcfcfc), to(#f6f6f6));
+		-moz-border-radius: 3px;
+		-webkit-border-radius: 3px;
+		-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+		-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+	}
+</style>
+
+<script>
+	StatdeeEmbed.graph_defaults = {w: 630, h: 150, u: 'week', c: 1, iu: 'minute', ic: 30};
+	StatdeeEmbed.render_default = function(key) {
+		this.render_graph(Object.extend(this.graph_defaults, {s1: key}))
+	}
+</script>
+
+
+<div id="stats">
+	
+	<h2>Portfolios</h2>
+	
+	<div class="stat">
+		<h3>Portfolio added</h3>
+		<div class="graph"><script>StatdeeEmbed.render_default('j03L');</script></div>
+	</div>
+	<div class="stat">
+		<h3>Portfolio deleted</h3>
+		<div class="graph"><script>StatdeeEmbed.render_default('WRJf');</script></div>
+	</div>
+	
+	<h2>Images</h2>
+	
+	<div class="stat">
+		<h3>Image added</h3>
+		<div class="graph"><script>StatdeeEmbed.render_default('Uwa9');</script></div>
+	</div>
+	<div class="stat">
+		<h3>Image deleted</h3>
+		<div class="graph"><script>StatdeeEmbed.render_default('acQ9');</script></div>
+	</div>
+	<div class="stat">
+		<h3>Image edited</h3>
+		<div class="graph"><script>StatdeeEmbed.render_default('UAv8');</script></div>
+	</div>
+	
+	<h2>Template</h2>
+	
+	<div class="stat">
+		<h3>Template changed</h3>
+		<div class="graph"><script>StatdeeEmbed.render_default('KY4z');</script></div>
+	</div>
+	<div class="stat">
+		<h3>Splash image uploaded</h3>
+		<div class="graph"><script>StatdeeEmbed.render_default('wNbx');</script></div>
+	</div>
+	<div class="stat">
+		<h3>Splash image deleted</h3>
+		<div class="graph"><script>StatdeeEmbed.render_default('YklF');</script></div>
+	</div>
+	<div class="stat">
+		<h3>Banner uploaded</h3>
+		<div class="graph"><script>StatdeeEmbed.render_default('pL0i');</script></div>
+	</div>
+	<div class="stat">
+		<h3>Banner deleted</h3>
+		<div class="graph"><script>StatdeeEmbed.render_default('sjKR');</script></div>
+	</div>
+	
+</div>
+
+

@@ -1,0 +1,954 @@
+/* update3.css */
+
+body.update input {
+	font-family: verdana, arial, sans-serif;
+}
+
+a.btn {
+	padding: 4px 10px;
+	text-decoration: none;
+	color: #555;
+	background: #f6f6f6;
+	border: 1px solid #ddd;
+}
+a.btn:hover,
+a.btn:active {
+	color: #2F84BD;
+	background: #E9F3F9;
+	border-color: #DCECF6;
+}
+a.btn.disabled {
+	color: #aaa;
+}
+a.btn.disabled:hover,
+a.btn.disabled:active {
+	background: #f6f6f6;
+	border: 1px solid #ddd;
+	cursor: default;
+}
+
+a.visible_true {
+	color: #00B927;
+}
+a.visible_false {
+	color: #bbb;
+}
+
+input,
+textarea,
+select {
+	font-family: verdana, arial, sans-serif;;
+	font-size: 11px;
+	line-height: 17px;
+	color: #555;
+	outline: none;
+}
+
+textarea::-webkit-scrollbar {
+	width: 9px;
+}
+textarea::-webkit-scrollbar-track {
+	background: #fff;
+}
+textarea::-webkit-scrollbar-thumb {
+	background: #ccc;
+}
+
+span.saved {
+	margin-left: 10px;
+	font-style: italic;
+	font-weight: normal;
+	color: #82B94B;
+}
+span.saved.hide {
+	opacity: 0.0;
+	-webkit-transition: opacity 0.5s ease-out;
+}
+span.saved.show {
+	opacity: 1.0;
+}
+span.saving {
+	font-style: italic;
+	color: #999;
+}
+
+iframe.upload_iframe {
+	margin: 0;
+	padding: 0;
+	width: 0;
+	height: 0;
+	border: none;
+}
+
+.right {
+	float: right;
+}
+
+div.warning.browser {
+	padding: 10px 12px;
+}
+div.warning.browser h4 {
+	margin: 0 0 5px;
+}
+div.warning.browser p {
+	margin: 5px 0 0;
+}
+
+/* Data form */
+
+
+body.update table.dataform {
+	font-size: 11px;
+	border-spacing: 0;
+	border-collapse: collapse;
+}
+body.update table.dataform td {
+	padding: 10px 0;
+	border-bottom: 1px solid #eee;
+	vertical-align: top;
+}
+body.update table.dataform td:first-child {
+	padding: 13px 15px 10px 5px;
+	line-height: 17px;
+	text-align: right;
+}
+body.update table.dataform td:last-child {
+	width: 300px;
+} 
+body.update table.dataform tr:last-child td {
+	border: none;
+}
+body.update table.dataform td:first-child span {
+	display: block;
+	font-size: 10px;
+	font-style: italic;
+	line-height: 11px;
+	color: #aaa;
+}
+body.update table.dataform input,
+body.update table.dataform textarea,
+body.update table.dataform select {
+	margin: 0;
+	width: 100%;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
+}
+body.update table.dataform input[type="text"],
+body.update table.dataform textarea {
+	padding: 2px 4px;
+}
+body.update table.dataform textarea {
+	height: 57px;
+}
+body.update table.dataform select {
+	height: 23px;
+}
+
+/* Login */
+
+body.update.signup input.standard {
+	margin-bottom: 15px;
+}
+body.update.signup p.btn {
+	width: 160px;
+}
+body.update.signup input[type="submit"] {
+	position: absolute;
+	visibility: hidden;
+}
+body.update.signup p.signing_in {
+	font-weight: normal;
+	color: #999;
+}
+body.update.signup p.lost {
+	margin: 40px 0 0;
+	font-size: 11px;
+}
+body.update.signup div.lost p {
+	margin: 0 0 40px;
+	line-height: 20px;
+}
+body.update.signup div.lost p strong {
+	display: block;
+	color: #158AD4;
+}
+
+/* Maintenance */
+
+body.maintenance div.column_content {
+	width: 100%;
+	padding: 0;
+}
+body.maintenance div.maintenance {
+	margin: 100px auto;
+	padding-left: 120px;
+	width: 400px;
+	min-height: 120px;
+	background: transparent url(/images/updates.png) 0 0 no-repeat;
+}
+body.maintenance div.maintenance p {
+	margin: 0 0 10px 0;
+}
+body.maintenance div.maintenance p.title {
+	font-size: 14px;
+	font-weight: bold;
+}
+
+/* Portfolios */
+
+body.update.portfolios ul.portfolios {
+	margin: 0 0 30px;
+	padding: 0;
+	list-style: none;
+}
+body.update.portfolios ul.portfolios li {
+	line-height: 32px;
+	border-bottom: 1px solid #eee;
+}
+body.update.portfolios ul.portfolios li:last-of-type {
+	border: none;
+}
+body.update.portfolios ul.portfolios li div.bar {
+	display: -webkit-box;
+	display: -moz-box;
+	display: box;
+}
+body.update.portfolios ul.portfolios li div.bar:hover {
+	background: #fafafa;
+}
+body.update.portfolios ul.portfolios li span.handle {
+	display: block;
+	margin: 4px 10px 4px -1px;
+	width: 20px;
+	height: 24px;
+	background: url(/images/grip_dot.png);
+	cursor: move;
+}
+body.update.portfolios ul.portfolios li a.expand {
+	display: block;
+	-webkit-box-flex: 1;
+	-moz-box-flex: 1;
+	box-flex: 1;
+	text-decoration: none;
+}
+body.update.portfolios ul.portfolios li a.visibility {
+	display: block;
+	width: 80px;
+	font-size: 11px;
+	text-align: center;
+}
+body.update.portfolios ul.portfolios li.hidden_true a.visibility {color: #bbb;}
+body.update.portfolios ul.portfolios li.hidden_false a.visibility {color: #00b927;}
+
+body.update.portfolios ul.portfolios li span.count {
+	display: block;
+	font-size: 11px;
+}
+body.update.portfolios ul.portfolios li div.details {
+	display: none;
+	margin: 0 0 10px;
+	padding: 0 0 0 10px;
+	font-size: 11px;
+	border-left: 1px solid #eee;
+}
+body.update.portfolios ul.portfolios li.details div.details {
+	display: block;
+	margin-bottom: 50px;
+	padding-top: 15px;
+}
+body.update.portfolios ul.portfolios li.details div.bar {
+	background: #f6f6f6;
+}
+body.update.portfolios ul.portfolios li.details a.expand {
+	font-weight: bold;
+}
+body.update.portfolios ul.portfolios li div.details div.images {
+	position: relative;
+	height: 120px;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+}
+body.update.portfolios ul.portfolios li div.details div.images div.scroll {
+	width: 252px;
+	height: 120px;
+	font-size: 0;
+	background: #ccc;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+body.update.portfolios ul.portfolios li div.details div.images div.gradient {
+	position: absolute;
+	left: 0;
+	right: 9px;
+	bottom: 0;
+	height: 50px;
+	background: -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(0,0,0,0.66)));
+}
+div.scroll::-webkit-scrollbar {
+	width: 9px;
+}
+div.scroll::-webkit-scrollbar-track {
+	background: #fff;
+}
+div.scroll::-webkit-scrollbar-thumb {
+	background: #84cfff;
+}
+body.update.portfolios ul.portfolios li div.details div.images div.image {
+	margin: 0 1px 1px 0;
+	width: 80px;
+	height: 80px;
+	float: left;
+	font-size: 0;
+	line-height: 80px;
+	text-align: center;
+	background-color: #888;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 80px auto;
+}
+body.update.portfolios ul.portfolios li div.details div.images div.empty {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 252px;
+	height: 120px;
+	line-height: 120px;
+	text-align: center;
+}
+body.update.portfolios ul.portfolios li form.options {
+	margin-right: 20px;
+	-webkit-box-flex: 1;
+	-moz-box-flex: 1;
+	box-flex: 1;
+}
+body.update.portfolios ul.portfolios li form.options ul {
+	margin: 0;
+	padding: 0;
+}
+body.update.portfolios ul.portfolios li form.options ul li {
+	display: -webkit-box;
+	display: -moz-box;
+	display: box;
+	border-bottom: 1px dotted #dcdcdc;
+}
+body.update.portfolios ul.portfolios li form.options ul li:last-child {
+	border-bottom: none;
+}
+body.update.portfolios ul.portfolios li form.options ul li div:nth-child(1) {
+	width: 75px;
+}
+body.update.portfolios ul.portfolios li form.options ul li div:nth-child(2) {
+	-webkit-box-flex: 1;
+	-moz-box-flex: 1;
+	box-flex: 1;
+}
+body.update.portfolios ul.portfolios li form.options ul li a.save {
+	display: block;
+	margin: 5px 0 0;
+	padding: 0 5px;
+	height: 19px;
+	line-height: 19px;
+	background: #f6f6f6;
+	border: 1px solid #e8e8e8;
+}
+body.update.portfolios ul.portfolios li form.options ul li a.save:hover {
+	text-decoration: none;
+	background: #eee;
+	border-color: #ddd;
+}
+body.update.portfolios ul.portfolios li form.options ul li input[type="text"],
+body.update.portfolios ul.portfolios li form.options ul li input[type="file"],
+body.update.portfolios ul.portfolios li form.options ul li select {
+	display: inline-block;
+	margin: 5px 0 0;
+	padding: 0 5px;
+	font-size: 11px;
+	line-height: 19px;
+	color: #555;
+	border: 1px solid #ccc;
+}
+body.update.portfolios ul.portfolios li form.options ul li input[type="text"] {
+	width: 140px;
+}
+body.update.portfolios ul.portfolios li form.options ul li input[type="file"] {
+	margin: 0 0 10px;
+	padding: 0;
+	width: 200px;
+}
+body.update.portfolios ul.portfolios li form.options ul li select {
+	margin-top: 6px;
+	padding: 0;
+}
+input[name="password"] {visibility: hidden;}
+div.private input[name="password"] {visibility: visible;}
+body.update.portfolios ul.portfolios li a.delete {
+	display: block;
+	text-align: center;
+	color: #a90000;
+}
+body.update.portfolios div.error_tip {
+	top: 31px;
+}
+body.update.portfolios div.new input.new_portfolio {
+	float: left;
+	margin: 0;
+	padding: 3px 5px;
+	width: 200px;
+	line-height: 18px;
+	color: #555;
+	border: 1px solid #ddd;
+}
+body.update.portfolios div.new a.create {
+	float: left;
+	line-height: 16px;
+	border-left: none;
+}
+body.update.portfolios div.new span.error {
+	float: left;
+	padding-left: 14px;
+	font-style: italic;
+	line-height: 26px;
+	color: #D63841;
+}
+
+body.update.images {
+
+}
+body.update.images div.main_content {
+	position: relative;
+}
+/* Thumb view */
+body.update.images ul.thumbs {
+	margin: 20px 0 0;
+	padding: 0;
+	list-style: none;
+}
+body.update.images ul.thumbs li.image {
+	position: relative;
+	float: left;
+	margin: 0 8px 8px 0;
+	width: 100px;
+	height: 100px;
+	background-color: #888;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: contain; /* "cover" is cool too */
+	box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+}
+body.update.images ul.thumbs li.image a.delete {
+	display: none;
+	position: absolute;
+	top: 2px;
+	right: 2px;
+	width: 16px;
+	height: 16px;
+	font-size: 8px;
+	font-weight: bold;
+	line-height: 16px;
+	text-align: center;
+	background: #fff;
+	border: 2px solid #333;
+	border-radius: 3px; /*50%;*/
+	box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+	z-index: 1;
+}
+body.update.images ul.thumbs li.image a.delete:hover {
+	/*background: #a90000;*/
+	text-decoration: none;
+	background: #ddd;
+}
+body.update.images ul.thumbs li.image div.handle {
+	display: none;
+	position: absolute;
+	top: 2px;
+	left: 2px;
+	width: 15px;
+	height: 15px;
+	background: url(/images/grip_dot.png);
+	border: 2px solid #333;
+	border-radius: 3px;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+	cursor: move;
+	z-index: 1;
+}
+body.update.images ul.thumbs li.image:hover a.delete,
+body.update.images ul.thumbs li.image:hover div.handle {
+	display: block;
+}
+body.update.images ul.thumbs li.image.dragging a.delete {
+	display: none;
+}
+body.update.images ul.thumbs li.image div.clickable {
+	position: absolute;
+	top: 23px;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	cursor: pointer;
+}
+/* List view */
+body.update.images ul.list {
+	margin: 20px 0 0;
+	padding: 0;
+	list-style: none;
+}
+body.update.images ul.list li.image {
+	position: relative;
+	display: block;
+	margin: 0;
+	padding: 6px 0;
+	border-bottom: 1px solid #eee;
+}
+body.update.images ul.list li.image:last-child {
+	border: none;
+}
+body.update.images ul.list li.image div.handle {
+	float: left;
+	margin-right: 8px;
+	width: 100px;
+	height: 100px;
+	background-color: #888;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: contain; /* "cover" is cool too */
+	box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+	cursor: move;
+}
+body.update.images ul.list li.image div.links {
+	position: absolute;
+	display: -webkit-box;
+	display: -moz-box;
+	display: box;
+	right: 0;
+	bottom: 5px;
+}
+body.update.images ul.list li.image div.links a {
+	display: block;
+	padding: 0 10px;
+	font-size: 11px;
+	line-height: 21px;
+	text-decoration: none;
+	border-right: 1px solid #eee;
+}
+body.update.images ul.list li.image div.links a:last-child {
+	border: none;
+}
+body.update.images ul.list li.image div.links a:hover {
+	background: #f6f6f6;
+}
+body.update.images ul.list li.image input[type="text"],
+body.update.images ul.list li.image textarea {
+	display: block;
+	margin: 0;
+	padding: 5px;
+	width: 532px;
+	background: transparent;
+	border: none;
+}
+body.update.images ul.list li.image input[type="text"] {
+	height: 17px;
+	border-bottom: 1px solid #eee;
+}
+body.update.images ul.list li.image textarea {
+	height: 34px;
+	resize: none;
+}
+body.update.images ul.list li.image ::-webkit-input-placeholder,
+body.update.images ul.list li.image ::-moz-placeholder {
+	font-style: italic;
+	color: #aaa;
+}
+body.update.images div.drop {
+	position: absolute;
+	float: none;
+	margin: 0;
+	padding: 0;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: 184px;
+	background: #fff;
+	z-index: 4;
+	visibility: hidden;
+	opacity: 0;
+	-webkit-transition: opacity 0.25s linear,
+	                    visibility 0.25s linear;
+}
+body.update.images div.drop.visible {
+	visibility: visible;
+	opacity: 1.0;
+}
+body.update.images div.drop ul {
+	border: none;
+}
+body.update.images div.drop ul li {
+	margin-bottom: 1px;
+	margin-right: 0;
+	padding: 0 14px;
+	font-size: 11px;
+	line-height: 27px;
+	/*color: #ccc;*/
+	background: #f6f6f6;
+}
+body.update.images div.drop ul li.first {
+	padding-top: 16px;
+	padding-bottom: 5px;
+	font-size: 16px;
+	color: #fff;
+	background-color: #67C0F9;
+	background-image: url(http://media.qufoto.com/misc/change_portfolio_white.png);
+	background-position: 138px 19px;
+	background-repeat: no-repeat;
+}
+body.update.images div.drop ul li.droppable.drop_hover {
+	background: #158AD9;
+	color: #fff;
+	text-shadow: 0 1px rgba(0,0,0,0.25);
+}
+body.update.images ul.drop li:last-child {
+	border-bottom: none;
+}
+body.update.images div.detail {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	/*background: rgba(0,0,0,0.25);*/
+	z-index: 5;
+}
+body.update.images div.detail div.inner {
+	position: absolute;
+	top: 40px;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	padding: 10px;
+	width: 775px;
+	text-align: center;
+	background: rgba(0,0,0,0.9);
+	box-shadow: 0 3px 10px rgba(0,0,0,0.5);
+}
+body.update.images div.detail div.inner div.loading {
+	line-height: 200px;
+	text-align: center;
+	font-style: italic;
+	color: #888;
+}
+body.update.images div.detail div.inner img {
+	margin-bottom: 15px;
+	max-width: 775px;
+	max-height: 450px;
+}
+body.update.images div.detail div.inner input[type="text"],
+body.update.images div.detail div.inner textarea {
+	display: block;
+	margin: 0 auto;
+	padding: 5px;
+	width: 500px;
+	background: transparent;
+	border: none;
+}
+body.update.images div.detail div.inner input[type="text"]:hover,
+body.update.images div.detail div.inner input[type="text"]:focus,
+body.update.images div.detail div.inner textarea:hover,
+body.update.images div.detail div.inner textarea:focus {
+	/*background: rgba(255,255,255,0.1);*/
+}
+body.update.images div.detail div.inner input[type="text"] {
+	height: 17px;
+	border-bottom: 1px solid #333;
+}
+body.update.images div.detail div.inner textarea {
+	height: 51px;
+	resize: none;
+}
+body.update.images div.detail div.inner ::-webkit-input-placeholder,
+body.update.images div.detail div.inner ::-moz-placeholder {
+	font-style: italic;
+	color: #666;
+}
+body.update.images div.detail div.inner a {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	padding: 10px 15px;
+	font-size: 11px;
+	color: #ccc;
+}
+body.update.images div.detail div.inner a.save {
+	left: auto;
+	right: 0;
+}
+
+/* Upload */
+
+body.update.images form.upload {
+	margin-bottom: 50px;
+}
+body.update.images div.uploaded {
+}
+body.update.images div.uploaded div.image {
+	margin: 20px 0;
+	text-align: center;
+}
+body.update.images div.uploaded div.image img {
+	max-width: 670px;
+	max-height: 350px;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+	cursor: pointer;
+}
+
+/* Layout */
+
+body.update.layout form.links td:nth-child(1) {
+	width: 80px;
+}
+body.update.layout form.links td:nth-child(2) {
+	width: 130px;
+}
+body.update.layout form.links td:nth-child(3) {
+	padding: 13px 3px 0 15px;
+	line-height: 17px;
+}
+body.update.layout form.links td:nth-child(4) {
+	width: 200px;
+}
+
+body.update.layout div.banner_or_splash div.image {
+	margin: 0 0 5px;
+	padding: 15px;
+	text-align: center;
+	background: #f6f6f6;
+	border-radius: 5px;
+}
+body.update.layout div.banner_or_splash div.image img {
+	max-width: 620px;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+}
+body.update.layout div.banner_or_splash div.foot {
+	margin: 0 15px;
+	font-size: 11px;
+	line-height: 17px;
+}
+body.update.layout div.banner_or_splash div.foot form {
+	position: relative;
+	display: inline-block;
+}
+body.update.layout div.banner_or_splash div.foot form span {
+	color: #338EBD;
+	outline: none;
+}
+body.update.layout div.banner_or_splash div.foot form:hover span {
+	text-decoration: underline;
+    color: #25749E;
+    outline: none;
+    cursor: pointer;
+}
+body.update.layout div.banner_or_splash div.foot form input[type="file"] {
+	position: absolute;
+	margin: 0;
+	padding: 0;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: #fcc;
+	opacity: 0;
+	cursor: pointer;
+}
+body.update.layout div.banner_or_splash div.foot span.saving {
+	margin-left: 10px;
+}
+
+body.update.layout div.javascript textarea {
+	margin: 0 0 5px;
+	padding: 2px 4px;
+	width: 100%;
+	min-height: 250px;
+	font-family: "Courier New";
+	font-size: 12px;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
+	resize: vertical;
+}
+body.update.layout div.javascript div.foot {
+	font-size: 11px;
+	line-height: 17px;
+}
+
+/* Basic */
+
+body.update.basic div.bio_info {
+	display: -webkit-box;
+	display: -moz-box;
+	display: box;
+	font-size: 11px;
+}
+body.update.basic div.bio_info div.text {
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: flex;
+	-webkit-flex-direction: column;
+	-moz-flex-direction: column;
+	flex-direction: column;
+	-webkit-box-flex: 1;
+	-moz-box-flex: 1;
+	box-flex: 1;
+	margin-right: 10px;
+}
+body.update.basic div.bio_info div.text textarea {
+	display: block;
+	-webkit-flex: 1;
+	-moz-flex: 1;
+	flex: 1;
+	margin: 0;
+	padding: 2px 4px;
+	border-color: #ccc;
+	resize: none;
+}
+body.update.basic div.bio_info div.text div {
+	line-height: 17px;
+	margin-top: 5px;
+}
+body.update.basic div.bio_info div.pic {
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: flex;
+	-webkit-flex-direction: column;
+	-moz-flex-direction: column;
+	flex-direction: column;
+	width: 200px;
+}
+body.update.basic div.bio_info div.pic div.bg {
+	position: relative;
+	-webkit-flex: 1;
+	-moz-flex: 1;
+	flex: 1;
+	height: 270px;
+	line-height: 270px;
+	text-align: center;
+	color: #ccc;
+	background-color: #333;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: contain; /* "cover" is cool too */
+}
+body.update.basic div.bio_info div.pic div.bg img {
+	max-width: 200px;
+	max-height: 270px;
+}
+body.update.basic div.bio_info div.pic div.bg input[type="file"] {
+	position: absolute;
+	margin: 0;
+	padding: 0;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: #fcc;
+	opacity: 0;
+	cursor: pointer;
+}
+body.update.basic div.bio_info div.pic div.foot {
+	line-height: 17px;
+	text-align: right;
+	margin-top: 5px;
+}
+body.update.basic div.resume {
+	
+}
+body.update.basic div.resume div.uploaded {
+	margin: 0 0 5px;
+	background: #f6f6f6;
+	padding: 15px;
+	border-radius: 5px;
+}
+body.update.basic div.resume div.foot {
+	margin: 0 15px;
+	font-size: 11px;
+	line-height: 17px;
+}
+body.update.basic div.resume div.foot form {
+	position: relative;
+	display: inline-block;
+}
+body.update.basic div.resume div.foot form span {
+    color: #338EBD;
+    outline: none;
+}
+body.update.basic div.resume div.foot form:hover span {
+	text-decoration: underline;
+    color: #25749E;
+    outline: none;
+    cursor: pointer;
+}
+body.update.basic div.resume div.foot form input[type="file"] {
+	position: absolute;
+	margin: 0;
+	padding: 0;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	opacity: 0;
+	cursor: pointer;
+}
+
+/* Messages */
+
+body.update.messages a.expand_all {
+	float: right;
+	font-size: 11px;
+	line-height: 31px;
+}
+body.update.messages ul.messages {
+	margin: 20px 0 0;
+	padding: 0;
+	list-style: none;
+}
+body.update.messages ul.messages li {
+	display: block;
+	border-bottom: 1px solid #eee;
+}
+body.update.messages ul.messages li:last-child {
+	border: none;
+}
+body.update.messages ul.messages li div.bar {
+	display: -webkit-box;
+	display: -moz-box;
+	display: box;
+	line-height: 32px;
+}
+body.update.messages ul.messages li div.bar:hover {
+	background: #fafafa;
+}
+body.update.messages ul.messages li div.bar * {
+	display: block;
+	margin-left: 20px;
+}
+body.update.messages ul.messages li div.bar a.expand {
+	margin: 0;
+	-webkit-box-flex: 1;
+	-moz-box-flex: 1;
+	box-flex: 1;
+	text-decoration: none;
+}
+body.update.messages ul.messages li div.bar span {
+	font-size: 11px;
+	color: #aaa;
+}
+body.update.messages ul.messages li div.bar a.delete {
+	font-size: 11px;
+}
+body.update.messages ul.messages li div.message {
+	margin: 5px 0 25px;
+}
+body.update.messages ul.messages li div.message p {
+	margin: 10px 0;
+}
+body.update.messages ul.messages li div.message p.meta {
+	margin: 0;
+	font-size: 11px;
+	line-height: 17px;
+	color: #aaa;
+}

@@ -1,0 +1,8 @@
+<% @announcements.each do |a| %>
+    <div class="post">
+        <b><%= a.title %></b>&nbsp;<span class="grey">|&nbsp;<%= a.posted.strftime("%b %d, %y") %></span><br>
+        <% a.body.split("\n").each do |p| %>
+            <p><%= p %></p>
+        <% end %>
+    </div>
+<% end %>

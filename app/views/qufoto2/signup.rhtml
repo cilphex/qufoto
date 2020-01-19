@@ -1,0 +1,130 @@
+<h1>Get Started</h1>
+<p class="intro">Getting your Qufoto website is easy and fast. Just
+complete the form below and that's it! You'll have a professional photography website in no time.</p>
+
+<hr/>
+
+<div class="left">
+	<label for="domain" class="standard">Domain name</label>
+	<input id="domain" class="standard" type="text" onkeyup="Signup.setDomain(this.value)" onkeydown="if(event.keyCode==13){Signup.checkDomain()}"/>
+	<p id="taken_warning" class="warning" style="display: none;">
+		<a class="close" href="#" onclick="$('taken_warning').toggle(); return false;">close</a>
+		<strong>Domain taken</strong>
+		If you own this domain, no problem.  If you don't, please choose another.
+	</p>
+	<p id="invalid_warning" class="warning" style="display: none;">
+		<a class="close" href="#" onclick="$('invalid_warning').toggle(); return false;">close</a>
+		<strong>Invalid format</strong>
+		Proper domain format: <strike>http://www.</strike>pro-shots.com
+	</p>
+	<p class="check">
+		<a id="check" href="#" onclick="Signup.checkDomain(); return false;">Check availability</a>
+		<span id="available" style="display: none;"><span></span>Available</span>
+		<span id="taken" style="display: none;"><strong>x</strong> Taken</span>
+		<span id="invalid" style="display: none;"><strong>x</strong> Invalid domain</span>
+	</p>
+	<p class="example">"myphotos.com", "pro-shots.net", etc.</p>
+	
+	<div class="plan_opts <%= 'free' if params[:free_month] %>">
+		<label>
+			<input id="plan1" type="radio" name="plan" value="1" onclick="Signup.planSelected()"/>
+			<span class="option_wrap">
+				<span class="option">
+					Standard <span>$19/month <%= '+ 1 Free' if params[:free_month] %></span>
+				</span>
+			</span>
+		</label>
+		<label>
+			<input id="plan2" type="radio" name="plan" value="2" onclick="Signup.planSelected()"/>
+			<span class="option_wrap">
+				<span class="option pro">
+					Pro <span>$29/month <%= '+ 1 Free' if params[:free_month] %></span>
+				</span>
+			</span>
+		</label>
+	</div>
+	<p id="plan_warning" class="warning" style="display: none;">
+		<a class="close" href="#" onclick="$('plan_warning').toggle(); return false;">close</a>
+		<strong>Choose a plan</strong>
+		Please select which plan you'd like before continuing.
+	</p>
+	
+	<p class="signup"><a href="#" onclick="Signup.doSignup(); return false;">Complete Signup &raquo;</a></p>
+	
+	<form id="signup_form" action="https://www.paypal.com/cgi-bin/webscr" method="post" style="display: none;">
+        <!--<input style="width: 125px; height: 59px; border: none;" type="image" src="http://qufoto.com/images/subscribe_lite.png" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">-->
+        <!--<img src="http://qufoto.com/images/subscribe_lite.png" id="submit_lite" style="cursor: pointer;" onClick="submitLite()"/>-->
+        <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1"/>
+        <!--<input type="hidden" name="image_url" value="http://media.qufoto.com/misc/qufoto_paypal.png"/>-->
+		<!--<input type="hidden" name="cpp_header_image" value="http://media.qufoto.com/misc/logo.png"/>-->
+		<!--<input type="hidden" name="cpp_headerborder_color" value="eeeeee"/>-->
+		<input type="hidden" name="cmd" value="_xclick-subscriptions">
+        <input type="hidden" name="business" value="service@qufoto.com">
+        <input type="hidden" name="item_name" value="Qufoto Standard Subscription" id="plan_title">
+        <input type="hidden" name="no_shipping" value="1">
+		<input type="hidden" name="notify_url" value="http://qufoto.com/paypal_ipn"/>
+        <input type="hidden" name="return" value="http://qufoto.com/thankyou"/>
+		<input type="hidden" name="cancel_return" value="http://qufoto.com/signup"/>
+        <input type="hidden" name="no_note" value="1"/>
+        <input type="hidden" name="currency_code" value="USD"/>
+        <input type="hidden" name="lc" value="US"/>
+        <input type="hidden" name="bn" value="PP-SubscriptionsBF"/>
+		<% if params[:free_month] %>
+			<input type="hidden" name="a1" value="0" id="a1"/>
+	        <input type="hidden" name="p1" value="1"/>
+	        <input type="hidden" name="t1" value="M"/>
+		<% end %>
+        <input type="hidden" name="a3" value="19.00" id="plan_rate"/>
+        <input type="hidden" name="p3" value="1"/>
+        <input type="hidden" name="t3" value="M"/>
+        <input type="hidden" name="src" value="1"/>
+        <input type="hidden" name="sra" value="1"/>
+		<% if !params[:free_month] && params[:modify] %>
+			<input type="hidden" name="modify" value="1"/>
+		<% end %>
+        <input type="hidden" name="custom" value="novalue" id="custom"/>
+    </form>
+	
+</div>
+
+<div class="right_questions">
+	<% if params[:free_month] %>
+		<p class="question">We're glad you like our interviews!</p>
+		<p class="answer">As a thanks for sharing them, you'll see each plan
+		marked with "<strong>+ 1 Free</strong>" month. We <span class="heart">&hearts;</span> you.</p>
+	<% end %>
+	
+	<p class="question">What if I already own a domain?</p>
+	<p class="answer">No problem! You can redirect a domain that you already own to
+	your Qufoto site, or choose a new domain for free.</p>
+	
+	<p class="question">How long do I have to subscribe for?</p>
+	<p class="answer">All plans run on a month-to-month basis.  There are no long-term
+	contracts, so you can cancel at any time with no fees.</p>
+	
+	<p class="question">How long does it take to get started?</p>
+	<p class="answer">Once you sign up it will take up to 24 hours to create your account.
+	Once you log in, you can get started instantly.</p>
+	
+	<p class="answer">Questions? Just <a href="/contact">send us a message</a>.</p>
+</div>
+
+<script>Signup.initialize();</script>
+
+<!-- Google Code for Signup Page Conversion Page -->
+<script language="JavaScript" type="text/javascript">
+<!--
+    var google_conversion_id = 1063328747;
+    var google_conversion_language = "en_US";
+    var google_conversion_format = "2";
+    var google_conversion_color = "000000";
+    if (0.00) {
+      var google_conversion_value = 0.00;
+    }
+    var google_conversion_label = "5DWxCLmsTBDrt4T7Aw";
+//-->
+</script>
+<script language="JavaScript" src="http://www.googleadservices.com/pagead/conversion.js"></script>
+<noscript>
+    <img height="1" width="1" border="0" src="http://www.googleadservices.com/pagead/conversion/1063328747/?value=0.00&amp;label=5DWxCLmsTBDrt4T7Aw&amp;script=0">
+</noscript>

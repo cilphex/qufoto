@@ -1,0 +1,3 @@
+# For StatHat
+
+STATHAT_UKEY = 'q554AQW4bpyB1S6OpgUU9i3c'

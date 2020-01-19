@@ -1,0 +1,41 @@
+<h1>Contact</h1>
+
+<p>If you have a question, please try checking the <a href="/faq">FAQ</a>
+and the <a href="/user_guide">User Guide</a> before sending us a message. We can
+also be contacted at <script>insert_address('service','qufoto.com');</script>. Thanks!</p>
+
+<form id="contact_form" class="contact_form clearfix">
+    <label>Name</label>
+    <input type="text" id="message_name" onkeydown="$(this).removeClassName('error')"/>
+    
+    <label>Email</label>
+    <input type="text" id="message_email" onkeydown="$(this).removeClassName('error')"/>
+    
+    <label>Comments</label>
+    <textarea id="message_text" onkeydown="$(this).removeClassName('error')"></textarea>
+	
+	<div id="query_results_wrap" style="display: none;">
+		<h2 id="matches">Before you send, please check these help topics:</h2>
+		<div id="query_results"></div>
+		<div id="no_results">No results!  Be more specific, or <a href="/contact">send us a message</a> instead.</div>
+		<div id="maybe_results"><em>Keep typing...</em></div>
+	</div>
+    
+    <a href="#" onclick="Contact.send(); return false;" class="send">
+    	<span id="send_text">Send comment</span><span id="send_loader" style="display: none;"></span>
+	</a>
+</form>
+
+<div id="message_sent" style="display: none;">
+	<h2>Message sent!</h2>
+	<p>Thanks for the message.  We'll get back to you as soon as possible.<br/>
+	In the meantime, check out some cool stuff:</p>
+	<ul class="no_pad">
+		<li><a href="/interviews">Our interviews with photographers</a></li>
+		<li><a href="http://twitter.com/qufoto">Follow us on Twitter</a></li>
+	</ul>
+</div>
+
+<script>
+	UserGuide.initialize('message_text', true);
+</script>

@@ -1,0 +1,27 @@
+<h1>Banner</h1>
+<p class="subtitle">A banner image is a long, thin image that appears
+at the top of your site.  Often used to display logos or brand graphics.
+Max dimensions are 920x100 px.</p>
+
+<div class="banner_or_splash">
+	<div class="image">
+		<img id="banner_image" style="<%= 'display: none;' if !current_user.info.banner %>" src="<%= "#{s3_file(banner_s3_path(current_user))}?rand=#{rand(1000000)}" %>"/>
+		<span id="banner_text" style="<%= 'display: none;' if current_user.info.banner %>">No banner image</span>
+	</div>
+	<div class="foot">
+		<span class="right">
+			<a id="banner_visibility" class="visible_<%= current_user.info.bannerdisplay %>" href="javascript:void(0)" onclick="Layout.toggleBannerVisibility()"><%= current_user.info.bannerdisplay ? 'Visible' : 'Hidden' %></a>
+		</span>
+		<form id="banner_form" action="/update3/layout_banner_process" method="post" enctype="multipart/form-data" target="upload_iframe">
+			<span>Upload new</span>
+			<input type="file" name="tmp_file" onchange="Layout.saveBanner()" title="Upload a banner image"/>
+		</form>
+		<span id="banner_delete" style="<%= 'display: none;' if !current_user.info.banner %>">
+			| <a href="javascript:void(0)" onclick="Layout.deleteBanner()">Delete</a>
+		</span>
+		<span id="banner_saving" class="saving" style="display: none;">Saving...</span>
+		<span id="banner_saved" class="saved" style="display: none;">Saved</span>
+	</div>
+</div>
+
+<iframe id="upload_iframe" class="upload_iframe" name="upload_iframe" src="about:blank"></iframe>

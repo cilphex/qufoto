@@ -1,0 +1,27 @@
+<h5>Examples</h5>
+
+<% if @examples.empty? %>
+	<p id="no_examples">No examples yet</p>
+	<ul id="examples" style="display: none;"></ul>
+<% else %>
+	<ul id="examples">
+		<%= render :partial => 'example', :collection => @examples %>
+	</ul>
+<% end %>
+
+<form id="example_form">
+	user:
+	<select name="user_id">
+		<% @users.each do |u| %>
+			<option value="<%= u.id %>"><%= u.website %> (<%= u.name %>)</option>
+		<% end %>
+	</select>
+	<p><a href="#" onclick="Example.addNew(); return false;">Add</a> | <a href="#" onclick="Example.toggleNew(); return false">Cancel</a></p>
+</form>
+
+<div class="spacer"></div>
+<iframe id="upload_frame" name="upload_frame" src="about:blank" style="margin: 0; padding: 0; width: 1px; height: 1px; border: none;"></iframe>
+
+<script>
+	Example.initialize();
+</script>

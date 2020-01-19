@@ -1,0 +1,82 @@
+<%
+	@sections = [
+		{
+			:title => 'Portfolios',
+			:section => 'portfolios',
+			:action => 'portfolios'
+		},
+		{
+			:title => 'Images',
+			:section => 'images',
+			:pages => [
+				{:title => 'Thumbnail view', :action => 'image_thumbs'},
+				{:title => 'List View',      :action => 'image_list'},
+				{:title => 'Upload',         :action => 'image_upload'}
+			]
+		},
+		{
+			:title => 'Layout',
+			:section => 'layout',
+			:pages => [
+				{:title => 'Template',     :action => 'layout_template'},
+				{:title => 'Color scheme', :action => 'layout_colors'},
+				{:title => 'Banner',       :action => 'layout_banner'},
+				{:title => 'Splash',       :action => 'layout_splash'},
+				{:title => 'Favicon',      :action => 'layout_favicon'},
+				{:title => 'Links',        :action => 'layout_links'},
+				{:title => 'Status',       :action => 'layout_status'},
+				{:title => 'Javascript',   :action => 'layout_javascript'}
+			]
+		},
+		{
+			:title => 'Basic info',
+			:section => 'basic',
+			:pages => [
+				{:title => 'My information', :action => 'basic_info'},
+				{:title => 'Biography',      :action => 'basic_bio'},
+				{:title => 'Resume',         :action => 'basic_resume'}
+			]
+		},
+		{
+			:title => 'Messages',
+			:section => 'messages',
+			:action => 'messages'
+		},
+		{
+			:title => 'Settings',
+			:section => 'settings',
+			:pages => [
+				{:title => 'General',         :action => 'settings_general'},
+				{:title => 'Change password', :action => 'settings_password'}
+			]
+		}
+	]
+%>
+
+<div class="column_nav">
+	<ul>
+		<li class="first">Customize</li>
+		<% @sections.each do |s| %>
+			<li class="<%= 'selected' if s[:section] == @section %>">
+				<% if s[:action] %>
+					<a href="/update3/<%= s[:action] %>"><%= s[:title] %></a>
+				<% else %>
+					<a href="/update3/<%= s[:pages][0][:action] %>"><%= s[:title] %></a>
+				<% end %>
+			</li> 
+			<% if s[:pages] %>
+				<% s[:pages].each do |page| %>
+					<li class="child <%= s[:section] %> <%= 'selected' if page[:action] == params[:action] %> <%= 'hidden' if s[:section] != @section %>">
+						<a href="/update3/<%= page[:action] %>"><%= page[:title] %></a>
+					</li>
+				<% end %>
+			<% end %>
+		<% end %>
+		<li class="last"></li>
+		<li class="big break"></li>
+		<li class="first">Help</li>
+		<li><a href="#">FAQ</a></li>
+		<li><a href="#">Contact us</a></li>
+		<li class="last"></li>
+	</ul>
+</div>

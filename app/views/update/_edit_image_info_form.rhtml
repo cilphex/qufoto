@@ -1,0 +1,40 @@
+<% i = Image.find(params['image_id']) %>
+<%= form_remote_tag(
+    :url => {:action => "update_image", :image_id => params['image_id']},
+    :loading => "$('loadImage').show();",
+    :complete => "$('loadImage').hide(); editImageInfo(#{params['image_id']}); if(newPortfolio != currentPortfolio){#{visual_effect(:Fade, 'thumb'+params['image_id'])};}") %>
+    <table cellspacing=1 cellpadding=4>
+        <tr>
+            <td align=right valign=top style="border-bottom: 1px dotted #DDDDDD;">
+                Title
+            </td><td valign=top style="border-bottom: 1px dotted #DDDDDD;">
+                <%= text_field "image", "title", :value => i.title %>
+            </td><td>
+                &nbsp;
+            </td>
+        </tr><tr>
+            <td align=right valign=top style="border-bottom: 1px dotted #DDDDDD;">
+                Description
+            </td><td valign=top style="border-bottom: 1px dotted #DDDDDD;">
+                <%= text_area "image", "description", :value => i.description, :maxlength => 240, :onkeyup => "return ismaxlength(this)" %>
+            </td><td valign=middle>
+                <%= submit_tag "Save", :style => "margin-bottom: 1px; width: 70px;", :class => "highlight" %>
+                <br><br>
+                <%= link_to_remote "Delete image",
+                    :url => {:action => "d_image", :image_id => params['image_id']},
+                    :loading => "$('loadImage').show();",
+                    :complete => "$('loadImage').hide(); " + visual_effect(:Fade, 'thumb'+params['image_id']) + "; editImageInfo(#{params['image_id']});" %>
+                <br><br>
+                <%= link_to_function "cancel", "editImageInfo(#{params['image_id']})" %>
+            </td>
+        </tr><tr>
+            <td>
+                Portfolio
+            </td><td>
+                <%= select "portfolio_id", "first", current_user.portfolios).collect {|p| [p.title, p.id]}, {:selected => Image.find(params['image_id']).portfolio.id}, {:onchange => "newPortfolio=('this.value');"} %>
+            </td><td>
+                &nbsp;
+            </td>
+        </tr>
+    </table>
+</form>

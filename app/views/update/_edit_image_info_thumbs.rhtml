@@ -1,0 +1,47 @@
+<% params['portfolio_id'] = Portfolio.find_by_user_id(current_user.id, :order => "position ASC").id if params['portfolio_id'].nil? %>
+<% @images = Image.find_all_by_portfolio_id(params['portfolio_id'], :order => "position ASC") %>
+<% if @images.empty? %>
+    There are no images in this portfolio
+<% else %>
+    <ul class="thumbs">
+        <% @images.each do |image| %>
+            <li id="thumb<%= image.id %>">
+                <table width=100% height=100% cellpadding=0 cellspacing=0>
+                    <tr>
+                        <%
+                            linkedImage = image_tag("photos/" + image.id.to_s + "_thumb.jpg", :class => "borderedThumb", :id => "image_#{image.id}")
+                            if image.rollover == true
+                                linkedImage += image_tag("photos/" + image.id.to_s + "_thumb_rollover.jpg", :class => "borderedThumb", :id => "image_#{image.id}_rollover", :style => "display: none;")
+                            end
+                        %>
+                        <td style="text-align: center;">
+                            <%= link_to_remote(
+                                    linkedImage,
+                                    :url => {:action => "edit_image_info_form", :image_id => image.id},
+                                    :update => "imageDetailsContent",
+                                    :loading => "$('loadImage').show(); currentPortfolio=#{image.portfolio_id};newPortfolio=#{image.portfolio_id};",
+                                    :complete => "$('loadImage').hide(); editImageInfo(#{image.id});") %>
+                            
+                            <% if image.rollover == true %>        
+                                <script type="text/javascript">
+                                    $('image_<%= image.id %>').observe('mouseover', function (e) {
+                                        $('image_<%= image.id %>', 'image_<%= image.id %>_rollover').invoke ('toggle');
+                                    });
+                                    $('image_<%= image.id %>_rollover').observe('mouseout', function (e) {
+                                        $('image_<%= image.id %>', 'image_<%= image.id %>_rollover').invoke ('toggle');
+                                    });
+                                </script>
+                            <% end %>
+                        </td>
+                    </tr>
+                </table>
+            </li>
+        <% end %>
+    </ul>
+    <div style="clear: both;"></div>    <!-- clearfix -->
+<% end %>
+
+<div id="imageDetails" style="display: none;">
+    <div id="imageDetailsContent" style="padding: 4px;">
+    </div>
+</div>

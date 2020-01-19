@@ -1,0 +1,15 @@
+<% if p.images.empty? %>
+	<li>There are no images in this portfolio</li>
+<% end %>
+
+<% p.images.each do |image| %>
+	<li id="image_<%= image.id %>" class="image clearfix" imageid="<%= image.id %>">
+		<div class="handle" style="background-image: url(<%= s3_photo(image.id, 'thumb') %>)"></div>
+		<input id="image_title_<%= image.id %>" type="text" placeholder="Title" value="<%= image.title %>"/>
+		<textarea id="image_description_<%= image.id %>" maxlength="240" placeholder="Description"><%= image.description %></textarea>
+		<div class="links">
+			<a href="javascript:void(0)" onclick="Images.save(<%= image.id %>)">Save</a>
+			<a href="javascript:void(0)" onclick="Images.remove(<%= image.id %>)">Delete</a>
+		</div>
+	</li>
+<% end %>

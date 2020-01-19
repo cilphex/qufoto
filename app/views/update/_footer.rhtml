@@ -1,0 +1,14 @@
+<div id="footer">
+    <div id="footer_padding" style="padding: <%= @wide == true ? '4px 8px 0 8px' : '4px 0 0 0' %>;">
+        <ul>
+            <!-- <li><%= link_to "Tips", :action => "tips" %></li> -->
+            <li><%= link_to "Contact Admin", :action => "contact_admin" %></li>
+            <li><%= link_to "Help", :action => "help" %></li>
+        </ul>
+        <span>
+            <% if logged_in? %>
+                <%= link_to "Logout", :action => "process_logout" %>
+            <% end %>
+        </span>
+    </div>
+</div>

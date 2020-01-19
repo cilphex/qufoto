@@ -1,0 +1,45 @@
+<h5>Add user</h5>
+
+<%= form_tag "create_user" %>
+    <table class="userlist" style="margin-bottom: 18px; width: auto;">
+        <tr>
+            <td align=right>
+                <b>Name</b>
+            </td><td>
+                <%= text_field_tag "name", nil, :style => "width: 200px;" %>
+            </td>
+        </tr><tr>
+            <td align=right>
+                <b>Domain</b>
+            </td><td>
+                <%= text_field_tag "domain", nil, :style => "width: 200px;" %>
+            </td>
+        </tr><tr>
+            <td align=right>
+                <b>Username</b>
+            </td><td>
+                <%= text_field_tag "username", nil, :style => "width: 200px;" %>
+                <span id="username_availability"></span>
+            </td>
+        </tr><tr>
+            <td align=right>
+                <b>Contact</b>
+            </td><td>
+                <%= text_field_tag "contact", nil, :style => "width: 200px;" %>
+            </td>
+        </tr><tr>
+            <td align=right>
+                <b>Grade</b>
+            </td><td>
+                <%= radio_button_tag "grade", "Pro", true %>Pro
+                &nbsp;&nbsp;
+                <%= radio_button_tag "grade", "Lite", false %>Lite
+            </td>
+        </tr>
+    </table>
+    <%= submit_tag "Create user", :class=> "highlight" %>
+</form>
+
+<script type="text/javascript">
+    observeUsername ();
+</script>

@@ -1,0 +1,35 @@
+<div id="help" style="display: none;">
+    Here you can check the status of and edit the details of the portfolios you have created.
+    <ul>
+        <li><b>Title:</b> The title of the portfolio.  You can click the titles and drag them up or down to order your portfolios.  The order you
+        arrange them is how they will be displayed on your website.
+        <li><b>Images:</b> The number of images in the portfolio.
+        <li><b>Visibility:</b> This setting determines whether or not the portfolio is displayed on your website.  Portfolios set to 'Visible' will, and
+        portfolios set to 'Hidden' will not.  Portfolios are set to 'Hidden' by default.
+        <% if current_user.grade == "Pro" %>
+            <li><b>Audio:</b> If you have uploaded an audio track for a portfolio, you can preview it or delete it in this column.
+            <li><b>Multimedia:</b> If you have uploaded an audio track for a portfolio, use this column to turn the portfolio into a Multimedia portfolio,
+            in which the image transitions and audio are synchronized.
+        <% end %>
+    </ul>
+    Portfolio options:
+    <ul>
+        <li><b>Add a portfolio:</b> Add a new portfolio to upload images into
+        <li><b>Rename a portfolio:</b> Rename a the selected portfolio to something new
+        <% if current_user.grade == "Pro" %>
+            <li><b>Add audio to a portfolio:</b> Add audio to a portfolio so that it can be turned
+            into a slideshow.
+        <% end %>
+    </ul>
+</div>
+
+<div id="portfolios" class="portfolios">
+    <%= render :partial => "portfolio_list" %>
+</div>
+
+<div class="add_portfolio">
+	Add a new portfolio: <input id="new_portfolio_title" type="text" name="title" maxlength="30"/>
+	<a href="#" onClick="addPortfolio(); return false;">Add</a>
+</div>
+
+<iframe id="upload_iframe" class="upload_iframe" name="upload_iframe" src="about:blank"></iframe>

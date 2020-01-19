@@ -1,0 +1,27 @@
+<h5>Login</h5>
+
+<%= "<h5 class='error'>#{params['error']}</h5>" unless params['error'].nil? %>
+
+<%= form_tag :action => "process_login" %>
+    <center>
+        <table style="margin-bottom: 10px;">
+            <tr>
+                <td align=right style="padding-right: 10px;">
+                    Username
+                </td><td>
+                    <%= text_field "user", nil, "size" => 30, "maxlength" => 30 %>
+                </td><td>
+                    &nbsp;
+                </td>
+            </tr><tr>
+                <td align=right style="padding-right: 10px;">
+                    Password
+                </td><td>
+                    <%= password_field "pass", nil, "size" => 30, "maxlength" => 30 %>
+                </td><td>
+                    <%= submit_tag "Login", :class => "highlight" %>
+                </td>
+            </tr>
+        </table>
+    </center>
+</form>

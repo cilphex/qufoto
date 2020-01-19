@@ -1,0 +1,26 @@
+<div id="help" style="display: none;">
+    List view gives you an easy way of viewing all the title and info text for all of your images.  To
+    edit an image's info, just change what's in the text boxes and click Save.  To delete an image, click
+    delete.  You can also order the images in a portfolio by clicking and holding the thumbnail, then
+    dragging it up or down.<br><br>
+    To edit images in another portfolio, choose another portfolio from the dropdown menu.
+</div>
+
+<div style="margin-bottom: 10px; padding: 10px 0 10px 0; border-bottom: 1px dotted #DDDDDD;">
+    <div style="float: right; padding-top: 2px;">
+        Drag a thumbnail to order your images
+    </div>
+    Portfolio: <%= render :partial => "portfolio_select" %>
+</div>
+
+<%= observe_field("portfolio_id_first", 
+    :on => "change", 
+    :url => {:action => "list_view"}, 
+    :update => "imageThumbs",
+    :with => "portfolio_id",
+    :loading => "$('loader').show();",
+    :complete => "$('loader').hide();") %>
+
+<div id="imageThumbs">
+    <%= render :partial => "image_order_list" %>
+</div>

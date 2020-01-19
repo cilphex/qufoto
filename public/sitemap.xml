@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+	<url>
+		<loc>http://www.qufoto.com/</loc>
+		<priority>1.0</priority>
+	</url>
+	
+	<url>
+		<loc>http://www.qufoto.com/features</loc>
+		<priority>0.5</priority>
+	</url>
+	<url>
+		<loc>http://www.qufoto.com/examples</loc>
+		<priority>0.5</priority>
+	</url>
+	<url>
+		<loc>http://www.qufoto.com/prices</loc>
+		<priority>0.5</priority>
+	</url>
+	<url>
+		<loc>http://www.qufoto.com/signup</loc>
+		<priority>0.5</priority>
+	</url>
+	
+	<url>
+		<loc>http://www.qufoto.com/news</loc>
+		<priority>0.5</priority>
+	</url>
+	<url>
+		<loc>http://www.qufoto.com/interviews</loc>
+		<priority>0.5</priority>
+	</url>
+	
+	<url>
+		<loc>http://www.qufoto.com/faq</loc>
+		<priority>0.5</priority>
+	</url>
+	<url>
+		<loc>http://www.qufoto.com/user_guide</loc>
+		<priority>0.5</priority>
+	</url>
+	<url>
+		<loc>http://www.qufoto.com/getting_started</loc>
+		<priority>0.5</priority>
+	</url>
+	<url>
+		<loc>http://www.qufoto.com/customize</loc>
+		<priority>0.5</priority>
+	</url>
+	<url>
+		<loc>http://www.qufoto.com/tips</loc>
+		<priority>0.5</priority>
+	</url>
+	<url>
+		<loc>http://www.qufoto.com/domains</loc>
+		<priority>0.5</priority>
+	</url>
+	<url>
+		<loc>http://www.qufoto.com/email</loc>
+		<priority>0.5</priority>
+	</url>
+	<url>
+		<loc>http://www.qufoto.com/analytics</loc>
+		<priority>0.5</priority>
+	</url>
+	<url>
+		<loc>http://www.qufoto.com/seo</loc>
+		<priority>0.5</priority>
+	</url>
+	<url>
+		<loc>http://www.qufoto.com/referrals</loc>
+		<priority>0.5</priority>
+	</url>
+	
+	<url>
+		<loc>http://www.qufoto.com/contact</loc>
+		<priority>0.5</priority>
+	</url>
+	<url>
+		<loc>http://www.qufoto.com/press</loc>
+		<priority>0.5</priority>
+	</url>
+	
+</urlset>

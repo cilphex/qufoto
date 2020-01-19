@@ -1,0 +1,85 @@
+<script type="text/javascript">
+	var simpleEncoding = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+	function simpleEncode(valueArray,maxValue) {
+		var chartData = ['s:'];
+		for (var i = 0; i < valueArray.length; i++) {
+			var currentValue = valueArray[i];
+			if (!isNaN(currentValue) && currentValue >= 0) {
+				chartData.push(simpleEncoding.charAt(Math.round((simpleEncoding.length-1) * currentValue / maxValue)));
+			}
+			else {
+				chartData.push('_');
+			}
+		}
+		return chartData.join('');
+	}
+	var valueArray = new Array(0,1,4,4,6,11,14,17,23,28,33,36,43,59,65);
+	var maxValue = 70;
+	simpleEncode(valueArray,maxValue);
+	//alert (simpleEncode (valueArray, maxValue));
+</script>
+
+
+<h5>Statistics & Data</h5>
+
+<img src="http://chart.apis.google.com/chart?cht=p3&chd=t:60,40&chs=250x100&chl=Hello|World" />
+<img src="http://chart.apis.google.com/chart?cht=lc&chs=300x100&chd=s:<%= @signups_graph_string %>&chxt=x,y&chxl=0:<%= @signups_label_string %>|1:||<%= (@max_signups.to_i/2).ceil %>|<%= @max_signups %>" />
+
+
+<% 5.times do %><br><% end %>
+
+&chxt=x,y&chxl=0:|Apr|May|June|1:||50+Kb
+
+
+<hr>
+
+<% @signups_per_month.each do |month| %>
+	<%= month.name[0,3] + ' ' + month.year[2,2] + ' : ' + month.signups %><br>
+<% end %>
+
+<hr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

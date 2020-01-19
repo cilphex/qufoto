@@ -1,0 +1,24 @@
+# SQLite version 3.x
+#   gem install sqlite3-ruby (not necessary on OS X Leopard)
+
+# On local machine -Craig
+development:
+  adapter: mysql
+  database: photositesite_development
+  username: root
+  password: 
+
+# Warning: The database defined as 'test' will be erased and
+# re-generated from your development database when you run 'rake'.
+# Do not set this db to the same as development or production.
+test:
+  adapter: 
+  database: 
+  timeout: 
+
+# On server -Craig
+production:
+  adapter: mysql
+  database: qufotoc_production
+  username: qufotoc_cilphex
+  password: lament

@@ -1,0 +1,12 @@
+<script>
+	var response = {
+		success: <%= success %>
+	};
+	<% if (defined? uploaded_image) && uploaded_image.class.to_s.downcase == 'image' %>
+		response.image = {
+			id: <%= uploaded_image.id %>,
+			url: '<%= s3_photo(uploaded_image.id, 'student') %>'
+		};
+	<% end %>
+	window.parent.Upload.submit_cb(response);
+</script>

@@ -1,0 +1,1 @@
+<%= select "portfolio_id", "first", current_user.portfolios.collect {|p| [p.title, p.id]} %>

@@ -1,0 +1,24 @@
+<p class="tip top">
+	<span>Note:</span> The Messages page is just a backup. It is read-only. Actual messages
+	will be sent to <%= current_user.info.email %>.
+</p>
+
+<a class="expand_all" href="javascript:void(0)" onclick="Messages.expandAll()">Expand all</a>
+<h1>Messages</h1>
+
+<ul id="messages" class="messages">
+	<% current_user.comments.each do |c| %>
+		<li id="message_<%= c.id %>">
+			<div class="bar">
+				<a class="expand" href="javascript:void(0)" onclick="$('message_body_<%= c.id %>').toggle()"><%= c.sender %></a>
+				<span><%= c.date.strftime("%b %d, %Y at %I:%M%p") %></span>
+				<a class="delete" href="javascript:void(0)" onclick="Messages.remove(<%= c.id %>)">Delete</a>
+			</div>
+			<div id="message_body_<%= c.id %>" class="message" style="display: none;">
+				<p class="meta">From: <%= c.replyTo %></p>
+				<p class="meta">To: <%= c.recipient %></p>
+				<p><%= c.body.gsub(/\n/, '</p><p>') %></p>
+			</div>
+		</li>
+	<% end %>
+</ul>

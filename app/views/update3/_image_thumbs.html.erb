@@ -1,0 +1,11 @@
+<% if p.images.empty? %>
+	<li>There are no images in this portfolio</li>
+<% end %>
+
+<% p.images.each do |image| %>
+	<li id="image_<%= image.id %>" class="image" imageid="<%= image.id %>" style="background-image: url(<%= s3_photo(image.id, 'thumb') %>)">
+		<div class="handle"></div>
+		<a class="delete" href="javascript:void(0)" onclick="Images.remove(<%= image.id %>); Event.stop(event)">X</a>
+		<div class="clickable" onclick="Images.getDetail(<%= image.id %>)"></div>
+	</li>
+<% end %>

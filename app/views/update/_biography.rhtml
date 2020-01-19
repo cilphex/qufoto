@@ -1,0 +1,19 @@
+<%
+    bdtrueblue = current_user.info.biodisplay == true ? " blue" : ""
+    bdfalseblue = current_user.info.biodisplay == true ? "" : " blue"
+%>
+
+<div id="help" style="display: none;">
+    Here you can type a simple blurb about yourself to display on your website.  If you
+    don't want people to view this text, select "Keep biography hidden."  If you would
+    like visitors to be able to see it, keep "Display biography" selected&#8212;a "Biography"
+    link will appear on your website.  Don't forget to save!
+</div>
+
+<%= form_remote_tag :url => {:action => "update_biography"}, :update => "status", :loading => "$('loader').show();", :complete => "$('loader').hide();" %>
+    <%= text_area_tag "biography", current_user.info.biography, :id => "biotext", :onfocus => "$('status').innerHTML='';" %>
+    <%= hidden_field_tag "biodisplay", current_user.info.biodisplay, :id => "biodisplay" %>
+    <%= submit_tag "Save", :class=> "highlight", :style => "float: right;" %>
+    <%= button_to_function "Display biography", "$('biodisplay').value='true'; this.style.background='#D5EBFF'; $('bdfalse').style.background='none'; $('status').innerHTML='';", :id => "bdtrue", :class => "clickable#{bdtrueblue}", :style => "width: 160px; margin-bottom: 4px;" %><br>
+    <%= button_to_function "Keep biography hidden", "$('biodisplay').value='false'; this.style.background='#D5EBFF'; $('bdtrue').style.background='none'; $('status').innerHTML='';", :id => "bdfalse", :class => "clickable#{bdfalseblue}", :style => "width: 160px;" %>
+</form>

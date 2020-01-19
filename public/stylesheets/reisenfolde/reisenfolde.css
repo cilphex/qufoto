@@ -1,0 +1,154 @@
+body {
+	margin: 0;
+	padding: 0;
+	background: #000 url(/images/reisenfolde/bg.jpg) center top no-repeat;
+	font-family: verdana, arial, sans-serif;
+	font-size: 10px;
+	line-height: 17px;
+	color: #AAA;
+}
+a {
+    outline: none;
+}
+a img {
+    border: none;
+}
+p {
+	margin-bottom: 24px;
+	text-align: justify;
+}
+h1,
+h3 {
+	color: #BBB;
+	font-family: arial, verdana, sans-serif;
+	font-size: 13px;
+}
+h2 {
+	margin-top: 24px;
+	padding: 4px;
+	font-size: 12px;
+	border-top: 1px solid #333;
+}
+h4 {
+    display: inline;
+    font-size: 11px;
+}
+hr {
+	margin: 0 0 20px 0;
+    height: 1px;
+    color: #333;
+    background-color: #333;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+}
+#container {
+	width: 740px;
+	margin-right: auto;
+	margin-left: auto;
+	padding: 0px 20px 0px 20px;
+	text-align: left;
+}
+#header {
+	margin-top: 20px;
+}
+#header img {
+    border: none;
+}
+#separator {
+	margin-top: 8px;
+	height: 12px;
+	background: url(/images/reisenfolde/separator.png);
+}
+#content {
+	padding: 8px 20px 20px 20px;
+	background: url(/images/reisenfolde/content.png);
+}
+#content a,
+#content a:link,
+#content a:visited,
+#content a:active {
+    color: #AAA;
+    text-decoration: none;
+    border-bottom: 1px dotted #00a2ff;
+}
+#content a:active,
+#content a:hover {
+    color: #fff;
+}
+#nav {
+	text-align: right;
+}
+#nav a,
+#nav a:link,
+#nav a:visited,
+#nav a:active {
+    color: #AAA;
+    text-decoration: none;
+    border: none;
+}
+#nav a:active,
+#nav a:hover {
+    color: #fff;
+}
+#nav span {
+    padding: 0 9px 0 9px;
+}
+#nav ul {
+	float: right;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+#nav li {
+    float: left;
+    margin: 0;
+    padding: 0;
+}
+#nav a,
+#nav a:link,
+#nav a:visited,
+#nav a:active {
+    text-decoration: none;
+}
+#comment_form {
+    margin-top: 20px;
+    font-family: courier new, courier, arial, sans-serif;
+    font-size: 14px;
+}
+#comment_form #body {
+    width: 680px;
+    height: 300px;
+    padding: 0px;
+    color: #AAA;
+    font-family: courier new, courier, arial, sans-serif;
+    font-size: 14px;
+    background: none;
+    border: none;
+    overflow: auto;
+}
+#comment_form #name,
+#comment_form #email {
+    width: 200px;
+    color: #AAA;
+    font-family: courier new, courier, arial, sans-serif;
+    font-size: 14px;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px dotted #333;
+}
+#send_comment {
+    float: right;
+    margin-top: 20px;
+	color: #AAA;
+	cursor: pointer;
+	background: none;
+	border: none;
+}
+.p_starter {
+	float: left;
+	padding: 0 20px 12px 0;
+}

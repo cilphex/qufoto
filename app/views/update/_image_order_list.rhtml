@@ -1,0 +1,49 @@
+<%  
+    params['portfolio_id'] = Portfolio.find_by_user_id(current_user.id, :order => "position ASC").id if params['portfolio_id'].nil?
+    @images = Image.find_all_by_portfolio_id(params['portfolio_id'], :order => "position ASC")
+    @slideshow = File.exists?(RAILS_ROOT + "/public/users/" + current_user.directory + "/audio_" + params['portfolio_id'].to_s + ".mp3") && Portfolio.find(params['portfolio_id']).slideshow == true
+%>
+
+<% if @images.empty? %>
+    There are no images in this portfolio
+<% else %>
+    <ul id="listThumbs">
+        <% @images.each do |image| %>
+            <li id="item_<%= image.id %>">
+                <%= form_remote_tag :url => {:action => "update_image", :image_id => image.id}, :html => {:id => "edit_image_form_#{image.id}"}, :loading => "$('loader').show();", :complete => "$('loader').hide();" %>
+                    <div style="float: right; padding: 6px; width: 100px; line-height: 18px;">
+                        <div id="options_<%= image.id %>">
+                            <!--<a href="#" onclick="previewImage ('<%= s3_photo(image.id, 'pro') %>'); return false;">Preview</a><br>-->
+                            <%= link_to_remote "Delete",
+                                :url => {:action => "d_image", :image_id => image.id},
+                                :loading => "$('loader').show ();",
+                                :complete => "$('loader').hide ();",
+                                :success => "new Effect.DropOut ('item_' + #{image.id}, {duration:'0.5'});",
+                                :failure => "$('status').innerHTML = 'Image could not be deleted.';" %>
+                            <br>
+                            <%= submit_tag "Save", :class => "highlight listButton" %>
+                        </div>
+                    </div>
+                    <div style="float: right; padding: 6px; width: 420px;">
+                        <%= text_field "image", "title", :value => image.title %><br>
+                        <%= text_area "image", "description", :value => image.description, :maxlength => 240, :onkeyup => "return ismaxlength(this)" %>
+                        <input type="hidden" id="portfolio_id_first" name="portfolio_id[first]" value="<%= image.portfolio_id.to_s %>">
+                    </div>
+                    <div class="listThumb" style="background-image: url(<%= s3_photo(image.id, 'thumb') %>);">&nbsp;</div>
+                </form>
+            </li>
+        <% end %>
+    </ul>
+<% end %>
+
+<% if @slideshow then clearstatus = " $('status').innerHTML='';" else clearstatus = '' end %>
+<%= sortable_element "listThumbs", 
+    :handle => "listThumb",
+    :constraint => "vertical",
+    :url => {:action => "order_portfolio", :portfolio_id => params['portfolio_id']}, 
+    :loading => "$('loader').show();#{clearstatus}",
+    :complete => "$('loader').hide();" %>
+
+<script type="text/javascript">
+    currentPortfolio = <%= params['portfolio_id'] %>;
+</script>

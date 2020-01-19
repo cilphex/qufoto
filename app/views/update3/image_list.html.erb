@@ -1,0 +1,15 @@
+<h1>Images</h1>
+
+<select id="portfolio_select" onchange="Images.showPortfolio(this.value)">
+	<% current_user.portfolios.each do |p| %>
+		<option value="<%= p.id %>"><%= p.title %></option>
+	<% end %>
+</select>
+
+<ul id="images" class="list">
+	<%= render :partial => "image_list", :locals => { :p => current_user.portfolios.first } %>
+</ul>
+
+<script>
+	Images.initialize('list');
+</script>

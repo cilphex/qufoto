@@ -1,0 +1,56 @@
+<h1 class="main_title">Professional Photography Websites</h1>
+
+<center>
+    <table cellpadding=0 cellspacing=0 class="intro">
+    	<tr>
+            <td>
+            	<script type="text/javascript">
+            		var image_area = '';
+            		switch (Math.floor (Math.random () * 2)) {
+            		case 0:
+            			image_area += 
+	            			'<a href="/features"><img src="/images/home_text.png" class="home-text low" alt="Go live now"/></a>' +
+	            			'<a href="/features"><img src="/images/home_01.jpg" alt="Features"/></a>' +
+	            			'<a href="http://edfreemanphotography.com" target="_blank" class="copyright" id="copyright">Image &copy; Ed Freeman</a>';
+            			break;
+            		case 1:
+            		default:
+            			image_area +=
+	            			'<a href="/features"><img src="/images/home_text.png" class="home-text high" alt="Go live now"/></a>' +
+	            			'<a href="/features"><img src="/images/home_02.jpg" alt="Features"/></a>' +
+	            			'<a href="http://christiantremblay.net" target="_blank" class="copyright" id="copyright">Image &copy; Christian Tremblay / Bos Agency</a>';
+            			break;
+            		}
+            		document.writeln (image_area);
+            	</script>
+            </td>
+        </tr>
+    </table>
+</center>
+
+<div class="featurelet">
+	<a href="/features" class="learn-more"><img src="images/learn_more.png" alt="Learn more"/></a>
+</div>
+
+<div class="featurelet">
+	<p class="newsstream"><span><a href="/news">NEWS & UPDATES</a></span></p>
+	<% @announcements.each do |a| %>
+		<p class="newsstream"><!--<span><%= a.posted.strftime("%m.%d.%y") %>--></span><a href="/news/<%= a.id %>"><%= a.title %></a></p>
+	<% end %>
+</div>
+
+<div class="featurelet">
+	<a href="http://meredithstorey.com" target="_blank"><img src="images/index/featured_website08.jpg" class="bordered" /></a>
+	<p class="subtitle">Featured Website</p>
+	<p class="byline"><a href="http://meredithstorey.com" target="_blank">Meredith Storey</a></p>
+</div>
+
+<div class="featurelet last">
+	<a href="/charles-pertwee"><img src="images/index/featured_photographer08.jpg" class="bordered" /></a>
+	<p class="subtitle">Featured Photographer</p>
+	<p class="byline"><a href="/charles-pertwee">Charles Pertwee</a></p>
+</div>
+
+<script type="text/javascript">
+	$('copyright').setStyle ({opacity:0.5});
+</script>

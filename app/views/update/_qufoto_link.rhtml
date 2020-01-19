@@ -1,0 +1,27 @@
+<div id="help" style="display: none;">
+    This feature is an option for Pro users.  It cannot be turned off on Lite accounts.
+</div>
+
+<%
+    psstrueblue = current_user.info.psslinkdisplay == true ? " blue" : ""
+    pssfalseblue = current_user.info.psslinkdisplay == true ? "" : " blue"
+%>
+
+<center>
+    <div style="width: 300px;">
+        The Qufoto link is a small text link that will be displayed in the bottom right corner of your
+        website to advertise Qufoto.com.  It is turned off by default.
+    </div>
+    
+    <%= form_remote_tag :url => {:action => "psslink_display"}, :update => "status", :loading => "$('loader').show();", :complete => "$('loader').hide();", :html => {:style => "margin-top: 20px;"} %>
+        <%= hidden_field_tag "psslinkdisplay", current_user.info.psslinkdisplay, :id => "psslinkdisplay" %>
+        <%= submit_tag "Display Qufoto link", :onclick => "$('psslinkdisplay').value='true'; this.style.background='#D5EBFF'; $('pssfalse').style.background='none';", :id => "psstrue", :class => "clickable#{psstrueblue}", :style => "width: 160px; margin-bottom: 4px;" %><br>
+        <%= submit_tag "Keep Qufoto link hidden", :onclick => "$('psslinkdisplay').value='false'; this.style.background='#D5EBFF'; $('psstrue').style.background='none';", :id => "pssfalse", :class => "clickable#{pssfalseblue}", :style => "width: 160px;" %>
+    </form>
+</center>
+
+
+
+
+
+

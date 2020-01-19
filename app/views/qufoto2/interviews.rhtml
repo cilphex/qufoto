@@ -1,0 +1,66 @@
+<%
+	@extra_head = '<link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds.qufoto.com/qufoto-interviews"/>'
+%>
+
+<a class="main" href="/interviews/<%= @interviews.first.url %>">
+	<div class="image">
+		<% if !@interviews.first.images.empty? %>
+			<img id="image" src="<%= s3_photo(@interviews.first.images.first.id, 'pro') %>" alt="Image by <%= @interviews.first.interviewee %>" title="<%= @interviews.first.interviewee %>"/>
+		<% else %>
+			<span class="no_images">No images</span>
+		<% end %>
+		&nbsp; <!-- necessary for vertical align -->
+		<h1>Photographer Interviews</h1>
+	</div>
+</a>
+
+<div class="column_nav">
+    <ul>
+    	<li class="first">Interviews &amp; News</li>
+		<li><a href="/interviews" class="selected">Interviews</a></li>
+		<li><a href="/news">News</a></li>
+		<li class="last"></li>
+		<li class="big break"></li>
+    	<li class="first">Share this page</li>
+		<li><a class="addthis_button_twitter"><span class="social twitter"></span>Tweet</a></li>
+		<li><a class="addthis_button_stumbleupon"><span class="social stumbleupon"></span>Stumble</a></li>
+		<li><a class="addthis_button_facebook"><span class="social facebook"></span>Share on Facebook</a></li>
+		<li><a class="addthis_button_compact"><span class="social more"></span>More&hellip;</a></li>
+		<li class="last"></li>
+		<li class="big break"></li>
+    	<li class="first">Follow us</li>
+		<li><a href="http://twitter.com/qufoto" target="_blank"><span class="social twitter"></span>On Twitter</a></li>
+		<li><a href="http://feedburner.google.com/fb/a/mailverify?uri=qufoto-interviews&amp;loc=en_US" target="_blank"><span class="social email"></span>Email alerts</a></li>
+		<li><a href="http://feeds.feedburner.com/qufoto-interviews" title="Qufoto Interviews RSS feed"><span class="social rss"></span>RSS</a></li>
+		<li class="last"></li>
+	</ul>
+	<!--<p class="btn sign_up">
+		<a href="/signup">Get interviewed</a>
+	</p>-->
+</div>
+
+<div class="column_content">
+	<% if @interviews.empty? %>
+		<p>No published interviews yet!</p>
+	<% else %>
+		<ul class="interviews">
+			<% for i in @interviews %>
+				<li>
+					<a class="clearfix" href="/interviews/<%= i.url %>">
+						<div class="image">
+							<% if !i.images.empty? %>
+								<img src="<%= s3_photo(i.images.first.id, 'thumb') %>" alt="Image by <%= i.interviewee %>" title="<%= i.interviewee %>"/>
+								&nbsp;
+							<% else %>
+								<span class="no_images">No images</span>
+							<% end %>
+						</div>
+						<h3><%= i.interviewee %></h3>
+						<p><%= i.caption %></p>
+						<span class="more">Read more &raquo;</span>
+					</a>
+				</li>
+			<% end %>
+		</ul>
+	<% end %>
+</div>

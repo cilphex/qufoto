@@ -1,0 +1,63 @@
+<h1>Welcome</h1>
+<p class="intro">
+	Your update area is where you can upload, edit, and reorganize
+	your site.  Use it from anywhere and make something awesome!
+</p>
+<hr/>
+
+<div class="left">
+	<div id="sign_in_area">
+		<form onsubmit="Login.go(); return false;">
+			<label for="user" class="standard">Username</label>
+			<input id="user" class="standard" type="text"/>
+			
+			<label for="pass" class="standard">Password</label>
+			<input id="pass" class="standard" type="password"/>
+		</form>
+		<p id="do_sign_in" class="signup">
+			<a href="#" onclick="Login.go(); return false;">Sign in &raquo;</a>
+		</p>
+		<p id="signing_in" class="signup signing_in" style="display: none;">Signing in&hellip;</p>
+		<p class="lost"><a href="#" onclick="$('sign_in_area', 'lost_area').invoke('toggle'); return false;">Lost username or password</a></p>
+	</div>
+	
+	<div id="lost_area" class="lost" style="display: none;">
+		<p>Enter your username or email address to have your username and password sent to you.</p>
+		<form onsubmit="Login.password(); return false;">
+			<label for="user_email" class="standard">Username or Email Address</label>
+			<input id="user_email" class="standard" type="text"/>
+		</form>
+		<p id="recover" class="signup">
+			<a href="#" onclick="Login.password(); return false;">Send &raquo;</a>
+		</p>
+		<p id="recovering" class="signup signing_in" style="display: none;">Sending&hellip;</p>
+		<div id="lost_success" class="lost" style="display: none;">
+			<p><strong>Success</strong> A reminder email has been sent to <span id="recovery_email"></span>.</p>
+		</div>
+		<div id="lost_failure" class="lost" style="display: none;">
+			<p><strong>Error</strong> The username or email address "<span id="user_email_fail"></span>" was not found in our system.</p>
+		</div>
+		<div id="lost_error" class="lost" style="display: none;">
+			<p><strong>Error</strong> There was a problem processing your request.  Please try again later.</p>
+		</div>
+		<p class="lost"><a href="#" onclick="$('sign_in_area', 'lost_area').invoke('toggle'); return false;">Sign in</a></p>
+	</div>
+</div>
+
+<div id="login_failure" class="right_questions" style="display: none;">
+	<p class="question">Sign In Error</p>
+	<p class="answer">
+		Your login information was incorrect.<br/>
+		<a href="#" onclick="$('sign_in_area').hide(); $('lost_area').showOrPulse(); return false;">Forget your info?</a>
+	</p>
+</div>
+<div id="login_error" class="right_questions" style="display: none;">
+	<p class="question red">Uh-oh!</p>
+	<p class="answer">There was a problem processing the request. Please try again later.</p>
+</div>
+<div id="login_maintenance" class="right_questions" style="display: none;">
+	<p class="question red">Updates are being made</p>
+	<p class="answer">Don't worry, your website is still online and viewable.  You just can't make
+    updates for a little bit. Service should return shortly. Thanks for your patience!</p>
+</div>
+

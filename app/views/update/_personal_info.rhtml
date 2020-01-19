@@ -1,0 +1,93 @@
+<div id="help" style="display: none;">
+    Here you can change basic information about your website:
+    <ul>
+        <li><b>Name:</b> Your name.  It is displayed in the copyright line of your website.</li>
+        <li><b>Email:</b> The email address you would like comments to be sent to.  If you leave this
+            blank, a comment link will not appear on your website.</li>
+        <li><b>Website title:</b> The title that is displayed at the top of the web browser and at the
+            top left corner of your images.</li>
+        <li><b>Upper left text:</b> The text that is displayed in the top left of the center presentation
+            area.</li>
+        <li><b>Meta Description:</b> The short (200 characters or less) description used in the 
+            meta-data of your website to provide search engines with a short text blurb about your
+            site to be displayed in search results.</li>
+        <li><b>Meta Keywords:</b>Short (200 characters or less) collection of keywords which describe
+            your site.  Sometimes used by search engines for indexing.</li>
+        <li><b>Meta verify-v1:</b>This is the field to place your verify-v1 tag from Google Webmaster
+            Tools, if you're using that service with your website.</li>
+        <li><b>Contact Info:</b>A short list of contact information that will appear next to the contact
+            form on your website.  Very basic HTML is allowed, including the 'font' tag for colors and
+            the 'a' tag for linking.</li>
+    </ul>
+    Don't forget to save!
+</div>
+
+<%= form_remote_tag :url => {:action => "update_info"}, :update => "status", :loading => "$('loader').show();", :complete => "$('loader').hide();", :style => "float: left;" %>
+    <table class="paddedTable" style="margin-top: 10px;">
+        <tr>
+            <td>
+                Name
+            </td><td>
+                <%= text_field_tag "name", current_user.info.name, :style => "width: 300px;", :onfocus => "$('status').innerHTML='';" %>
+            </td><td>
+                &nbsp;
+            </td>
+        </tr><tr>
+            <td>
+                Email
+            </td><td>
+                <%= text_field_tag "email", current_user.info.email, :style => "width: 300px;", :onfocus => "$('status').innerHTML='';" %>
+            </td><td>
+                (Leave blank to not be contacted)
+            </td>
+        </tr><tr>
+            <td>
+                Website title
+            </td><td>
+                <%= text_field_tag "title", current_user.info.title, :style => "width: 300px;", :onfocus => "$('status').innerHTML='';" %>
+            </td><td>
+                &nbsp;
+            </td>
+        </tr><tr>
+            <td>
+                Upper left text
+            </td><td>
+                <%= text_field_tag "toptext", current_user.info.toptext, :style => "width: 300px;", :onfocus => "$('status').innerHTML='';" %>
+            </td><td>
+                &nbsp;
+            </td>
+        </tr><tr>
+            <td>
+                Meta Description
+            </td><td>
+                <%= text_field_tag "description", current_user.info.description, :maxlength => 200, :style => "width: 300px;", :onfocus => "$('status').innerHTML='';" %>
+            </td><td>
+                &nbsp;
+            </td>
+        </tr><tr>
+            <td>
+                Meta Keywords
+            </td><td>
+                <%= text_field_tag "keywords", current_user.info.keywords, :maxlength => 200, :style => "width: 300px;", :onfocus => "$('status').innerHTML='';" %>
+            </td><td>
+                &nbsp;
+            </td>
+        </tr><tr>
+            <td>
+                Meta verify-v1
+            </td><td>
+                <%= text_field_tag "verifyv1", current_user.info.verifyv1, :maxlength => 200, :style => "width: 300px;", :onfocus => "$('status').innerHTML='';" %>
+            </td><td>
+                &nbsp;
+            </td>
+        </tr><tr>
+            <td valign="top">
+                Contact Info
+            </td><td>
+                <%= text_area_tag "contact_info", current_user.info.contact_info, :style => "width: 300px; height: 85px;", :onfocus => "$('status').innerHTML='';" %>
+            </td><td valign="bottom">
+                <%= submit_tag "Save", :class=> "highlight" %>
+            </td>
+        </tr>
+    </table>
+</form>

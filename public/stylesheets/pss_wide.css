@@ -1,0 +1,9 @@
+/* overwrite pss.css width attributes */
+body {
+    background: #EEEEEE url(/images/background_wide.png) top center repeat-y;
+}
+
+#container {
+    margin-left: -525px !important;
+    width: 1050px !important;
+}

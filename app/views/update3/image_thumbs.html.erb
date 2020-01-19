@@ -1,0 +1,34 @@
+<h1>Images</h1>
+
+<select id="portfolio_select" onchange="Images.showPortfolio(this.value)">
+	<% current_user.portfolios.each do |p| %>
+		<option value="<%= p.id %>"><%= p.title %></option>
+	<% end %>
+</select>
+
+<div id="portfolio_drop" class="column_nav drop">
+	<ul>
+		<li class="first">Move</li>
+		<% current_user.portfolios.each do |p| %>
+			<li class="droppable" portfolioid="<%= p.id %>"><%= p.title %></li>
+		<% end %>
+		<li class="last"></li>
+	</ul>
+</div>
+
+<div id="detail" class="detail" style="display: none;">
+	<div class="inner">
+		<div id="image_loading" class="loading">Loading...</div>
+		<div id="image_detail"></div>
+		<a class="close" href="javascript:void(0)" onclick="$('detail').hide()">Close</a>
+		<a class="save" href="javascript:void(0)" onclick="Images.saveDetail()">Save</a>
+	</div>
+</div>
+
+<ul id="images" class="thumbs clearfix">
+	<%= render :partial => "image_thumbs", :locals => { :p => current_user.portfolios.first } %>
+</ul>
+
+<script>
+	Images.initialize('thumbs');
+</script>

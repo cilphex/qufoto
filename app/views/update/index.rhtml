@@ -1,0 +1,44 @@
+<%= "<h5 class='error'>#{params['error']}</h5>" unless params['error'].nil? %>
+
+<center>
+    <%= form_tag :action => "process_login" %>
+        <table style="margin-bottom: 10px;">
+            <tr>
+                <td align=right style="padding-right: 10px;">
+                    Username
+                </td><td>
+                    <%= text_field "user", nil, "size" => 30, "maxlength" => 30 %>
+                </td><td>
+                    &nbsp;
+                </td>
+            </tr><tr>
+                <td align=right style="padding-right: 10px;">
+                    Password
+                </td><td>
+                    <%= password_field "pass", nil, "size" => 30, "maxlength" => 30 %>
+                </td><td>
+                    <%= submit_tag "Login", :class => "highlight" %>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <a id="passworddown" href="javascript:hide('passworddown'); show('passwordup');" onclick='<%= visual_effect(:SlideDown, "lostpassword") %>'>Lost username or password</a>
+    <a id="passwordup" style="display: none;" href="javascript:show('passworddown'); hide('passwordup');" onclick='<%= visual_effect(:SlideUp, "lostpassword") %>'>Cancel</a>
+    <br><br>
+    <div id="lostpassword" style="display: none;">
+        <div id="lostpasswordform" style="width: 300px; text-align: left;">
+            Enter your username or email address to have your username and password sent to you.
+            <%= form_remote_tag :url => {:action => "request_pass"}, :update => "lostpasswordform" %>
+                <table style="margin-top: 12px;">
+                    <tr>
+                        <td>
+                            <%= text_field_tag "useremail", nil, "size" => 30, "maxlength" => 255 %>
+                        </td><td>
+                            <%= submit_tag "Send", :class => "highlight" %>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+<center>

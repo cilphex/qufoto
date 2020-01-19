@@ -1,0 +1,153 @@
+<% if !@interview %>
+	<h1>Not found</h1>
+	<p>Sorry, this interview could not be found.</p>
+<% elsif !@interview.enabled %>
+	<h1>Not published</h1>
+	<p>Sorry, this interview has not been published.</p>
+<% else %>
+	<div id="image_area" class="image">
+		<% if !@interview.images.empty? %>
+			<img id="image" src="<%= s3_photo(@interview.images.first.id, 'pro') %>" alt="Image by <%= @interview.interviewee %>"/>
+		<% else %>
+			<span class="no_images">No images</span>
+		<% end %>
+		&nbsp; <!-- necessary for vertical align -->
+	</div>
+	<p id="back" class="back">
+		<a href="/interviews">&laquo; All interviews</a>
+	</p>
+	<div class="thumbs">
+		<% for image in @interview.images %>
+			<img id="thumb_<%= image.id %>" src="<%= s3_photo(image.id, 'thumb') %>" alt="Image by <%= @interview.interviewee %>" onclick="Interview.swapImage('<%= image.id %>'); return false;"/>
+		<% end %>
+		&nbsp; <!-- necessary for vertical align -->
+	</div>
+	<div class="interview">
+		<hr/>
+		<h1 id="interviewee"><%= @interview.interviewee %></h1>
+		<p class="byline">By <%= @interview.interviewer %></p>
+		<hr/>
+		<%= @interview.body %>
+		<hr/>
+		<p class="question">About the photographer</p>
+		<% if @interview.photographer_image %>
+			<a class="photographer" href="<%= @interview.link %>" target="_blank">
+				<img src="<%= s3_photo(@interview.photographer_image.id, 'thumb') %>" alt="<%= @interview.interviewee %>" title="<%= @interview.interviewee %>"/>
+			</a>
+		<% end %>
+		<p><%= @interview.bio %></p>
+		<p><a href="<%= @interview.link %>" target="_blank">Visit the photographer's site &raquo;</a></p>
+		<ul id="social" class="social">
+			<li><a class="addthis_button_twitter twitter reward" title="Tweet this"></a></li>
+			<li><a class="addthis_button_stumbleupon stumbleupon reward" title="Stumble this"></a></li>
+			<li><a class="addthis_button_facebook facebook reward" title="Share on Facebook"></a></li>
+			<li><a class="rss" href="http://feeds.qufoto.com/qufoto-interviews" target="_blank" title="Qufoto Interviews RSS Feed"></a></li>
+			<li><a class="addthis_button_compact more" title="More options"></a></li>
+		</ul>
+	</div>
+	
+	<% if @interview.next_interview or @interview.prev_interview %>
+		<div class="more clearfix">
+			<p class="left">
+				<% if @interview.prev_interview %>
+					<a href="/interviews/<%= @interview.prev_interview.url %>">
+						&laquo; Older
+						<span><%= @interview.prev_interview.interviewee %></span>
+					</a>
+				<% end %>
+			</p>
+			<p class="right">
+				<% if @interview.next_interview %>
+					<a href="/interviews/<%= @interview.next_interview.url %>">
+						Newer &raquo;
+						<span><%= @interview.next_interview.interviewee %></span>
+					</a>
+				<% end %>
+			</p>
+		</div>
+	<% end %>
+	
+	<!--<a href="/interviews/charles-pertwee#disqus_thread" onclick="Interview.showComments(); return false;">Comments</a>-->	
+	<div id="disqus_thread" class="comments"></div>
+	<script type="text/javascript">
+		// var disqus_identifier; [Optional but recommended: Define a unique identifier (e.g. post id or slug) for this thread] 
+		var disqus_developer = 1;
+		(function() {
+			var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+			dsq.src = 'http://qufoto.disqus.com/embed.js';
+			(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+		})();
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=qufoto">comments powered by Disqus.</a></noscript>
+	<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+	
+	<% if @interview.next_interview or @interview.prev_interview %>
+		<div class="more clearfix">
+			<p class="left">
+				<% if @interview.prev_interview %>
+					<a href="/interviews/<%= @interview.prev_interview.url %>">
+						&laquo; Older
+						<span><%= @interview.prev_interview.interviewee %></span>
+					</a>
+				<% end %>
+			</p>
+			<p class="right">
+				<% if @interview.next_interview %>
+					<a href="/interviews/<%= @interview.next_interview.url %>">
+						Newer &raquo;
+						<span><%= @interview.next_interview.interviewee %></span>
+					</a>
+				<% end %>
+			</p>
+		</div>
+	<% end %>
+	
+<% end %>
+
+<div id="thanks" style="display: none;">
+	<p class="close">
+		<a href="#" onclick="$('thanks').hide(); return false;">Close</a>
+	</p>
+	<p class="title">Thanks for sharing!</p>
+	<p>We're really glad that you liked this interview enough to share it, and
+	we appreciate that you did. As a thank you, we'd like to offer you something
+	special: one free month of a Qufoto website.</p>
+	
+	<p class="sub">Awesome! &mdash; What's the catch?</p>
+	<p>There is no catch! When you get started your first 30 days will be completely
+	free. Then you'll be billed at the regular price once per month. If you
+	cancel within the first 30 days, you'll never be charged.</p>
+	
+	<p class="sub">Can I think about it?</p>
+	<p>Of course.  To bring up this offer again, just read any interview and share
+	it using one of the share buttons at the bottom.</p>
+	
+	<p class="btn green">
+		<a href="#" onclick="Interview.doSecret(); return false;">Get my free month &raquo;</a>
+	</p>
+	<p class="features"><a href="/features">See features</a> | <a href="/examples">See examples</a></p>
+</div>
+<a id="secret" href="#" onclick="Interview.showReward(); return false;" style="display: none;">
+	<strong>Psst&hellip;</strong>
+	A special thanks &raquo;
+</a>
+
+<script>
+	Interview.initialize();
+	
+	var disqus_shortname = 'qufoto';
+	(function () {
+		var s = document.createElement('script'); s.async = true;
+		s.src = 'http://disqus.com/forums/qufoto/count.js';
+		(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+	}());
+</script>
+
+
+
+
+
+
+
+
+

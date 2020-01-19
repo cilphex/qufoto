@@ -1,0 +1,71 @@
+<li id="example_<%= example.id %>" class="clearfix">
+	<div class="handle"></div>
+	<div id="image_<%= example.id %>" class="image">
+		<div id="image_area_<%= example.id %>" class="img">
+			<% if example.image %>
+				<img src="<%= s3_photo(example.image.id, 'student') %>"/>&nbsp;
+			<% else %>
+				<span>No image</span>
+			<% end %>
+		</div>
+		<form id="image_upload_<%= example.id %>" target="upload_frame" method="post" enctype="multipart/form-data" action="/admin/example_add_image">
+			<input id="tmp_file_<%= example.id %>" type="file" name="tmp_file"/>
+			<input type="hidden" name="example_id" value="<%= example.id %>"/>
+			<a href="#" onclick="Example.addImage('<%= example.id %>'); return false;">Upload</a>
+		</form>
+	</div>
+	<form id="example_form_<%= example.id %>">
+		<input type="hidden" name="example_id" value="<%= example.id %>"/>
+		<p>
+			<label>User</label>
+			<select name="user_id">
+				<% @users.each do |u| %>
+					<option value="<%= u.id %>" <%= 'selected' if u.id == example.user.id %>><%= u.website %> (<%= u.name %>)</option>
+				<% end %>
+			</select>
+		</p>
+		<p>
+			<label>Name</label>
+			<input type="text" name="name" value="<%= example.name %>"/>
+		</p>
+		<p>
+			<label>Category</label>
+			<% categories = {
+				'Style' => 1,
+				'Commercial' => 2,
+				'Photojournalism' => 3,
+				'Weddings' => 4,
+				'Art and Design' => 5
+			} %>
+			<select name="category">
+				<option value=""></option>
+				<% categories.each do |category, id| %>
+					<option value="<%= id %>" <%= 'selected' if example.category == id %>><%= category %></option>
+				<% end %>
+			</select>
+		</p>
+		<p>
+			<label>Location</label>
+			<input type="text" name="location" value="<%= example.location %>"/>
+		</p>
+		<p>
+			<label>Quote</label>
+			<textarea name="quote"><%= example.quote %></textarea>
+		</p>
+		<p>
+			<label>Description</label>
+			<textarea name="description"><%= example.description %></textarea>
+		</p>
+		<p>
+			<label>Status</label>
+			<select name="enabled">
+				<option value="0" <%= 'selected' if !example.enabled %>>Disabled</option>
+				<option value="1" <%= 'selected' if example.enabled %>>Enabled</option>
+			</select>
+		</p>
+		<p>
+			<a href="#" onclick="Example.save('<%= example.id %>'); return false;">Save</a> | <a href="#" onclick="Example.remove('<%= example.id %>'); return false;">Delete</a>
+			<span id="saved_<%= example.id %>" class="saved" style="display: none;">Saved</span>
+		</p>
+	</form>
+</li>

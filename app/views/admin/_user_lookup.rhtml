@@ -1,0 +1,39 @@
+<% @results = User.find(:all, :order => "id DESC") if @results.nil? %>
+
+<% if @results.empty? %>
+    <h5 class="error">No matches found</h5>
+<% else %>
+    <table class="userlist" cellspacing=0>
+        <tr>
+            <td style="padding-right: 7px;">
+                &nbsp;
+            </td><td>
+                <b>Name</b>
+            </td><td>
+                <b>Grade</b>
+            </td><td>
+                <b>Domain</b>
+            </td><td>
+                <b>Registered</b>
+            </td>
+        </tr>
+        <% @results.each do |u| %>
+            <% rowcolor = "#FFEBF8" if u.status == "New" %>
+            <% rowcolor = "#FFFFFF" if u.status == "Subscribed" %>
+            <% rowcolor = "#EBEFFF" if u.status == "Suspended" %>
+            <tr style="background: <%= rowcolor %>" title="Online in the last <%= u.online_title %>">
+                <td style="padding-right: 7px;">
+                    <img src="/images/pinkdot.jpg" style="opacity:<%= u.online_opacity %>;"/>
+                </td><td>
+                    <a href="/admin/user?id=<%= u.id %>"><%= u.name.gsub("#{@phrase}", "<b>#{@phrase}</b>") %></a>
+                </td><td>
+                    <%= u.grade %>
+                </td><td>
+                    <a href="http://<%= u.website %>" target="_blank"><%= u.website.gsub("#{@phrase}", "<b>#{@phrase}</b>") %></a>
+                </td><td style="padding-right: 0px;">
+                    <%= u.signup.strftime("%b %d, %y") %>
+                </td>
+            </tr>
+        <% end %>
+    </table>
+<% end %>

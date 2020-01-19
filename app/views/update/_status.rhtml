@@ -1,0 +1,26 @@
+<div id="help" style="display: none;">
+    Here you can change the status of your website.
+    <ul>
+        <li><b>Down for maintenance:</b> When visitors come to your website, they will see a
+        "down for maintenance" notice and no images.  This is helpful for when you're customizing
+        your site, or when you simply don't want to be showing anything.  This is the default.
+        Switch to "up and running" after you've created portfolios and uploaded images.
+        <li><b>Up and running:</b> Change to this setting when you are ready to display your website.
+    </ul>
+</div>
+
+<%
+    wstrueblue = current_user.info.enabled == true ? " blue" : ""
+    wsfalseblue = current_user.info.enabled == true ? "" : " blue"
+%>
+
+<center>
+    <%= form_remote_tag :url => {:action => "update_website_status"}, :update => "status", :loading => "$('loader').show();", :complete => "$('loader').hide();" %>
+        <%= hidden_field_tag "enabled", current_user.info.enabled, :id => "enabled" %>
+        <%= submit_tag "Down for maintenance", :onclick => "$('enabled').value='false'; this.style.background='#D5EBFF'; $('wstrue').style.background='none';", :id => "wsfalse", :class => "clickable#{wsfalseblue}", :style => "width: 160px; margin-bottom: 4px;" %><br>
+        <%= submit_tag "Up and running", :onclick => "$('enabled').value='true'; this.style.background='#D5EBFF'; $('wsfalse').style.background='none';", :id => "wstrue", :class => "clickable#{wstrueblue}", :style => "width: 160px;" %>
+    </form>
+</center>
+
+
+

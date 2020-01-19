@@ -1,0 +1,13 @@
+<ul id="submenu">
+    <li>Thumbnail view</li>
+    <li>List view</li>
+</ul>
+
+<div id="partial">
+    <% if current_user.portfolios.length > 0 %>
+        <% page = params['page'].nil? ? "thumbnail_view" : params['page'] %>
+        <%= render :partial => page %>
+    <% else %>
+        You must create at least one portfolio first.
+    <% end %>
+</div>

@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+		
+<html>
+    <head>
+        <title><%= "Qufoto - " + (@title or "Websites for Photographers") %></title>
+        <meta name="description" content="Professional flash-based websites for commercial photographers and photojournalists.  Easy to use and controlled by you.  Get started in 24 hours.">
+        <meta name="keywords" content="websites for photographers, photography websites, art websites, qufoto, photo portfolio, photographer portfolio, online portfolio, portfolio websites">
+        <script src="http://ajax.googleapis.com/ajax/libs/prototype/1.6.0.2/prototype.js" type="text/javascript"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/scriptaculous/1.8.1/scriptaculous.js?load=effects,dragdrop" type="text/javascript"></script>
+        <script src="/javascripts/qufoto2.js" type="text/javascript"></script>
+		<script src="/javascripts/update3.js" type="text/javascript"></script>
+        <script src="/javascripts/soundmanager2.js" type="text/javascript"></script>
+		<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=cilphex"></script>
+        <link href="/stylesheets/qufoto2.css" media="screen" rel="stylesheet" type="text/css"/>
+		<link href="/stylesheets/update3.css" media="screen" rel="stylesheet" type="text/css"/>
+		<% if logged_in? && current_user.info.favicon? %>
+            <link rel="shortcut icon" href="<%= s3_file(favicon_s3_path(current_user)) %>">
+        <% else %>
+			<link rel="shortcut icon" href="/favicon.ico"/>
+		<% end %>
+		<%= @extra_head if @extra_head %>
+    </head>
+    <body class="update <%= @section %>">
+    	<div class="head clearfix">
+            <a class="logo" href="/" alt="Qufoto" title="Websites for photographers"></a>
+            <% if logged_in? %>
+				<div id="head_opts" class="options">
+	            	<a class="drop" href="#" onclick="$('head_opts').toggleClassName('fixed'); return false;"><%= current_user.website %></a>
+	            	<ul>
+	            		<!--
+						<li><a href="#">My contact info</a></li>
+						<li><a href="#">My password</a></li>
+						-->
+						<li><a href="/update3/settings">Settings</a></li>
+						<li><a href="/update3/logout">Sign out</a></li>
+	            	</ul>
+				</div>
+			<% end %>
+			<ul class="main">
+				<% if logged_in? %>
+					<li class="selected"><a href="/update3">My site</a></li>
+					<li><a href="/community">Community</a></li>
+				<% else %>
+					<li class="selected"><a href="/update3">Sign in</a></li>
+				<% end %>
+            </ul>
+			<div class="subtitle">
+				Update area
+				<% if logged_in? %>
+					<span>&mdash; <span><%= current_user.grade_text %></span></span>
+				<% end %>
+			</div>
+        </div>
+        <div id="content">
+            <div class="main_content clearfix">
+                <%= render :partial => 'navigation' if logged_in? && !@hide_navigation %>
+                <div class="column_content">
+                    <%= render :partial => 'browser_top' %>
+                	<% if logged_in? && current_user.status == 'Suspended' %>
+                		<p class="tip top warning">
+                			<span>Your account is currently suspended</span><br/>
+                			You can continue to use your update area but your website will not appear online.
+                			To re-enable your account, please resubscribe at <a href="/signup">our signup page</a> or <a href="/contact">contact us</a>.
+                		</p>
+                	<% end %>
+                    <%= @content_for_layout %>
+                </div>
+            </div>
+        </div>
+		<div class="footer">
+        	<ul class="clearfix">
+				<li class="first"><a href="/contact">Help</a></li>
+				<li><a href="/update3/logout">Logout</a></li>
+            </ul>
+            <p class="title">&copy; Qufoto. Websites for photographers.</p>
+        </div>
+        
+        <%= render :partial => :analytics.to_s %>
+    </body>
+</html>

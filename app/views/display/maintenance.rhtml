@@ -1,0 +1,78 @@
+<html>
+    <head>
+        <title><%= @user.info.title %></title>
+        <meta name="description" content="<%= @user.info.description %>">
+        <meta name="keywords" content="<%= @user.info.keywords %>">
+        <meta name="verify-v1" content="<%= @user.info.verifyv1 %>">
+        <%# if s3_contains(favicon = "favicon" + @user.id.to_s + ".ico") %>
+            <link rel="shortcut icon" href="<%= s3_file(favicon_s3_path(@user)) %>">
+        <%# end %>
+        <style type="text/css">
+            html, 
+            body {
+                margin: 0;
+                padding: 0;
+                height: 100%;
+                font-family: arial, verdana, sans-serif;
+                font-size: 10px;
+                <%= "color: ##{@user.info.textcolor};" %>
+                <%= "background: ##{@user.info.bgcolor};" %>
+            }
+			h1 {
+				font-size: 18px;
+				font-weight: normal;
+			}
+            #maintenance {
+                position: absolute;
+                margin-left: -200px;
+                margin-top: -50px;
+                top: 50%;
+                left: 50%;
+                width: 400px;  
+                font-size: 12px;
+            }
+			div.brand {
+				position: absolute;
+				padding: 0 10px 5px 0;
+				right: 0;
+				bottom: 0;
+			}
+			div.brand a,
+			div.brand a:visited,
+			div.brand a:active,
+			div.brand a:hover {
+				text-decoration: none;
+                <%= "color: ##{@user.info.textcolor};" %>
+			}
+        </style>
+    </head>
+    <body>
+        <div id="maintenance">
+        	<%= "<h1>#{@user.info.title}</h1>" if @user.info.title %>
+            <p><strong>Down for maintenance.</strong></p>
+			<%= "<p>#{@user.info.description}</p>" if @user.info.description %>
+        </div>
+		
+		<% if !(@user.grade == "Pro" && @user.info.psslinkdisplay == false) %>
+			<% @link_text = ['Qufoto - The best photography websites', 'Photography websites', 'Photography websites by Qufoto', 'The best photography websites'][rand(4)] %>
+			<div class="brand">
+	            <a href="http://qufoto.com" title="<%= @link_text %>">by Qufoto</a>
+			</div>
+		<% end %>
+		
+        <% if @user.info.analytics =~ /<script[\s\S]*<\/script>/ %>
+            <%= @user.info.analytics %>
+        <% end %>
+        
+        <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+        </script>
+        <script type="text/javascript">
+            var pageTracker = _gat._getTracker("UA-971952-64");
+            pageTracker._initData();
+            pageTracker._trackPageview();
+        </script>
+    </body>
+</html>
+

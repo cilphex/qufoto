@@ -1,0 +1,83 @@
+<%
+    params['portfolio_id'] = Portfolio.find_by_user_id(current_user.id, :order => "position ASC").id if params['portfolio_id'].nil?
+    @images = Image.find_all_by_portfolio_id(params['portfolio_id'], :order => "position ASC")
+    @slideshow = s3_contains("portfolio_audio" + params['portfolio_id'].to_s + ".mp3") && Portfolio.find(params['portfolio_id']).slideshow == true
+
+    # These should move to the controller action
+    
+    #if params['portfolio_id'].nil?
+    #  @portfolio = Portfolio.find_by_user_id(current_user.id, :order => "position ASC")
+    #  params['portfolio_id'] = @portfolio.id
+    #end
+    
+    #@images = @portfolio.images
+    #@slideshow = @portfolio.audio? && @portfolio.slideshow?
+%>
+
+<% if @images.empty? %>
+    There are no images in this portfolio
+<% else %>
+    <% if @slideshow %>
+        <%= form_remote_tag :url => {:action => "update_times"}, :update => "status", :loading => "$('loadImage').show();", :complete => "$('loadImage').hide();" %>
+        <%= hidden_field_tag "portfolio_id", params['portfolio_id'] %>
+    <% end %>
+    <ul id="sortableThumbs" class="thumbs">
+        <% totaltime = 0 %>
+        <% @images.each do |image| %>
+            <li id="item_<%= image.id %>"<%= ' style="height: 128px !important;"' if @slideshow %> onmouseover="$('handle_<%= image.id %>').show();" onmouseout="$('handle_<%= image.id %>').hide();">
+                <table width=100% height=100% cellpadding=0 cellspacing=0>
+                    <tr>
+                        <td style="<%= 'height: 108px; ' if @slideshow %>text-align: center; background: url(<%= s3_photo(image.id, 'thumb') %>) center center no-repeat;" >
+                            <div style="height: 78px; cursor: pointer;" onclick="editImage(<%= image.id.to_s %>);">&nbsp;</div>
+                            <div id="handle_<%= image.id %>" style="display: none;">
+                                <div class="delete">
+                                    <%= link_to_remote "X",
+                                        :url => {:action => "d_image", :image_id => image.id},
+                                        :loading => "$('loader').show ();",
+                                        :complete => "$('loader').hide ();",
+                                        :success => "new Effect.Fade ('item_' + #{image.id}, {duration:'0.5'});",
+                                        :failure => "$('status').innerHTML = 'Image could not be deleted.';" %>
+                                </div>
+                                <div class="handle" style="float: left; font-weight: bold;">
+                                    Drag
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <% if @slideshow %>
+                        <tr>
+                            <td style="text-align: center;">
+                                <%= text_field_tag "duration#{image.id.to_s}", nil, :value => image.duration, "size" => 3, "maxlength" => 3, :class => "time", :onkeyup => "calculateTime();" %> seconds
+                                <% totaltime += image.duration %>
+                            </td>
+                        </tr>
+                    <% end %>
+                </table>
+            </li>
+        <% end %>
+    </ul>
+    <hr class="break" />
+    <% if @slideshow %>
+        <div style="clear: both; padding-top: 30px; text-align: right; font-size: 18px; font-weight: bold;"><!-- clearfix -->
+            <% if totaltime%60 < 10 then seconds = "0" + (totaltime%60).to_s else seconds = totaltime%60 end %>
+            <span id="totaltime"><%= "#{totaltime/60}:#{seconds}" %></span><%= submit_tag "Save times", :class => "highlight", :style => "margin-left: 16px; font-size: 18px; font-weight: bold;" %>
+        </div>
+        </form>
+    <% end %>
+<% end %>
+
+<% if @slideshow then clearstatus = " $('status').innerHTML='';" else clearstatus = '' end %>
+<%= sortable_element "sortableThumbs", 
+    :handle => "handle",
+    :constraint => false,
+    :url => {:action => "order_portfolio", :portfolio_id => params['portfolio_id']}, 
+    :loading => "$('loader').show();#{clearstatus}",
+    :complete => "$('loader').hide();" %>
+
+<script type="text/javascript">
+    currentPortfolio = <%= params['portfolio_id'] %>;
+</script>
+
+
+
+    

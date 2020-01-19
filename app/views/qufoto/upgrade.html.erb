@@ -1,0 +1,68 @@
+<%= render :partial => "help_navigation" %>
+
+<h1>Upgrading to Qufoto's newest services</h1>
+
+<p class="greyblue">This walkthrough is for users who signed up before May 10, 2008</p>
+
+<p>In mid-may 2008, we pushed a significant upgrade to our system.  It offers a new and
+improved user update area, faster image loading times for your website, and greater stability
+all around.  Visitors still see your website the way it always was, but everything under the
+hood has been improved.</p>
+
+<p>The only downside to this system is that because it exists in a different location on 
+newer hardware, using it requires your domain name to point to a new location.  That is, the 
+nameservers associated with your domain need to be updated.</p>
+
+<p>For a good number of Qufoto users, we can handle the change for you and move you over to
+the new system ourselves because your domain is registered through us.  But for many more users
+who use domains they have registered themselves, a little configuration will be necessary.</p>
+
+<p>Essentially, all that needs to be done is the updating of the nameservers associated with
+your domain:</p>
+
+<center>
+    <table id="upgradeTable" cellspacing=0>
+        <tr>
+            <td>Old nameservers</td>
+            <td>New nameservers</td>
+        </tr><tr>
+            <td>
+                ns8.hostingrails.com<br>
+                ns1.hostingrails.com<br>
+                ns2.hostingrails.com
+            </td><td>
+                ns1.qufoto.com<br>
+                ns2.qufoto.com
+            </td>
+        </tr>
+    </table>
+</center>
+
+<p>After your nameservers are updated, they should begin pointing to your data at our new location
+in about half a day.  The data that exists on the new location, however, is a copy of the state of things
+as they were on the old system from late April.  If you have been updating your site since then, the
+images and information once you switch will be outdated.  This can be remedied in one of three ways:</p>
+
+<ul style="margin-bottom: 20px;">
+    <li>Make the switch and then make the updates on your own</li>
+    <li>Shoot us an email and ask us to update your information for you, either before or after you
+    make the switch</li>
+    <li>Log in to qufoto.com/update and update your information, then redirect your domain.</li>
+</ul>
+
+<p>If you have any email addresses, <b>please let us know</b>.  We can both port it over and upgrade you
+to very nice, very easy to use webmail at the same time.</p>
+
+<p>This is the only time an upgrade will ever have to happen this way.  We are still young and
+growing, and this is an important one time switch that is better to have happen early rather than
+later.</p>
+
+<p>Eventually (a date has not been set), the current/old system will be deprecated, so all users
+will have to make the switch at some point.</p>
+
+<h4>The short and sweet:</h4>
+<p>Update the nameservers associated with your domain name to these nameservers listed above.
+After a short amount of time (usually around a half a day), your domain will begin pointing
+to your account at our newer service.  Some (or lots) of your data might be entirely out of date.
+If it is, you can either update it yourself or ask us to do it.  If you have any email addresses
+based on the domain, let us know.</p>

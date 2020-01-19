@@ -1,0 +1,70 @@
+Users who originally subscribed to a PhotoSiteSite website can re-subscribe or
+upgrade their accounts at the following reduced rates:
+
+<table cellspacing=0 style="margin: 35px 0 40px 0; width: 100%;">
+    <tr>
+        <td align=center>
+            <form id="form_lite" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+                <!--<input style="width: 125px; height: 59px; border: none;" type="image" src="http://qufoto.com/images/subscribe_lite.png" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">-->
+                <img src="http://qufoto.com/images/subscribe_lite.png" id="submit_lite" style="cursor: pointer;">
+                <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                <input type="hidden" name="cmd" value="_xclick-subscriptions">
+                <input type="hidden" name="business" value="cilphex@gmail.com">
+                <input type="hidden" name="item_name" value="Qufoto Lite Subscription">
+                <input type="hidden" name="no_shipping" value="1">
+                <input type="hidden" name="return" value="http://qufoto.com/thankyou">
+                <input type="hidden" name="no_note" value="1">
+                <input type="hidden" name="currency_code" value="USD">
+                <input type="hidden" name="lc" value="US">
+                <input type="hidden" name="bn" value="PP-SubscriptionsBF">
+                <input type="hidden" name="a3" value="13.00">
+                <input type="hidden" name="p3" value="1">
+                <input type="hidden" name="t3" value="M">
+                <input type="hidden" name="src" value="1">
+                <input type="hidden" name="sra" value="1">
+                <input type="hidden" name="custom" value="novalue" id="customLite">
+            </form>
+            $13/month&nbsp;
+        </td><td align=center>
+            <form id="form_pro" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+                <!--<input style="width: 125px; height: 59px; border: none;" type="image" src="http://qufoto.com/images/subscribe_pro.png" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">-->
+                <img src="http://qufoto.com/images/subscribe_pro.png" id="submit_pro" style="cursor: pointer;">
+                <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                <input type="hidden" name="cmd" value="_xclick-subscriptions">
+                <input type="hidden" name="business" value="cilphex@gmail.com">
+                <input type="hidden" name="item_name" value="Qufoto Pro subscription">
+                <input type="hidden" name="no_shipping" value="1">
+                <input type="hidden" name="return" value="http://qufoto.com/thankyou">
+                <input type="hidden" name="no_note" value="1">
+                <input type="hidden" name="currency_code" value="USD">
+                <input type="hidden" name="lc" value="US">
+                <input type="hidden" name="bn" value="PP-SubscriptionsBF">
+                <input type="hidden" name="a3" value="28.00">
+                <input type="hidden" name="p3" value="1">
+                <input type="hidden" name="t3" value="M">
+                <input type="hidden" name="src" value="1">
+                <input type="hidden" name="sra" value="1">
+                <input type="hidden" name="custom" value="novalue" id="customPro">
+            </form>
+            $28/month&nbsp;
+        </td>
+    </tr>
+</table>
+
+<script type="text/javascript">
+    window.onload = function () {
+        Event.observe('submit_lite', 'click', function () {
+            $('form_lite').submit ();
+        });
+        Event.observe('submit_pro', 'click', function () {
+            $('form_pro').submit ();
+        });
+    }
+</script>
+
+
+
+
+
+
+

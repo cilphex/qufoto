@@ -1,0 +1,131 @@
+<p class="tip top">
+    <span>Note:</span> If you've signed up for a Qufoto site and opted
+	to get a free domain with your account, you can skip this article.
+</p>
+
+<h1>Domains</h1>
+
+<ol class="jumper">
+	<li><a href="#redirect">Redirecting a domain</a></li>
+	<li><a href="#transfer">Transferring a domain</a></li>
+</ol>
+
+<h2 id="redirect">Redirecting a domain</h2>
+
+<p>Redirecting a domain that you already own to your Qufoto website is
+as simple as changing some settings on your domain.  These settings
+are called nameservers, and they control where your domain points.</p>
+
+<!--
+<h3>Option 1: Nameservers</h3>  We recommend this option if you don't
+already use your domain for various things beyond a website, like email
+with custom spam filters, FTP, etc.
+-->
+
+<!--
+<p>Updating the nameservers for your domain is the more common of the two
+methods for redirecting, and it's very simple to do.  "Namservers" are values
+that control where your domain pionts, and all you need to do to redirect
+your domain to your Qufoto site is update them to a couple specific values.
+</p>
+-->
+
+<p>Updating the nameservers associated with your domain can be done either
+through a control panel or through the customer service of the registrar
+that currently hosts your domain. If you do use a control panel to maintain
+your domain or current website, simply log in and find the option to modify
+the nameservers. If you're using a customer service, contact them. In either
+case, update your nameservers to use the following values:
+</p>
+
+<ul>
+    <li>ns1.qufoto.com</li>
+    <li>ns2.qufoto.com</li>
+</ul>
+
+<p>Once the nameservers are changed for your domain, the domain should be
+redirected to your Qufoto website within 24 hours. (It takes a little time for
+the change to propagate through the internet.)</p>
+
+<p>When you redirect your domain, if you have any email addresses based on it,
+they may get funky. Please read our help document on <a href="/email">email addresses</a>.
+
+<h2 id="transfer">Transferring a domain</h2>
+
+<p>If you have a Qufoto website and you have not taken advantage of the free
+domain option with your subscription, and you already own a domain that you would
+like us to pay for, you can have us do that by transferring the domain to us. But please
+note: transferring a domain to us is transferring <em>ownership</em> of the domain
+to us.  Qufoto will technically become the owner of your domain. You will no longer own
+your domain.  If this does not sound appealing to you, please see the redirect option
+above.</p>
+
+<p>That said, if you do transfer your domain to Qufoto, we will help you transfer
+it back to another domain registrar at any time, whether you decide to cancel your 
+photography website or simply want to retain ownership of it.</p>
+
+<p>To transfer your domain to Qufoto you must do the following four steps:</p>
+
+<ol>
+	<li>
+		Update the administrative contact email address on file for your domain to
+		<script>util.insertAddress('service','qufoto.com');</script>
+	</li>
+	<li>Wait 2 days (This is necessary for your DNS changes to propagate)</li>
+	<li>Unlock the domain</li>
+	<li>Send us the authorization code for the domain</li>
+</ol>
+
+<p>Once these steps are complete, we can begin the transfer process for your domain. A
+typical domain transfer can take anywhere from a few days to a week to complete. Once
+it's finished, we'll attach the domain to your Qufoto website by redirecting it (like above)
+ourselves if your domain has not already been redirected.</p>
+
+<p>When we redirect your domain, if you have any email addresses based on it,
+they may get funky. Please read our help document on <a href="/email">email addresses</a>.
+
+
+<!--
+<p>We recommend using this option if you do not already use your domain for a
+lot of things besides a simple website.  For example, if you already have an email
+address with custom spam filters, or storage and FTP that you access through the
+domain, and if you want to keep these things just the way they are without changing
+them, then you should not use this method.  You should use an "A" record (see below).
+It's definitely possible to keep your email addresses if you use this method, but
+please read our help article on <a href="/email">email addresses</a> first.
+</p>
+-->
+
+<!--
+<h3>Option 2: "A" record</h3>
+
+<p>When you update the nameservers for your domain, what actually happens is that
+all of the requests for anything related to your domain get routed to Qufoto. Email,
+FTP, subdomains.. anything.  If your domain exists in the URL, it'll get redirected
+to us.  So if you already have a lot of stuff set up before you start a site
+with us, it might not work any more when you redirect your domain using nameservers.
+None of the stuff you created already will exist on the server where the domain is
+going to start pointing.
+</p>
+
+<p>Creating an "A" record can get around this.  When you create an "A" record, your
+nameservers remain unchanged, so everything you already set up continues to work. But
+when visitors type your domain name into their browser, they get redirected to Qufoto
+instead of your old server.  So really you're just making a redirect for a <i>specific case</i>
+instead of a redirect for <i>everything</i>.</p>
+
+<p>An "A" record is a simple pointer, so it takes two values.  One of them is your
+domain, and the other is the IP address that it should point to.  Our IP address is:</p>
+
+<ul>
+	<li>208.101.54.41</li>
+</ul>
+
+<p>You should be able to use this to create the "A" record. If you're unfamiliar with
+the process or your domain's control panel does not make it intuitive, you should contact
+your domain host's customer service for help.</p>
+
+<p>We generally recommend redirecting your domain via the nameserver method, unless you
+have a specific reason not to.</p>
+
+-->

@@ -1,0 +1,9 @@
+<h1><%= @announcement.title %></h1>
+<div class="update">
+	<h2 class="bold bee"><%= @announcement.posted.strftime("%B %d, %Y") %></h2>
+	<% @announcement.body.split("\n").each do |p| %>
+	    <p><%= p %></p>
+	<% end %>
+</div>
+
+<p><a href="/news">< Back to all News</a></p>

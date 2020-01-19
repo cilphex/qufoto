@@ -1,0 +1,12 @@
+<h1>Javascript</h1>
+<p class="subtitle">Insert custom javascript to your website.
+Be sure to include surrounding <em>&lt;script&gt;</em> tags.</p>
+
+<div class="javascript">
+	<textarea id="js_text"><%= current_user.info.analytics %></textarea>
+	<div class="foot">
+		<a id="js_save" class="save" href="javascript:void(0)" onclick="Layout.saveJS()">Save</a>
+		<span id="js_saving" class="saving" style="display: none;">Saving...</span>
+		<span id="js_saved" class="saved" style="display: none;">Saved</span>
+	</div>
+</div>

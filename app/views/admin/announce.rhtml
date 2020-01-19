@@ -1,0 +1,49 @@
+<h5>Announce</h5>
+
+<div id="new_post" style="display: none;">
+    <div>
+        <%= form_remote_tag(
+            :url => {:action => "post_news"}, 
+            :update => "announcements",
+            :position => :top,
+            :complete => visual_effect(:SlideUp, 'new_post')) %>
+            <div class="label">
+                Title
+            </div>
+            <div style="float: left; margin: 14px 10px 0 0;">
+                <%= text_field_tag "title", nil, :style => "width: 530px;" %>
+            </div>
+            
+            <div class="label">
+                Body
+            </div>
+            <div style="float: left; margin: 14px 10px 0 0; width: 300px;">
+                <%= text_area_tag "body", nil, :style => "width: 530px; height: 200px;" %><br>
+            </div>
+            
+            <div style="clear: left; float: left; margin: 14px 10px 0 0; padding: 3px 12px 0 0; width: 55px; text-align: right;">
+                &nbsp;
+            </div>
+            <div style="float: left; margin: 14px 10px 0 0;">
+                <%= submit_tag "Post", :class => "highlight" %>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div style="clear: both;">
+    <a href="#" onclick="new Effect.toggle ('new_post', 'slide');">Make a new post</a>
+</div>
+
+<div id="announcements" style="clear: both; padding: 20px 0 0 0;">
+    <% Announcement.find(:all, :order => "posted DESC").each do |a| %>
+        <div class="post">
+            <%= link_to_function a.title, "$('post_#{a.id}').toggle ()" %>&nbsp;&nbsp;|&nbsp;&nbsp;<%= a.posted.strftime("%b %d, %y") %>
+        </div>
+        <div id="post_<%= a.id %>" class="post_body" style="display: none;">
+            <% a.body.split("\n").each do |p| %>
+                <p><%= p %></p>
+            <% end %>
+        </div>
+    <% end %>
+</div>

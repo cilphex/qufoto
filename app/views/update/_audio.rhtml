@@ -1,0 +1,48 @@
+<div id="help" style="display: none;">
+    Here you can upload an audio track (mp3 only) to be played on your site.  Once you upload a file,
+    if you have "Play audio" selected, a small speaker icon will appear on your website, and the audio
+    file will begin to play.  The icon can be clicked to turn off the music.<br><br>
+    
+    If you just replaced an old audio file with a new one, and you still hear the old one when you click
+    the preview speaker below, this is probably because your web browser still has the old file in memory. 
+    Clear your cache and refresh.
+</div>
+
+<%
+    autrueblue = current_user.info.audioplay == true ? " blue" : ""
+    aufalseblue = current_user.info.audioplay == true ? "" : " blue"
+    altrueblue = current_user.info.audioloop == true ? " blue" : ""
+    alfalseblue = current_user.info.audioloop == true ? "" : " blue"
+    audio = "audio" + current_user.id.to_s + ".mp3"
+%>
+
+<center>
+    <%# if s3_contains(audio) %>
+    <% if current_user.info.audio %>
+        <a href="#" onclick="soundManager.play('audio', '<%= s3_file(audio_s3_path(current_user)) %>'); return false;">Preview</a> |
+        <a href="#" onclick="soundManager.stop('audio'); return false;">Stop</a>
+    <% else %>
+        No audio file has been uploaded.<br>
+    <% end %>
+        
+    <%= form_tag({:action => 'update_audio'}, :multipart => true, :style => "margin: 30px 0;") %>
+        <%= file_field_tag "tmp_file", :size => 42 %><br><br>
+        <%= submit_tag "Upload New", :class => "highlight", :style => "width: 300px;", :onclick => "$('loader').show();" %>
+    </form>
+    
+    <%= form_remote_tag :url => {:action => "audio_play"}, :update => "status", :loading => "$('loader').show();", :complete => "$('loader').hide();", :html => {:style => "margin: 30px 0;"} %>
+        <%= hidden_field_tag "audioplay", current_user.info.audioplay, :id => "audioplay" %>
+        <%= submit_tag "Play audio", :onclick => "$('audioplay').value='true'; this.style.background='#D5EBFF'; $('aufalse').style.background='none';", :id => "autrue", :class => "clickable#{autrueblue}", :style => "width: 160px; margin-bottom: 4px;" %><br>
+        <%= submit_tag "Keep quiet", :onclick => "$('audioplay').value='false'; this.style.background='#D5EBFF'; $('autrue').style.background='none';", :id => "aufalse", :class => "clickable#{aufalseblue}", :style => "width: 160px;" %>
+    </form>
+    
+    <%= form_remote_tag :url => {:action => "audio_loop"}, :update => "status", :loading => "$('loader').show();", :complete => "$('loader').hide();", :html => {:style => "margin: 30px 0;"} %>
+        <%= hidden_field_tag "audioloop", current_user.info.audioloop, :id => "audioloop" %>
+        <%= submit_tag "Loop audio", :onclick => "$('audioloop').value='true'; this.style.background='#D5EBFF'; $('alfalse').style.background='none';", :id => "altrue", :class => "clickable#{altrueblue}", :style => "width: 160px; margin-bottom: 4px;" %><br>
+        <%= submit_tag "Play once", :onclick => "$('audioloop').value='false'; this.style.background='#D5EBFF'; $('altrue').style.background='none';", :id => "alfalse", :class => "clickable#{alfalseblue}", :style => "width: 160px;" %>
+    </form>
+</center>
+
+
+
+

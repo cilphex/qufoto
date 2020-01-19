@@ -1,0 +1,132 @@
+<h5>
+    <div style="float: right;">Account created <%= @user.signup.strftime("%B %d, %Y") %></div>
+    <b><%= @user.name %></b>
+    <span id="userstatus" style="margin-left: 6px;">
+        <%= params['userstatus'] unless params['userstatus'].nil? %>
+    </span>
+</h5>
+
+<div class="next_previous clearfix">
+	<%= '<a class="right" href="/admin/user?id=' + @older_user.id.to_i.to_s + '" title="Online in the last ' + @older_user.online_title + '"><img src="/images/pinkdot.jpg" style="opacity:' + @older_user.online_opacity.to_s + ';"/>' + @older_user.name + ' ></a>' if @older_user %>
+	<%= '<a href="/admin/user?id=' + @newer_user.id.to_i.to_s + '" title="Online in the last ' + @newer_user.online_title + '">< ' + @newer_user.name + '<img src="/images/pinkdot.jpg" style="opacity:' + @newer_user.online_opacity.to_s + ';"/></a>' if @newer_user %>
+</div>
+
+<form action="/admin/update_user" class="user_form">
+    <table>
+        <tr>
+            <td>
+                <table style="margin-bottom: 18px;" class="userlist">
+                    <tr>
+                        <td align=right>
+                            <b>Name</b>
+                        </td><td class="show" title="Online in the last <%= @user.online_title %>">
+                            <%= @user.name %>&nbsp;&nbsp;<img src="/images/pinkdot.jpg" style="opacity:<%= @user.online_opacity %>;"/>
+                        </td><td class="hide">
+                            <%= text_field_tag "name", @user.name, :style => "width: 200px;", :onfocus => "$('status').innerHTML='';" %>
+                        </td>
+                    </tr><tr>
+                        <td align=right>
+                            <b>Domain</b>
+                        </td><td class="show">
+                            <a href="http://<%= @user.website %>" target="_blank"><%= @user.website %></a>
+                        </td><td class="hide">
+                            <%= text_field_tag "domain", @user.website, :style => "width: 200px;", :onfocus => "$('status').innerHTML='';" %>
+                        </td>
+                    </tr><tr>
+                        <td align=right>
+                            <b>Username</b>
+                        </td><td class="show">
+                            <%= @user.user %>
+                        </td><td class="hide">
+                            <%= text_field_tag "username", @user.user, :style => "width: 200px;", :onfocus => "$('status').innerHTML='';" %>
+                        </td>
+                    </tr><tr>
+                        <td align=right>
+                            <b>Password</b>
+                        </td><td id="viewpass">
+                            <%= link_to_function "View", "Element.hide('viewpass'); Element.show('pass')", :id => "viewpasslink" %>
+                            <div id="editpass" style="display: none;">
+                                <%= text_field_tag "password", @user.pass, :style=> "width: 60px;", :onfocus => "$('status').innerHTML='';" %>&nbsp;
+                                <%= link_to_function "Save", "document.forms[0].submit()" %>&nbsp;|
+                                <%= link_to_function "Cancel", "Element.hide('editpass'); Element.show('viewpasslink')" %>
+                            </div>
+                        </td><td id="pass" style="display: none;">
+                            <%= @user.pass %>
+                            &nbsp;&nbsp;
+                            <%= link_to_function "Change", "Element.hide('pass'); Element.hide('viewpasslink'); Element.show('viewpass'); Element.show('editpass')" %>&nbsp;|
+                            <%= link_to_function "Hide", "Element.hide('pass'); Element.show('viewpass')" %>
+                        </td>
+                    </tr><tr>
+                        <td align=right>
+                            <b>Contact</b>
+                        </td><td class="show">
+                            <%= @user.contactemail %>
+                        </td><td class="hide">
+                            <%= text_field_tag "contact", @user.contactemail, :style => "width: 200px;", :onfocus => "$('status').innerHTML='';" %>
+                        </td>
+                    </tr><tr>
+                        <td align=right>
+                            <b>Directory</b>
+                        </td><td>
+                            <%= @user.directory %>
+                        </td><td style="display: none;">
+                            &nbsp;
+                        </td>
+                    </tr><tr>
+                        <td align=right>
+                            <b>Status</b>
+                        </td><td class="show">
+                            <%= @user.status %>&nbsp;
+                            <% if @user.status == "New" %>
+                                (<%= link_to "Send welcome email", {:action => "send_welcome_email", :id => @user.id}, :confirm => "Are you sure?" %>)
+                            <% end %>
+                        </td><td class="hide">
+                            <%= select "user", "status", ["New","Subscribed","Suspended"] %>
+                        </td>
+                    </tr><tr>
+                        <td align=right>
+                            <b>Grade</b>
+                        </td><td class="show">
+                            <%= @user.grade %>
+                        </td><td class="hide">
+                            <%= radio_button_tag "grade", "Pro", @user.grade == "Pro" %>Pro
+                            &nbsp;&nbsp;
+                            <%= radio_button_tag "grade", "Lite", @user.grade == "Lite" %>Lite
+                        </td>
+                    </tr><tr>
+                        <td align=right>
+                            <b>Subscription</b>
+                        </td><td class="show">
+                            $<%= @user.subscription %>.00/month
+                        </td><td class="hide">
+                            <%= select "user", "subscription", 0..100 %>
+                        </td>
+                    </tr>
+                </table>
+            </td><td valign=top style="padding: 16px;">
+                <div class="hide">
+                	<input type="hidden" name="id" value="<%= @user.id %>"/>
+                    <%= submit_tag "Save", :id => "savebutton", :class => "highlight" %>&nbsp;
+                    <%= link_to_function "Cancel", "swapHidden()" %>
+                </div>
+                <% @user.name =~ /(^.*$)/ unless @user.name =~ /(^.*[\s])/ %>
+                <%= link_to_function "Edit #{$1.chomp(" ")}'s info", "swapHidden()", :class => "show" %><br>
+                <%= link_to "Delete this user", {:action => "delete_user", :id => @user.id}, :confirm => "Are you sure you want to delete #{@user.name}?\nDeletion is permanent and cannot be undone." %>
+            </td>
+        </tr>
+    </table>
+</form>
+
+<%= link_to_function "Google Analytics", "new Effect.toggle('analytics', 'slide');" %><br>
+<div id="analytics" style="margin-top: 10px; display: none;">
+    <div>
+        <%= form_remote_tag(
+            :url => {:action => "update_user_analytics", :id => @user.id}, 
+            :update => "userstatus",
+            :complete => visual_effect(:SlideUp, 'analytics')) %>
+            <%= text_area_tag "googleAnalytics", @user.info.analytics, :style => "width: 600px; height: 100px;" %><br>
+            <%= submit_tag "Save", :class => "highlight", :style => "margin-top: 10px;" %>
+        </form>
+    </div>
+</div>
+

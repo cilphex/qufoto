@@ -1,0 +1,97 @@
+<html>
+    <head>
+        <title><%= @user.info.title %></title>
+        <meta name="description" content="<%= @user.info.description %>">
+        <meta name="keywords" content="<%= @user.info.keywords %>">
+        <meta name="verify-v1" content="<%= @user.info.verifyv1 %>">
+        <link href="/stylesheets/display.css" media="screen" rel="stylesheet" type="text/css" />
+		<link rel="shortcut icon" href="<%= s3_file(favicon_s3_path(@user)) %>">
+        <style type="text/css">
+            html, 
+            body {
+                margin: 0;
+                padding: 0;
+                height: 100%;
+                font-family: arial, verdana, sans-serif;
+                font-size: 10px;
+            }
+            #splash {
+                position: absolute;
+                margin-top: -300px;
+                margin-left: -450px;
+                top: 50%;
+                left: 50%;
+                width: 900px;
+                height: 600px;
+            }
+            body {
+                <%= "background: ##{@user.info.bgcolor};" %>
+                <%= "color: ##{@user.info.textcolor};" %>
+            }
+            img {
+                border: none;
+            }
+            table {
+                font-family: arial, verdana, sans-serif;
+                font-size: 10px;
+            }
+			div.brand {
+				position: absolute;
+				padding: 0 10px 5px 0;
+				right: 0;
+				bottom: 0;
+			}
+			div.brand a,
+			div.brand a:visited,
+			div.brand a:active,
+			div.brand a:hover {
+				text-decoration: none;
+                <%= "color: ##{@user.info.textcolor};" %>
+			}
+        </style>
+    </head>
+    <body>
+        <div id="splash">
+            <table width=100% height=100%>
+                <tr>
+                    <td align=center>
+                    	<script type="text/javascript">
+                    		var href = document.location.href.toLowerCase ();
+                    		if (href.indexOf ('qufoto') != -1) {
+								var url = href.replace ('splash', 'enter');
+							}
+							else {
+								var url = '/enter';
+							}
+                    		document.write ('<a href="' + url + '">');
+							document.write ('<img src="<%= s3_file(splash_s3_path(@user)) %>" alt="Enter" title="Enter"/>');
+							document.write ('</a>');
+                    	</script>
+                    </td>
+                </tr>
+            </table>
+        </div>
+		
+		<% if !(@user.grade == "Pro" && @user.info.psslinkdisplay == false) %>
+			<% @link_text = ['Qufoto - The best photography websites', 'Photography websites', 'Photography websites by Qufoto', 'The best photography websites'][rand(4)] %>
+			<div class="brand">
+	            <a href="http://qufoto.com" title="<%= @link_text %>">by Qufoto</a>
+			</div>
+		<% end %>
+		
+        <% if @user.info.analytics =~ /<script[\s\S]*<\/script>/ %>
+            <%= @user.info.analytics %>
+        <% end %>
+        
+        <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+        </script>
+        <script type="text/javascript">
+            var pageTracker = _gat._getTracker("UA-971952-64");
+            pageTracker._initData();
+            pageTracker._trackPageview();
+        </script>
+    </body>
+</html>
+

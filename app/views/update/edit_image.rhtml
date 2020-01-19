@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <link href="/stylesheets/update_2.css" media="screen" rel="stylesheet" type="text/css" />
+    </head>
+    <body style="padding: 8px;">
+        <div style="height: 275px; text-align: center;">
+            <%= image_tag(url_for(:controller => "image", :action => :resize_s3_photo, :id => @image.id, :size => "student", :width => 465, :height => 275), :alt => "Loading image") %>
+        </div>
+        <form action="/update/update_image" id="edit_image_form" name="edit_image_form" method="post">
+            <input name="image_id" type="hidden" value="<%= @image.id %>">
+            <table id="imageDetails" cellspacing=1 cellpadding=4>
+                <tr>
+                    <td align=right valign=top style="border-bottom: 1px dotted #DDDDDD;">
+                        Title
+                    </td><td valign=top style="border-bottom: 1px dotted #DDDDDD;">
+                        <%= text_field "image", "title", :value => @image.title %>
+                    </td><td>
+                        &nbsp;
+                    </td>
+                </tr><tr>
+                    <td align=right valign=top style="border-bottom: 1px dotted #DDDDDD;">
+                        Description
+                    </td><td valign=top style="border-bottom: 1px dotted #DDDDDD;">
+                        <%= text_area "image", "description", :value => @image.description, :maxlength => 240, :onkeyup => "return ismaxlength(this)" %>
+                    </td><td valign=middle>
+                        <%= submit_tag "Save", :style => "margin-bottom: 1px; width: 70px;", :class => "highlight" %>
+                    </td>
+                </tr><tr>
+                    <td>
+                        Portfolio
+                    </td><td>
+                        <%= select "portfolio_id", "first", current_user.portfolios.collect {|p| [p.title, p.id]}, {:selected => Image.find(@image.id).portfolio.id}, {:onchange => "newPortfolio=('this.value');"} %>
+                    </td><td>
+                        &nbsp;
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

@@ -1,0 +1,11 @@
+<% if !@supported %>
+	<div class="tip top warning">
+		<h4>Unsupported Browser</h4>
+		<p>You're using <strong><%= @browser %></strong>,
+		a web browser that doesn't support modern web standards.</p>
+		<p>You can still use the update area, but it may look ugly or not work.
+		We strongly recommend upgrading to<br/>
+		<a href="http://google.com/chrome" target="_blank">Google Chrome</a> or
+		<a href="http://www.mozilla.org/en-US/firefox/new/" target="_blank">Firefox</a>.</p>
+	</div>
+<% end %>

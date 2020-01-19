@@ -1,0 +1,62 @@
+<h1>Upload</h1>
+
+<!-- copied from image_thumbs.html.erb -->
+<div id="detail" class="detail" style="display: none;">
+	<div class="inner">
+		<div id="image_loading" class="loading">Loading...</div>
+		<div id="image_detail"></div>
+		<a class="close" href="javascript:void(0)" onclick="$('detail').hide()">Close</a>
+		<a class="save" href="javascript:void(0)" onclick="Images.saveDetail()">Save</a>
+	</div>
+</div>
+
+<form id="upload_form" class="upload" action="/update3/image_upload_process" method="post" enctype="multipart/form-data" target="upload_iframe">
+	<table class="dataform">
+		<tr>
+			<td>Title</td>
+			<td>
+				<input type="text" name="image_title"/>
+			</td>
+		</tr>
+		<tr>
+			<td>Description</td>
+			<td>
+				<textarea name="image_description" maxlength="240"></textarea>
+			</td>
+		</tr>
+		<tr>
+			<td>Portfolio</td>
+			<td>
+				<select id="portfolio_select" name="image_portfolio">
+					<% current_user.portfolios.each do |p| %>
+						<option value="<%= p.id %>"><%= p.title %></option>
+					<% end %>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>Image</td>
+			<td>
+				<input type="file" name="image_file"/>
+			</td>
+		</tr>
+		<tr style="<%= 'display:none;' if current_user.grade != 'Pro' %>">
+			<td>Rollover <span>Optional</span></td>
+			<td>
+				<input type="file" name="image_rollover"/>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<a id="upload" href="javascript:void(0)" onclick="Upload.submit()">Upload</a>
+				<span id="uploading" class="saving" style="display: none;">Uploading...</span>
+			</td>
+		</tr>
+	</table>
+</form>
+
+<h3 id="uploaded_title" style="display: none;">Uploaded images</h3>
+<div id="uploaded_images" class="uploaded"></div>
+
+<iframe id="upload_iframe" class="upload_iframe" name="upload_iframe" src="about:blank"></iframe>

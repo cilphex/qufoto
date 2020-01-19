@@ -1,0 +1,20 @@
+<ul id="photos" class="sortableThumbs">
+    <% @photos.each do |photo| %>
+        <li id="item_<%= photo.id %>" class="thumb" style="background: url(/images/photos/<%= photo.filename %>s.jpg) 0 0 no-repeat;" onmouseover="handle_show(<%= photo.id %>);" onmouseout="handle_fade(<%= photo.id %>);">
+            <div style="height: 78px; cursor: pointer;" onclick="document.location.href='/photo/<%= photo.id %>';">&nbsp;</div>
+            <div id="handle_<%= photo.id %>" style="display: none;">
+                <div class="delete">
+                    <%= link_to_remote "X",
+                        :url => {:action => "delete_photo", :id => photo.id},
+                        :loading => "$('loader').show ();",
+                        :complete => "$('loader').hide ();",
+                        :success => "new Effect.Fade ('item_' + #{photo.id}, {duration:'0.5'});",
+                        :failure => "$('status').innerHTML = 'Image could not be deleted.';" %>
+                </div>
+                <div class="handle" style="float: left; font-weight: bold;">
+                    Drag
+                </div>
+            </div>
+        </li>
+    <% end %>
+</ul>

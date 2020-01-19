@@ -1,0 +1,36 @@
+<div id="help" style="display: none;">
+    Here you can upload a resume for visitors to view and download.  It must be in .pdf format.
+    Once you have uploaded a resume, options for viewing it and deleting it appear.  You can upload
+    a resume and keep it hidden from your visitors by keeping "keep resume hidden" selected.  If "Display resume"
+    is selected, a link to your resume will appear on your website, but only if you have uploaded
+    a resume.  There is no need to press "save" here&#8212;your actions are saved automatically.
+</div>
+
+<%
+    resume = "resume" + current_user.id.to_s + ".pdf"
+%>
+
+<center>
+    <%# if s3_contains(resume) %>
+    <% if current_user.info.resume? %>
+        <%= link_to "View current resume", s3_file(resume_s3_path(current_user)), :popup => true, :style => "font-weight: bold;" %>
+        [<%= link_to "delete", :action => "delete_resume" %>]
+    <% else %>
+        No resume has been uploaded
+    <% end %>
+
+    <%= form_tag({:action => 'update_resume'}, :multipart => true, :style => "margin: 20px 0;") %>
+        <%= file_field_tag "tmp_file", :size => 42 %><br><br>
+        <%= submit_tag "Upload New", :class => "highlight", :style => "width: 300px;", :onclick => "$('loader').show();" %>
+    </form>
+    
+    <%= form_remote_tag :url => {:action => "resume_display"}, :update => "status", :loading => "$('loader').show();", :complete => "$('loader').hide();" %>
+        <%= hidden_field_tag "resumedisplay", current_user.info.resumedisplay, :id => "resumedisplay" %>
+        <%
+            rdtrueblue = current_user.info.resumedisplay == true ? " blue" : ""
+            rdfalseblue = current_user.info.resumedisplay == true ? "" : " blue"
+        %>
+        <%= submit_tag "Display resume", :onclick => "$('resumedisplay').value='true'; this.style.background='#D5EBFF'; $('rdfalse').style.background='none';", :id => "rdtrue", :class => "clickable#{rdtrueblue}", :style => "width: 160px; margin-bottom: 4px;" %><br>
+        <%= submit_tag "Keep resume hidden", :onclick => "$('resumedisplay').value='false'; this.style.background='#D5EBFF'; $('rdtrue').style.background='none';", :id => "rdfalse", :class => "clickable#{rdfalseblue}", :style => "width: 160px;" %>
+    </form>
+</center>

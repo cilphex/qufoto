@@ -1,0 +1,26 @@
+<h1>Splash</h1>
+<p class="subtitle">A splash image is an image that users click on to enter
+your website. Max dimensions are 900x600 px.</p>
+
+<div class="banner_or_splash">
+	<div class="image">
+		<img id="splash_image" style="<%= 'display: none;' if !current_user.info.splash %>" src="<%= "#{s3_file(splash_s3_path(current_user))}?rand=#{rand(1000000)}" %>"/>
+		<span id="splash_text" style="<%= 'display: none;' if current_user.info.splash %>">No splash image</span>
+	</div>
+	<div class="foot">
+		<span class="right">
+			<a id="splash_visibility" class="visible_<%= current_user.info.splashdisplay %>" href="javascript:void(0)" onclick="Layout.toggleSplashVisibility()"><%= current_user.info.splashdisplay ? 'Visible' : 'Hidden' %></a>
+		</span>
+		<form id="splash_form" action="/update3/layout_splash_process" method="post" enctype="multipart/form-data" target="upload_iframe">
+			<span>Upload new</span>
+			<input type="file" name="tmp_file" onchange="Layout.saveSplash()" title="Upload a splash image"/>
+		</form>
+		<span id="splash_delete" style="<%= 'display: none;' if !current_user.info.splash %>">
+			| <a href="javascript:void(0)" onclick="Layout.deleteSplash()">Delete</a>
+		</span>
+		<span id="splash_saving" class="saving" style="display: none;">Saving...</span>
+		<span id="splash_saved" class="saved" style="display: none;">Saved</span>
+	</div>
+</div>
+
+<iframe id="upload_iframe" class="upload_iframe" name="upload_iframe" src="about:blank"></iframe>

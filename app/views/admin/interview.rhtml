@@ -1,0 +1,82 @@
+<h5>
+	<div style="float: right;"><%= "Created on #{@interview.created.strftime('%B %d, %Y')}" if @interview %></div>
+	Interview <%= "with <b>#{@interview.interviewee}</b>" if @interview %>
+	<span id="status"></span>
+</h5>
+
+<% if params[:id] && !@interview %>
+	<strong>Interview could not be found.  Invalid ID?</strong>
+<% end %>
+
+<% if @interview %>
+	<h1>Editing an existing interview</h1>
+<% else %>
+	<h1>Create a new interview</h1>
+<% end %>
+
+<form id="interview_form" class="interview_form">
+	<label for="interviewer">Interviewer:</label>
+	<input id="interviewer" type="text" value="<%= @interview.interviewer if @interview %>"/>
+	
+	<label for="interviewee">Interviewee:</label>
+	<input id="interviewee" type="text" value="<%= @interview.interviewee if @interview %>"/>
+	
+	<label for="url">URL for the page (e.g. charles-pertwee):</label>
+	<input id="url" type="text" value="<%= @interview.url if @interview %>"/>
+	
+	<label for="link">Link to their stuff:</label>
+	<input id="link" type="text" value="<%= @interview.link if @interview %>"/>
+	
+	<label for="caption">Caption text:</label>
+	<textarea id="caption"><%= @interview.caption if @interview %></textarea>
+	
+	<label for="body">Interview text:</label>
+	<textarea id="body"><%= @interview.body if @interview %></textarea>
+	
+	<label for="bio">Bio text:</label>
+	<textarea id="bio"><%= @interview.bio if @interview %></textarea>
+	
+	<label><input id="enabled" type="checkbox" <%= 'checked' if @interview and @interview.enabled %>/> Enabled</label>
+</form>
+
+<p>
+	<a href="#" onclick="Interview.save(); return false;">Save</a> |
+	<a href="#" onclick="Interview.destroy(); return false;">Delete this interview</a>
+</p>
+
+<p>Images: <%= 'None' if !@interview or @interview.images.empty? %></p>
+<div id="images" class="images clearfix">
+	<% if @interview then for image in @interview.images %>
+		<div id="image_<%= image.id %>" class="image clearfix">
+			<img src="<%= s3_photo(image.id, 'thumb') %>" onclick="Interview.setPhotographer('<%= image.id %>'); return false;"/>
+			<a href="#" onclick="Interview.removeImage(<%= image.id %>); return false;">Remove</a>
+			<div class="handle"></div>
+		</div>
+	<% end end %>
+</div>
+
+<p>Photographer pic:</p>
+<div id="photographer_image" class="images clearfix">
+	<% if @interview and @interview.photographer_image %>
+		<div id="image_<%= @interview.photographer_image.id %>" class="image">
+			<img src="<%= s3_photo(@interview.photographer_image.id, 'thumb') %>" onclick="Interview.setPhotographer('<%= @interview.photographer_image.id %>'); return false;"/>
+			<a href="#" onclick="Interview.removeImage('<%= @interview.photographer_image.id %>'); return false;">Remove</a>
+			<div class="handle"></div>
+		</div>
+	<% else %>
+		None
+	<% end %>
+</div>
+
+<form id="upload_form" target="upload_frame" method="post" enctype="multipart/form-data" action="/admin/interview_add_image" style="<%= 'display: none;' if !@interview %>">
+	<input id="interview_id" type="hidden" name="interview_id" value="<%= @interview.id if @interview %>"/>
+	<input id="description" type="hidden" name="description" value=""/>
+	<input id="tmp_file" type="file" name="tmp_file"/>
+	<p><a href="#" onclick="Interview.addImage(); return false;">Upload</a></p>
+</form>
+
+
+<iframe id="upload_frame" name="upload_frame" src="about:blank" style="margin: 0; padding: 0; width: 1px; height: 1px; border: none;"></iframe>
+<script>
+	Interview.initialize('<%= @interview.id if @interview %>');
+</script>

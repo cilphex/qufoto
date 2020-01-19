@@ -1,0 +1,151 @@
+ActionController::Routing::Routes.draw do |map|
+  # The priority is based upon order of creation: first created -> highest priority.
+
+  # Sample of regular route:
+  #   map.connect 'products/:id', :controller => 'catalog', :action => 'view'
+  # Keep in mind you can assign values other than :controller and :action
+
+  # Sample of named route:
+  #   map.purchase 'products/:id/purchase', :controller => 'catalog', :action => 'purchase'
+  # This route can be invoked with purchase_url(:id => product.id)
+
+  # Sample resource route (maps HTTP verbs to controller actions automatically):
+  #   map.resources :products
+
+  # Sample resource route with options:
+  #   map.resources :products, :member => { :short => :get, :toggle => :post }, :collection => { :sold => :get }
+
+  # Sample resource route with sub-resources:
+  #   map.resources :products, :has_many => [ :comments, :sales ], :has_one => :seller
+
+  # Sample resource route within a namespace:
+  #   map.namespace :admin do |admin|
+  #     # Directs /admin/products/* to Admin::ProductsController (app/controllers/admin/products_controller.rb)
+  #     admin.resources :products
+  #   end
+
+  # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
+  # map.root :controller => "welcome"
+
+  # See how all your routes lay out with "rake routes"
+  
+  # Make sure to put these in your Windows hosts file at:
+  #   C:\WINDOWS\system32\drivers\etc\hosts
+  #   
+  # 127.0.0.1 qufoto2.local
+  # 127.0.0.1 qufoto.local
+  # 127.0.0.1 reisenfolde.local
+
+  # Users without domains.  Allows "qufoto.com/user/cilphex".  I don't know if this is
+  # actually used... the third to last line might be what's taking care of this.
+  
+  #map.connect 'user/:user', :controller => 'display', :action => 'user'
+  
+  # Misc redirects
+
+  map.connect 'gallery/:whatev', :controller => 'qufoto'
+  map.connect 'gallery', :controller => 'qufoto'
+  map.connect 'blog/:whatev', :controller => 'qufoto'
+  map.connect 'blog', :controller => 'qufoto'
+
+  # Update
+
+  map.connect 'update/:action', :controller => 'update'
+  map.connect 'update', :controller => 'update'
+  
+  # New update
+
+  map.connect 'update3/:action', :controller => 'update3'
+  map.connect 'update3', :controller => 'update3'
+  
+  # Admin
+  
+  map.connect 'admin/:action/:id', :controller => 'admin'
+  map.connect 'admin/:action', :controller => 'admin'
+  map.connect 'admin', :controller => 'admin'
+  
+  # Some image stuff.  Unnecessary?
+  
+  map.connect 'image/:action/:directory/:filename', :controller => 'image'
+  map.connect 'image/:action/:id', :controller => 'image'
+  map.connect 'image/:action', :controller => 'image'
+  map.connect 'image', :controller => 'image'
+  
+  # Reisenfolde 
+  
+  #map.connect ':action', :controller => 'reisenfolde', :conditions => {:domain => /reisenfolde\.(com|net|local)/}
+  #map.connect '', :controller => 'reisenfolde', :conditions => {:domain => /reisenfolde\.(com|net|local)/}
+  
+  # Qufoto and qufoto2
+  
+  map.connect 'user/:user/enter', :controller => 'display', :enter => true, :conditions => {:domain => /qufoto(\d?)\.(com|net|local)/}
+  map.connect 'user/:user/:action', :controller => 'display', :conditions => {:domain => /qufoto(\d?)\.(com|net|local)/}
+  map.connect 'user/:user', :controller => 'display', :conditions => {:domain => /qufoto(\d?)\.(com|net|local)/}
+  map.connect 'flash_info/:user', :controller => 'display', :action => 'flash_info', :conditions => {:domain => /qufoto(\d?)\.(com|net|local)/}
+  map.connect 'send_message', :controller => 'display', :action => 'send_message', :conditions => {:domain => /qufoto(\d?)\.(com|net|local)/}
+  
+  # Temporary
+    
+  map.connect ':action/:id', :controller => 'qufoto2', :conditions => {:domain => /qufoto(\d?)\.(com|net|local)/}
+  map.connect ':action', :controller => 'qufoto2', :conditions => {:domain => /qufoto(\d?)\.(com|net|local)/}
+  map.connect '', :controller => 'qufoto2', :conditions => {:domain => /qufoto(\d?)\.(com|net|local)/}
+  
+  # Don't want v1 to get indexed by search engines under a separate domain...
+  
+  #map.connect ':action/:id', :controller => 'qufoto', :conditions => {:domain => /reisenfolde\.(com|net|local)/}
+  #map.connect ':action', :controller => 'qufoto', :conditions => {:domain => /reisenfolde\.(com|net|local)/}
+  #map.connect '', :controller => 'qufoto', :conditions => {:domain => /reisenfolde\.(com|net|local)/}
+  
+  # qufoto
+
+  #map.connect ':action/:id', :controller => 'qufoto2', :conditions => {:domain => /qufoto\.(com|net|local)/}
+  #map.connect ':action', :controller => 'qufoto2', :conditions => {:domain => /qufoto\.(com|net|local)/}
+  #map.connect '', :controller => 'qufoto2', :conditions => {:domain => /qufoto\.(com|net|local)/}
+  
+  # qufoto1
+
+  #map.connect ':action/:id', :controller => 'qufoto', :conditions => {:domain => /qufoto1\.(com|net|local)/}
+  #map.connect ':action', :controller => 'qufoto', :conditions => {:domain => /qufoto1\.(com|net|local)/}
+  #map.connect '', :controller => 'qufoto', :action => 'home', :conditions => {:domain => /qufoto1\.(com|net|local)/}
+  
+  # Display, the new default.
+  
+  map.connect 'enter', :controller => 'display', :enter => true
+  map.connect ':action/:user', :controller => 'display'
+  map.connect ':action', :controller => 'display'
+  map.connect '', :controller => 'display'
+  
+  
+  map.error '*path', :controller => 'display', :action => 'error_404'
+  map.error '*path', :controller => 'qufoto2', :action => 'error_404', :conditions => {:domain => /qufoto\.(com|net|local)/}
+  
+  # other
+  
+  #map.connect 'user/:user', :controller => 'display', :action => 'user'
+
+  # Display => each user's personal site
+  #map.connect 'display', :controller => 'display'
+  #map.connect 'display/flash_info', :controller => 'display', :action => 'flash_info'
+  #map.connect 'display/flash_info/:user', :controller => 'display', :action => 'flash_info'
+  #map.connect 'display/:action', :controller => 'display'
+  #map.connect 'display/:action/:user', :controller => 'display'
+  
+  # Update => update area for personal websites
+  #map.connect 'update', :controller => 'update'
+  #map.connect 'update/:action', :controller => 'update'
+  
+  # Admin => PhotoSiteSite admin area
+  #map.connect 'admin', :controller => 'admin'
+  #map.connect 'admin/:action', :controller => 'admin'
+  
+  #map.connect 'image', :controller => 'image'
+  #map.connect 'image/:action', :controller => 'image'
+  #map.connect 'image/:action/:id', :controller => 'image'
+  #map.connect 'image/:action/:directory/:filename', :controller => 'image'
+  
+  # Install the default route as the lowest priority.
+  #map.connect ':action/:id', :controller => 'qufoto'
+  #map.connect ':action', :controller => 'qufoto'
+  #map.connect '', :controller => 'qufoto'
+    
+end

@@ -1,0 +1,172 @@
+<% 
+    @prolayout = current_user.info.template == 2 ? '' : 'none;'
+    @widelayout = current_user.info.template == 3 ? '' : 'none;'    
+%>
+
+<div id="help" style="display: none;">
+    Select your template!
+    <ul>
+        <li><b>Template 1A:</b> Images are displayed at 775x518px and thumbnails are on the right.
+        <li><b>Template 1B:</b> Images are displayed at 775x518px and thumbnails are on the left.
+        <li><b>Template 2:</b> Images are displayed at 950x562px and thumbnails pop out from the right when the viewer moves the mouse towards them.  Supports customizable
+        image transitions and styled arrows.
+        <li><b>Template 3A:</b> Images are displayed at 1000x370px and are scrolled through horizontally.
+		<li><b>Template 3B:</b> Images are displayed at 775x518px and are scrolled through horizontally.
+    </ul>
+    <b>Pro users:</b> Templates 0 and 1 do not support multimedia or roll-over images.  Multimedia portfolios will be displayed as regular portfolios.
+</div>
+
+<div id="layoutimages">
+    <% 0.upto 4 do |x| %>
+        <%= image_tag "template#{x}.jpg", :id => "template#{x}", :style => ("display: " + (current_user.info.template == x ? "block;" : "none;")) %>
+    <% end %>
+</div>
+<form action="/update/template_select" method="post" class="template_form" onsubmit="new Ajax.Updater('status', '/update/template_select', {asynchronous:true, evalScripts:true, onComplete:function(request){$('loader').hide();}, onLoading:function(request){$('loader').show();}, parameters:Form.serialize(this)}); return false;">
+	<% templates = ['1A', '1B', '2', '3A', '3B'] %>
+	<%= hidden_field_tag "template", current_user.info.template, :id => "template" %>
+	<% 0.upto 4 do |x| %>
+		<input id="templateSelect<%= x %>" type="submit" onmouseover="showTemplate(<%= x %>);" onclick="selectTemplate(<%= x %>);" value="Template <%= templates[x] %>" style="background: <%= current_user.info.template == x ? "#D5EBFF" : "#FFFFFF" %>;"/>
+	<% end %>
+</form>
+
+<div class="note">
+    The following settings only apply to template 2
+</div>
+
+<%= form_remote_tag :url => {:action => "transition_select"}, :update => "status", :loading => "$('loader').show();", :complete => "$('loader').hide();" %>
+    <table cellspacing=0 style="margin-top: 10px; clear: both;">
+        <tr>
+            <td style="padding-bottom: 10px;">
+                Transition:
+            </td><td colspan=2 style="padding-bottom: 10px;">
+                Speed: <span id="transitionspeedpercent"><%= current_user.info.transitionspeed %></span>%
+            </td><td>
+                &nbsp;
+            </td><td>
+                &nbsp;
+            </td>
+        </tr><tr>
+            <%= hidden_field_tag "transitionspeed", current_user.info.transitionspeed, :id => "transitionspeed" %>
+            <td align=left style="width: 200px;">
+                <select id="transition" name="transition" style="margin-top: 6px;">
+                    <option value="0"<%= " selected" if current_user.info.transition == 0 %>>Standard Fade</option>
+                    <option value="1"<%= " selected" if current_user.info.transition == 1 %>>Fade to background</option>
+                    <option value="2"<%= " selected" if current_user.info.transition == 2 %>>Flash to background</option>
+                    <option value="3"<%= " selected" if current_user.info.transition == 3 %>>Fall down</option>
+                    <option value="4"<%= " selected" if current_user.info.transition == 4 %>>Fall across</option>
+                    <option value="5"<%= " selected" if current_user.info.transition == 5 %>>Slide down</option>
+                    <option value="6"<%= " selected" if current_user.info.transition == 6 %>>Slide across</option>
+                    <option value="7"<%= " selected" if current_user.info.transition == 7 %>>None</option>
+                </select>
+            </td><td style="padding: 4px; background: #EFEFEF;">
+                <small>Fast</small>
+            </td><td style="padding: 0px 25px 0px 25px;">
+                <div id="track1" style="width: 100px; background-color: #FFFFFF; height: 8px; border-bottom: 4px solid #CCCCCC;">
+                    <div id="handle1" style="width: 10px; height: 20px; background-color: #228AFF; cursor: move;">
+                    </div>
+                </div>
+                <script type="text/javascript" language="javascript">
+                    var slider2 = new Control.Slider('handle1', 'track1', {
+                        onSlide:function(v){$('transitionspeedpercent').innerHTML=v},
+                        onChange:function(v){$('transitionspeed').value=v;$('transitionspeedpercent').innerHTML=v},
+                        sliderValue:<%= current_user.info.transitionspeed %>,
+                        range:$R(0,100),
+                        values:[<% 0.upto(100) do |i| %><%= i.to_s + ", " %><% end %>]
+                        });
+                </script>
+            </td><td style="padding: 4px; background: #EFEFEF;">
+                <small>Slow</small>
+            </td><td align=left>
+                <%= submit_tag "Save", :class=> "highlight", :style => "margin-top: 7px; margin-left: 40px;" %>
+            </td>
+        </tr>
+    </table>
+</form>
+
+<hr>
+
+<table cellspacing=0 width=100% style="margin-top: 10px; width: 164px;">
+    <tr>
+        <td valign=top>
+            <%= form_remote_tag :url => {:action => "update_arrowdisplay"}, :update => "status", :loading => "$('loader').show();", :complete => "$('loader').hide();" %>
+                <%= hidden_field_tag "arrowdisplay", current_user.info.arrowdisplay, :id => "arrowdisplay" %>
+                <%
+                    atrueblue = current_user.info.arrowdisplay == true ? " blue" : ""
+                    afalseblue = current_user.info.arrowdisplay == true ? "" : " blue"
+                %>
+                <%= submit_tag "Small arrows", :onclick => "$('arrowdisplay').value='false'; if ($('arrowdiv').style.display != 'none'){new Effect.SlideUp('arrowdiv');}; this.style.background='#D5EBFF'; $('atrue').style.background='none';", :id => "afalse", :class => "clickable#{afalseblue}", :style => "width: 160px; margin-bottom: 4px;" %><br>
+                <%= submit_tag "Styled arrows", :onclick => "$('arrowdisplay').value='true';  if ($('arrowdiv').style.display == 'none'){new Effect.SlideDown('arrowdiv');}; this.style.background='#D5EBFF'; $('afalse').style.background='none';", :id => "atrue", :class => "clickable#{atrueblue}", :style => "width: 160px;" %>
+            </form>
+        </td>
+    </tr>
+</table>
+<div id="arrowdiv" style="display: <%= current_user.info.arrowdisplay ? 'block' : 'none' %>;;"><div>
+    <%= form_remote_tag :url => {:action => "update_arrows"}, :html => {:name => "arrowform"}, :update => "status", :loading => "$('loader').show();", :complete => "$('loader').hide();" %>
+        <%= hidden_field_tag "arrowsize", current_user.info.arrowsize, :id => "arrowsize" %>
+        <%= hidden_field_tag "arrowalpha", current_user.info.arrowalpha, :id => "arrowalpha" %>
+        <table cellspacing=0 cellpadding=2 style="margin-top: 20px;" id="arrowtable">
+            <tr>
+                <td colspan=4 valign=top style="padding-bottom: 10px; border-right: 1px solid #CCCCCC;">
+                    Size: <span id="arrowsizepercent"><%= current_user.info.arrowsize %></span>% 
+                </td><td valign=top style="padding-left: 12px;">
+                    Color: 
+                </td><td valign=top style="border-right: 1px solid #CCCCCC;">
+                    &nbsp;
+                </td><td colspan=4 valign=top style="padding-left: 12px;">
+                    Transparency: <span id="arrowalphapercent"><%= current_user.info.arrowalpha %></span>% 
+                </td>
+            </tr><tr>
+                <td style="background: #EFEFEF;">
+                    <small>Small</small>
+                </td><td style="padding: 0px 15px 0px 15px;">
+                    <div id="track3" style="width: 100px; background-color: #FFFFFF; height: 8px; border-bottom: 4px solid #CCCCCC;">
+                        <div id="handle3" style="width: 10px; height: 20px; background-color: #228AFF; cursor: move;">
+                        </div>
+                    </div>
+                    <script type="text/javascript" language="javascript">
+                        var slider3 = new Control.Slider('handle3', 'track3', {
+                            onSlide:function(v){$('arrowsizepercent').innerHTML=v},
+                            onChange:function(v){$('arrowsize').value=v;$('arrowsizepercent').innerHTML=v},
+                            sliderValue:<%= current_user.info.arrowsize %>,
+                            range:$R(0,100),
+                            values:[<% 0.upto(100) do |i| %><%= i.to_s + ", " %><% end %>]
+                        });
+                    </script>
+                </td><td style="margin-right: 10px; background: #EFEFEF;">
+                    <small>Large</small>
+                </td><td style="width: 12px; border-right: 1px solid #CCCCCC;"">
+                    &nbsp; <!-- buffer -->
+                </td><td style="padding-left: 40px;">
+                    #<%= text_field_tag "arrowcolor", current_user.info.arrowcolor, :maxlength => 6, :style => "width: 80px;", :onkeyup => "if (this.value.length == 6) { $('arrowcolor_div').style.background='#' + this.value }", :onfocus => "$('status').innerHTML='';" %>
+                </td><td style="width: 20px; border-right: 1px solid #CCCCCC; padding-right: 40px;">
+                    <%= link_to_function '<div id="arrowcolor_div" class="colorpreview" style="margin-left: 2px; background: #' + current_user.info.arrowcolor + ';">&nbsp;</div>', "TCP.popup(document.forms['arrowform'].elements['arrowcolor'])" %>
+                </td><td style="width: 12px;">
+                    &nbsp; <!-- buffer -->
+                </td><td style="background: #EFEFEF;">
+                    <small>Transparent</small>
+                </td><td style="padding: 0px 15px 0px 15px;">
+                    <div id="track4" style="width: 100px; background-color: #FFFFFF; height: 8px; border-bottom: 4px solid #CCCCCC;">
+                        <div id="handle4" style="width: 10px; height: 20px; background-color: #228AFF; cursor: move;">
+                        </div>
+                    </div>
+                    <script type="text/javascript" language="javascript">
+                        var slider4 = new Control.Slider('handle4', 'track4', {
+                            onSlide:function(v){$('arrowalphapercent').innerHTML=v},
+                            onChange:function(v){$('arrowalpha').value=v;$('arrowalphapercent').innerHTML=v},
+                            sliderValue:<%= current_user.info.arrowalpha %>,
+                            range:$R(0,100),
+                            values:[<% 0.upto(100) do |i| %><%= i.to_s + ", " %><% end %>]
+                        });
+                    </script>
+                </td><td style="background: #EFEFEF;">
+                    <small>Opaque</small>
+                </td>
+            </tr><tr>
+                <td colspan=10 align=right>
+                    <%= submit_tag "Save", :class=> "highlight", :style => "margin-top: 30px;" %>
+                </td>
+            </tr>
+        </table>                
+    </form>
+    </div>
+</div>

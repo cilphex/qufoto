@@ -1,0 +1,58 @@
+<h1>Examples</h1>
+<ul id="example_menu" class="clearfix">
+	<li class="first">Show</li>
+	<li id="category_0" class="<%= 'selected' unless @featured %>"><a href="#" onclick="Examples.showCategory(0); return false;">All</a></li>
+	<li id="category_1"><a href="#" onclick="Examples.showCategory(1); return false;">Style</a></li>
+	<li id="category_2"><a href="#" onclick="Examples.showCategory(2); return false;">Commercial</a></li>
+	<li id="category_3"><a href="#" onclick="Examples.showCategory(3); return false;">Photojournalism</a></li>
+	<li id="category_4"><a href="#" onclick="Examples.showCategory(4); return false;">Weddings</a></li>
+	<li id="category_5"><a href="#" onclick="Examples.showCategory(5); return false;">Art and Design</a></li>
+	<% if @featured %>
+		<li id="category_featured" class="selected"><a href="#" onclick="Examples.showCategory('featured'); return false;"><%= @featured.user.website %></a></li>
+	<% end %>
+</ul>
+
+<% if @examples.empty? %>
+	No examples yet!
+<% else %>
+	<ul id="examples" class="examples">
+		<% @examples.each do |e| %>
+			<% if e.user.status != 'Suspended' && e.image %>
+				<li class="clearfix" style="<%= 'display: none;' if @featured && e.id != @featured.id %>">
+					<input id="<%= 'featured' if @featured && e.id == @featured.id %>" type="hidden" value="<%= e.category %>"/>
+					<a class="image" href="http://<%= e.user.website %>" target="_blank" alt="e.user.website" title="<%= e.user.website %>">
+						<img rel="<%= s3_photo(e.image.id, 'student') %>" style="display: none;"/>
+					</a>
+					<h2><%= (e.name.nil? || e.name.strip.empty?) ? e.user.name : e.name %></h2>
+					<p class="detail"><strong>Website:</strong> <a href="http://<%= e.user.website %>" target="_blank"><%= e.user.website %></a></p>
+					<% if e.location and !e.location.strip.empty? %>
+						<p class="detail"><strong>Location:</strong> <%= e.location %></p>
+					<% end %>
+					<% if e.quote and !e.quote.strip.empty? %>
+						<p class="quote">&ldquo;<%= e.quote %>&rdquo;</p>
+					<% end %>
+					<% if e.description and !e.description.strip.empty? %>
+						<p class="description"><%= e.description %></p>
+					<% end %>
+					
+					<!-- AddThis Button BEGIN -->
+					<script type="text/javascript">var addthis_config = {"data_track_clickback":true};</script>
+					<a class="addthis_button" href="http://www.addthis.com/bookmark.php?v=250&amp;username=cilphex" addthis:url="http://qufoto.com/examples/<%= e.id %>" addthis:title="<%= e.user.website %> featured on Qufoto.com" addthis:description="<%= e.user.website %> featured on Qufoto.com">
+						<img src="http://s7.addthis.com/static/btn/sm-share-en.gif" width="83" height="16" alt="Bookmark and Share" style="border:0"/>
+					</a>
+					<!-- AddThis Button END -->
+					
+					<a class="signup" href="/signup">Make a site like this</a>
+				</li>
+			<% end %>
+		<% end %>
+	</ul>
+<% end %>
+
+<p class="btn green signup">
+	<a href="/signup">Get Started &raquo;</a>
+</p>
+
+<script>
+	Examples.initialize();
+</script>

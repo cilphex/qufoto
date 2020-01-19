@@ -1,0 +1,84 @@
+<div id="portfolio_list" class="portfolio_list">
+	<% Portfolio.find_all_by_user_id(current_user.id, :order => "position ASC").each do |portfolio| %>
+		<div id="portfolio_<%= portfolio.id %>" class="portfolio clearfix">
+			<div class="top clearfix">
+				<div class="handle" title="Drag to reorder"></div>
+				<span class="visibility">
+					<select onChange="setVisibility('<%= portfolio.id %>', this.value)">
+						<option value="true" <%= 'selected="selected"' if portfolio.hidden %>>Hidden</option>
+						<option value="false" <%= 'selected="selected"' unless portfolio.hidden %>>Visible</option>
+					</select>
+				</span>
+				<span class="count"><%= portfolio.images.length %> images</span>
+				<a id="title_<%= portfolio.id %>" class="title" href="#" onClick="$('details_<%= portfolio.id %>').toggle(); return false;"><%= portfolio.title %></a> 
+			</div>
+			<div id="details_<%= portfolio.id %>" class="bottom" style="display: none;">
+				<% if current_user.grade == "Pro" %>
+					<div class="section clearfix">
+						<span class="first">Audio:</span>
+						<span id="audio_uploaded_<%= portfolio.id %>" <%= 'style="display: none;"' unless portfolio.audio? %>>
+							<a id="audio_play_<%= portfolio.id %>" href="#" onClick="playPauseAudio('<%= portfolio.id %>', '<%= s3_file(portfolio_audio_s3_path(portfolio)) %>'); return false;">Preview</a>
+							| <a href="#" onClick="deleteAudio('<%= portfolio.id %>'); return false;">Delete</a>
+						</span>
+						<span id="audio_upload_<%= portfolio.id %>" <%= 'style="display: none;"' if portfolio.audio? %>>
+							None | <a href="#" onClick="$('audio_upload_span_<%= portfolio.id %>').toggle(); return false;">Upload new</a>
+							<span id="audio_upload_span_<%= portfolio.id %>" class="upload" style="display: none;">
+								<form id="audio_upload_form_<%= portfolio.id %>" target="upload_iframe" method="post" enctype="multipart/form-data" action="/update/attach_audio">
+									<input type="hidden" name="portfolio_id" value="<%= portfolio.id %>"/>
+									<input id="tmp_file_<%= portfolio.id %>" type="file" name="tmp_file">
+								</form>
+								<a href="#" onClick="submitAudio('<%= portfolio.id %>'); return false;">Upload</a>
+							</span>
+						</span>
+					</div>
+					<div class="section">
+						<span class="first">Multimedia:</span>
+						<select onChange="setMultimedia('<%= portfolio.id %>', this.value)">
+							<option value="false" <%= 'selected="selected"' unless portfolio.slideshow %>>Off</option>
+							<option value="true" <%= 'selected="selected"' if portfolio.slideshow %>>On</option>
+						</select>
+					</div>
+				<% end %>
+				<div class="section">
+					<span class="first">Private?</span>
+					<input id="private_on_<%= portfolio.id %>" class="radio" type="radio" name="private_<%= portfolio.id %>" value="true" <%= 'checked="checked"' if portfolio.private %> onClick="$('password_span_<%= portfolio.id %>').show();">
+					<label for="private_on_<%= portfolio.id %>">Yes</label>
+					<input id="private_off_<%= portfolio.id %>" class="radio" type="radio" name="private_<%= portfolio.id %>" value="false" <%= 'checked="checked"' unless portfolio.private %> onClick="$('password_span_<%= portfolio.id %>').hide();">
+					<label for="private_off_<%= portfolio.id %>">No</label>
+					<span id="password_span_<%= portfolio.id %>" class="password" <%= 'style="display: none;"' unless portfolio.private %>>
+						Password: <input id="password_<%= portfolio.id %>" type="text" maxlength="25" value="<%= portfolio.password %>"/>
+					</span>
+					<a href="#" onClick="savePrivacy('<%= portfolio.id %>'); return false;">Save</a>
+				</div>
+				<div class="section">
+					<span class="first">Rename to:</span>
+					<input id="rename_<%= portfolio.id %>" type="text"/>
+					<a href="#" onClick="renamePortfolio('<%= portfolio.id %>'); return false;">Save</a>
+				</div>
+				<div class="section last">
+					<a href="#" onClick="deletePortfolio('<%= portfolio.id %>', '<%= portfolio.title %>'); return false;">Delete this portfolio</a>
+				</div>
+			</div>
+		</div>
+	<% end %>
+</div>
+
+<script type="text/javascript">
+	Sortable.create ('portfolio_list', {
+		constraint: 'vertical',
+		tag: 'div',
+		only: 'portfolio',
+		handle: 'handle',
+		onUpdate: function () {
+			new Ajax.Updater ('status', '/update/order_portfolios', {
+				parameters: Sortable.serialize ('portfolio_list'),
+				onComplete: function (request) {
+					$('loader').hide();
+				},
+				onLoading: function (request) {
+					$('loader').show();
+				}
+			});
+		}
+	});
+</script>

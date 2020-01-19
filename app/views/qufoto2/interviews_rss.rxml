@@ -1,0 +1,18 @@
+xml.instruct!
+
+xml.rss 'version' => '2.0', 'xmlns:dc' => 'http://purl.org/dc/elements/1.1/' do
+  xml.channel do
+    xml.title         'Qufoto.com Photographer Interviews'
+    xml.link          url_for :controller => :qufoto2, :action => :interviews, :id => 'rss'
+    xml.description   'Qufoto.com photographer interviews provide interesting looks into the lives and work of individual photographers'
+    
+    @interviews.each do |interview|
+      xml.item do
+        xml.title         interview.interviewee
+        xml.link          url_for :controller => :qufoto2, :action => :interviews, :id => interview.url
+        xml.description   interview.caption
+        xml.guid          url_for :controller => :qufoto2, :action => :interviews, :id => interview.url
+      end
+    end
+  end
+end

@@ -1,0 +1,16 @@
+<ul id="submenu">
+    <li>Template</li>
+    <li>Color scheme</li>
+    <%= "<li>Audio</li>" if current_user.grade == "Pro" %>
+    <li>Banner</li>
+    <li>Splash</li>
+    <li>Favicon</li>
+    <%= "<li>Qufoto link</li>" if current_user.grade == "Pro" %>
+    <li>Status</li>
+	<li>Javascript</li>
+</ul>
+
+<div id="partial">
+    <% page = params['page'].nil? ? "template" : params['page'] %>
+    <%= render :partial => page %>
+</div>

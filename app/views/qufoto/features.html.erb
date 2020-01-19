@@ -1,0 +1,136 @@
+<h5>Everything you need</h5>
+<p>Amateur or professional, photographer or artist, Qufoto websites have the
+features you need to display your work professionally, the way you want to.</p>
+
+<div id="previewdiv" style="float: right; margin: 0px 0px 12px 20px; padding: 0; border: 6px solid #222; width: 360px; height: 268px;">
+    <img id="previewimage" src="" style="margin: 0; padding: 0;">
+</div>
+
+<h4>Design</h4>
+Swap your layout on the fly to any of three stylish, easy to navigate layouts for your site:<br><br>
+<ul class="greyblue" style="margin: 0 0 0 18px; padding: 0;">
+    <li><span class="grey">Large images with visible thumbnails |</span> <a href="http://facun.com/enter" target="_blank">example</a><br>
+    <li><span class="grey">Larger images with hidden/pop out thumbnails |</span> <a href="http://laceyannphotography.com" target="_blank">example</a><br>
+    <li><span class="grey">Images aligned in row, horizontal scrolling |</span> <a href="http://arronfoto.com/enter" target="_blank">example</a><br>
+</ul>
+
+<h4>Images</h4>
+<p>Every image you upload is displayed large, high quality, and loads fast.  You can edit the
+title and description for every image, and you can swap images easily from one portfolio to another.
+They are resized automatically upon upload, and there is no limit to the number of images you can 
+upload or portfolios you can create.</p>
+
+<div style="float: left; margin-right: 30px; margin-top: -3px;">
+    <img id="rollover" src="images/rollover1.jpg" style="padding: 4px; border: 1px solid #444;"><br>
+    <center><small>Rollover</small></center>
+</div>
+
+<h4>Pro Tools</h4>
+
+<p>Pro accounts come with these additional features to display a broader range of your professional talents:</p>
+<ul class="greyblue" style="margin: 0 0 0 18px; padding: 0;">
+    <li><span class="grey">Photojournalism: Create multimedia slideshows right online<!-- |</span> <a href="http://jdmeyerphotography.com/display?enter=true&displayFirst=In%20a%20Man's%20World" target="_blank">example</a>, <a href="http://meganrossman.com/display?enter=true&displayFirst=Born%20to%20Perform" target="_blank">example</a> -->
+    <li><span class="grey">Digital retouching: Add rollover images for before and after pictures</span>
+    <li><span class="grey">Add audio or music</span>
+</ul>
+
+<h4>Customize</h4>
+<p>Select your layout, then create your own color scheme or choose from any of our presets.  After that,
+upload a banner or logo to be displayed above your site, or a click-to-enter image to precede it.  Even
+upload your own favicon! (the tiny icon that appears at the top of your browser)</p>
+
+<h4>Sell Yourself</h4>
+<p>When you're done organizing your portfolios, add information about yourself to a biography page with
+your picture.  Then upload your resume as a PDF for others to download, and enable a comment form which
+sends messages directly to your inbox so that visitors or potential clients can contact you.
+</p>
+<hr>
+
+<h5 id="testh5">Take Control</h5>
+<p>Your update section provides you with the necessary tools to manage your site quickly and efficiently.
+Update your site anywhere by going to yoursite.com/update.</p>
+
+<div style="float: left; width: 260px; margin: 0 30px 0 0; padding-bottom: 30px;">
+    <ul id="sortableThumbs">
+        <li id="item_1"><img src="/images/p1.jpg"></li>
+        <li id="item_2"><img src="/images/p2.jpg" id="p2"></li>
+        <li id="item_3"><img src="/images/p3.jpg"></li>
+        <li id="item_4"><img src="/images/p4.jpg"></li>
+        <li id="item_5"><img src="/images/p5.jpg"></li>
+        <li id="item_6"><img src="/images/p6.jpg"></li>
+        <li id="item_7"><img src="/images/p7.jpg"></li>
+        <li id="item_8"><img src="/images/p8.jpg"></li>
+        <li id="item_9"><img src="/images/p9.jpg" id="p9"></li>
+    </ul>
+    <center>
+        <span id="prize">Sort your images!</span>
+    </center>
+</div>
+
+<h4>Organize</h4>
+<p>All of your images and portfolios are easily sortable using drag-and-drop functionality.  Any portfolio
+can be hidden from your viewers so that you can edit it behind-the-scenes or simply use it as storage, and
+your whole website can be put "down for maintenance" with the click of a button.</p>
+
+<h4>Statistics</h4>
+<p>Use Google Analytics to see detailed statistics on how many people visit your site, where they're from,
+when they visit, how long they stay, and much, much more.</p>
+
+<a href="/prices">See pricing and package comparison</p>
+
+<script type="text/javascript">
+    // Preload rollover
+    var rollover_img = new Image;
+    rollover_img.src = 'images/rollover2.jpg';
+    
+    Event.observe ('rollover', 'mouseover', function () {
+        $('rollover').src = 'images/rollover2.jpg';
+    });
+    Event.observe ('rollover', 'mouseout', function () {
+        $('rollover').src = 'images/rollover1.jpg';
+    });
+    Event.observe ('p2', 'mouseover', function () {
+        $('p2').src = 'images/p2_rollover.jpg';
+    });
+    Event.observe ('p2', 'mouseout', function () {
+        $('p2').src = 'images/p2.jpg';
+    });
+    Event.observe ('p9', 'mouseover', function () {
+        $('p9').src = 'images/p9_rollover.jpg';
+    });
+    Event.observe ('p9', 'mouseout', function () {
+        $('p9').src = 'images/p9.jpg';
+    });
+    //----------------------------------------------------
+    Sortable.create ('sortableThumbs', {
+        constraint:false,
+        onUpdate:function (){
+            // do nothing
+        }
+    });
+
+    //----------------------------------------------------
+    var images = new Array (3);
+	for (var x = 0; x < images.length; x++) { //>
+		images[x] = new Image;
+		images[x].src = '/images/screen' + (x+1) + '.jpg';
+	}
+	var y = 0;
+	$('previewimage').src = images[y].src;
+	function updatePreview () {
+	   $('previewimage').src = images[y].src;
+	   $('previewimage').show ();
+	   y++;
+	   y = y % images.length;
+	   $('previewdiv').setStyle ({background:'url(' + images[y].src + ') 0 0 no-repeat'});
+	   new Effect.Fade ('previewimage');
+	   setTimeout ("updatePreview ()", 10000);
+	}
+	function setPreview () {
+	   setTimeout ("updatePreview ()", 5000);
+	}
+	Event.observe (images[0], 'load', function () {
+	   Event.observe (images[1], 'load', setPreview ());
+	});
+</script>
+

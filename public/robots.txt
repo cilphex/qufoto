@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /update
+Disallow: /display/flash_info/
+Disallow: /sites
+Sitemap: http://www.qufoto.com/sitemap.xml

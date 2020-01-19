@@ -1,0 +1,17 @@
+<h1>Status</h1>
+<p class="subtitle">Enable or disable your website. Please note that your site
+will still appear as "Down for maintenance" if you do not have at least one portfolio
+with at least one image in it set to "Visible" on your
+<a href="/update3/portfolios">Portfolios</a> page.</p>
+
+<p>
+	My website is: 
+
+	<span id="status_save">
+		<a id="enabled" href="javascript:void(0)" onclick="Layout.saveStatus(false)" style="<%= 'display: none;' if !current_user.info.enabled %>">Enabled</a>
+		<a id="disabled" href="javascript:void(0)" onclick="Layout.saveStatus(true)" style="<%= 'display: none;' if current_user.info.enabled %>">Disabled</a>
+	</span>
+
+	<span id="status_saving" class="saving" style="display: none;">Saving...</span>
+	<span id="status_saved" class="saved" style="display: none;">Saved</span>
+</p>

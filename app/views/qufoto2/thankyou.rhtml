@@ -1,0 +1,41 @@
+<h1>Signup Complete</h1>
+
+<p id="reference">
+	How'd you hear about us?
+	<select id="referrer" name="referrer" onChange="Thankyou.checkReferrer()">
+		<option value="0">Select</option>
+		<option value="0">&mdash;</option>
+		<option value="1">Facebook Advertisement</option>
+		<option value="7">Bing (Advertisement)</option>
+		<option value="3">Google (Advertisement)</option>
+		<option value="2">Google (Search result)</option>
+		<option value="4">Another Qufoto user</option>
+		<option value="5">A webpage</option>
+		<option value="6">Other</option>
+	</select>
+	<span id="specify_reference" style="display: none;">
+		Please specify:
+		<input type="text" id="referrer_detail" name="referrer_detail"/>
+	</span>
+	<a href="#" onClick="Thankyou.sendReferrer(); return false;">Send</a>
+	<input type="hidden" id="user" name="user" value="<%= @name %>"/>
+	<input type="hidden" id="email" name="email" value="<%= @email %>"/>
+</p>
+
+<h2>If you're a new user</h2>
+<p>Thanks for signing up! Your transaction is complete and a
+receipt for your purchase has been emailed to you. You may log into your
+account at <a href="http://www.paypal.com" target="_blank">paypal.com</a>
+to view details of this transaction.</p>
+<p><strong>Please allow 24 hours for your account to be set up</strong>.
+Your username and password will be sent to your PayPal email address. If
+you will be using a domain that you already own, please see our help document
+on <a href="/domains">redirecting domains</a>.</p>
+
+<h2>If you're resubscribing</h2>
+<p>If your subscription has expired but your website is still online it will
+continue to stay online.  If your website had been taken offline, it will
+be re-enabled within 24 hours.</p>
+
+<h2>Upgrades/downgrades</h2>
+<p>Your account will be updated to reflect this change within 24 hours.</p>

@@ -1,0 +1,36 @@
+<h1>Biography</h1>
+<p class="subtitle">Enabling your biography will automatically create a <em>Biography</em> page on your website.
+You can rename the <em>Biography</em> page to something else under 
+<a href="/update3/layout_links">Layout > Links</a>.</p>
+
+
+<div class="bio_info">
+	<div class="text">
+		<h3>Bio text</h3>
+		<textarea id="bio_text" maxlength="10000"><%= current_user.info.biography %></textarea>
+		<div class="foot">
+			<a id="bio_save" href="javascript:void(0)" onclick="Basic.saveBio()">Save</a>
+			<span id="bio_saving" class="saving" style="display: none;">Saving...</span>
+			<span id="bio_saved" class="saved" style="display: none;">Saved</span>
+			<span class="right">
+				<a id="bio_visibility" class="visible_<%= current_user.info.biodisplay %>" href="javascript:void(0)" onclick="Basic.toggleBioVisibility()"><%= current_user.info.biodisplay ? 'Visible' : 'Hidden' %></a>
+			</span>
+		</div>
+	</div>
+	<div class="pic">
+		<h3>Bio picture</h3>
+		<div id="biopic_bg" class="bg" style="<%= "background-image: url(#{s3_file(biopic_s3_path(current_user))}?rand=#{rand(1000000)});" if current_user.info.biopic %>">
+			<% if !current_user.info.biopic %>
+				<span>Upload a bio picture</span>
+			<% end %>
+			<form id="biopic_form" action="/update3/basic_biopic_process" method="post" enctype="multipart/form-data" target="upload_iframe">
+				<input type="file" name="tmp_file" onchange="$('biopic_form').submit()" title="Upload a bio picture"/>
+			</form>
+		</div>
+		<div class="foot">
+			<a id="biopic_visibility" class="visible_<%= current_user.info.biopicdisplay %>" href="javascript:void(0)" onclick="Basic.toggleBioPicVisibility()"><%= current_user.info.biopicdisplay ? 'Visible' : 'Hidden' %></a>
+		</div>
+	</div>
+</div>
+
+<iframe id="upload_iframe" class="upload_iframe" name="upload_iframe" src="about:blank"></iframe>

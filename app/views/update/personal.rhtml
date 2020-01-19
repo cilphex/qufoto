@@ -1,0 +1,14 @@
+<ul id="submenu">
+    <li>Biography</li>
+    <li>Bio picture</li>
+    <li>Resume</li>
+    <li>Personal info</li>
+    <li>Links</li>
+	<li>Password</li>
+</ul>
+
+<div id="partial">
+    <% page = params['page'].nil? ? "biography" : params['page'] %>
+    <%= render :partial => page %>
+</div>
+

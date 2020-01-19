@@ -1,0 +1,83 @@
+<div id="graphic_area" class="graphic_area">
+	<div class="reflection_wrap">
+		<div class="page first style">
+			<a class="credit" href="http://heatherkey.com" target="_blank">Photo: Heather Key</a>
+			<a class="learn_more" href="/features">Learn more &raquo;</a>
+		</div>
+		<!-- For later use -->
+		<!--
+		<div class="page jump_in">
+			<a class="credit" href="ericheistand.com" target="_blank">Photo: Eric Heistand</a>
+			<a class="learn_more" href="/features">Learn more &raquo;</a>
+		</div>
+		<div class="page beautiful">
+			<a class="credit">Photo: Some User</a>
+		</div>
+		-->
+	</div>
+</div>
+
+<div class="widgets clearfix">
+	<a class="widget" title="Designs" href="/examples">
+		<span class="icon design"></span>
+		<strong>Great designs</strong>
+		Impress your clients with a clean, efficient site that makes your work the center of attention. You control the design.
+	</a>
+	<a class="widget" title="Easy to use" href="/features">
+		<span class="icon easy"></span>
+		<strong>Easy to use</strong>
+		No web experience necessary.  Get started instantly and update your website any time with intuitive, powerful controls.
+	</a>
+	<a class="widget" title="Features" href="/features">
+		<span class="icon features"></span>
+		<strong>Pro features</strong>
+		Unlimited image uploads, private galleries, email addresses, free domain name, and more come free with every account.
+	</a>
+</div>
+
+<!--
+<div class="learn_more">
+	<p class="btn learn_more">
+		<a href="/features">Learn more &raquo;</a>
+	</p>
+</div>
+-->
+
+<div class="news clearfix">
+	<% if @interview %>
+		<div class="widget">
+			<a class="all" href="/interviews">All Interviews &raquo;</a>
+			<h2>Featured Photographer</h2>
+			<a class="block" href="/interviews/<%= @interview.url %>">
+				<% if !@interview.images.empty? %>
+					<div class="img">
+						<img src="<%= s3_photo(@interview.images.first.id, 'thumb') %>"/>
+						&nbsp;
+					</div>
+				<% end %>
+				<h3><%= @interview.interviewee %></h3>
+				<p>
+					<%= @interview.caption %>
+					<strong class="read_more">Read the interview &raquo;</strong>
+				</p>
+			</a>
+		</div>
+	<% end %>
+	<% if @news %>
+		<div class="widget last">
+			<a class="all" href="/news">All News &raquo;</a>
+			<h2>Recent News</h2>
+			<a class="block" href="/news/<%= @news.id %>">
+				<h3><%= @news.title %></h3>
+				<p>
+					<%= @news.body[0..120] %>&hellip;
+					<strong class="read_more">Read more &raquo;</strong>
+				</p>
+			</a>
+		</div>
+	<% end %>
+</div>
+
+<script>
+	Landing.initialize();
+</script>

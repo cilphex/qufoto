@@ -1,0 +1,111 @@
+<!-- pss3 -->
+
+<%= form_remote_tag :url => {:action => "check_domain"}, 
+    :update => "domainStatus", 
+    :loading => "$('domainCheck').hide(); $('checking').show()",
+    :complete => "$('domainCheck').show(); $('checking').hide()" %>
+    <div id="notice">
+        <div id="notice_inner" style="padding: 6px; background: #1F1F1F;">
+			<input id="domain" name="domain" type="text" maxlength="100" value="Enter domain name..." onFocus="domainFocus()" onBlur="domainBlur()"/>
+        </div>
+    </div>
+    <div id="domainStatus" class="sub_notice" style="margin-bottom: 25px;"></div>
+    <div class="sub_notice">
+        <input name="commit" id="domainCheck" class="greyblue" type="submit" value="Check availability"/>
+        <p>(Ignore check if you own the domain)</p>
+        <span id="checking" style="display: none;">Checking...</span>
+    </div>
+</form>
+
+<div class="referral">
+	Referral code (Optional): <input id="referral_code" type="text" maxlength="6" onKeyUp="checkReferralCode()"/>
+</div>
+
+<table cellspacing=0 style="margin: 40px 0; width: 100%;">
+    <tr>
+        <td align=center>
+            <form id="form_lite" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+                <!--<input style="width: 125px; height: 59px; border: none;" type="image" src="http://qufoto.com/images/subscribe_lite.png" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">-->
+                <img src="http://qufoto.com/images/subscribe_lite.png" id="submit_lite" style="cursor: pointer;" onClick="submitLite()"/>
+                <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1"/>
+                <input type="hidden" name="image_url" value="http://media.qufoto.com/misc/qufoto_paypal.png"/>
+				<input type="hidden" name="cpp_header_image" value="http://media.qufoto.com/misc/qufoto_paypal2.png"/>
+				<input type="hidden" name="cpp_headerborder_color" value="ffffff"/>
+				<input type="hidden" name="cmd" value="_xclick-subscriptions">
+                <input type="hidden" name="business" value="service@qufoto.com">
+                <input type="hidden" name="item_name" value="Qufoto Lite Subscription">
+                <input type="hidden" name="no_shipping" value="1">
+				<input type="hidden" name="notify_url" value="http://qufoto.com/paypal_ipn"/>
+                <input type="hidden" name="return" value="http://qufoto.com/thankyou">
+                <input type="hidden" name="no_note" value="1">
+                <input type="hidden" name="currency_code" value="USD">
+                <input type="hidden" name="lc" value="US">
+                <input type="hidden" name="bn" value="PP-SubscriptionsBF">
+				<div id="lite_referral" style="display: none;"></div>
+                <input type="hidden" name="a3" value="19.00">
+                <input type="hidden" name="p3" value="1">
+                <input type="hidden" name="t3" value="M">
+                <input type="hidden" name="src" value="1">
+                <input type="hidden" name="sra" value="1">
+                <input type="hidden" name="custom" value="novalue" id="customLite">
+            </form>
+            $19/month&nbsp;
+        </td><td align=center>
+            <form id="form_pro" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+                <!--<input style="width: 125px; height: 59px; border: none;" type="image" src="http://qufoto.com/images/subscribe_pro.png" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">-->
+                <img src="http://qufoto.com/images/subscribe_pro.png" id="submit_pro" style="cursor: pointer;" onClick="submitPro()"/>
+                <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1"/>
+				<input type="hidden" name="image_url" value="http://media.qufoto.com/misc/qufoto_paypal.png"/>
+				<input type="hidden" name="cpp_header_image" value="http://media.qufoto.com/misc/qufoto_paypal2.png"/>
+				<input type="hidden" name="cpp_headerborder_color" value="ffffff"/>
+                <input type="hidden" name="cmd" value="_xclick-subscriptions">
+                <input type="hidden" name="business" value="service@qufoto.com">
+                <input type="hidden" name="item_name" value="Qufoto Pro subscription">
+                <input type="hidden" name="no_shipping" value="1">
+				<input type="hidden" name="notify_url" value="http://qufoto.com/paypal_ipn"/>
+                <input type="hidden" name="return" value="http://qufoto.com/thankyou">
+                <input type="hidden" name="no_note" value="1">
+                <input type="hidden" name="currency_code" value="USD">
+                <input type="hidden" name="lc" value="US">
+                <input type="hidden" name="bn" value="PP-SubscriptionsBF">
+				<div id="pro_referral" style="display: none;"></div>
+                <input type="hidden" name="a3" value="34.00">
+                <input type="hidden" name="p3" value="1">
+                <input type="hidden" name="t3" value="M">
+                <input type="hidden" name="src" value="1">
+                <input type="hidden" name="sra" value="1">
+                <input type="hidden" name="custom" value="novalue" id="customPro">
+            </form>
+            $34/month&nbsp;
+        </td>
+    </tr>
+</table>
+
+<div style="margin-left: 220px; width: 300px; text-align: justify;">
+    <p>Please have the domain that you would like typed into the box at top before
+    clicking to subscribe.</p>
+    
+    <p>Payments are made through PayPal.  If you do not have a PayPal account, standard
+    credit card information will let you sign up in seconds.</p>
+    
+    <p>Allow 24 hours for your account to be created.  A detailed signup email will
+    be sent to your PayPal email address when setup is complete.</p>
+    
+    <!-- Google Code for Signup Page Conversion Page -->
+    <script language="JavaScript" type="text/javascript">
+    <!--
+        var google_conversion_id = 1063328747;
+        var google_conversion_language = "en_US";
+        var google_conversion_format = "2";
+        var google_conversion_color = "000000";
+        if (0.00) {
+          var google_conversion_value = 0.00;
+        }
+        var google_conversion_label = "5DWxCLmsTBDrt4T7Aw";
+    //-->
+    </script>
+    <script language="JavaScript" src="http://www.googleadservices.com/pagead/conversion.js"></script>
+    <noscript>
+        <img height="1" width="1" border="0" src="http://www.googleadservices.com/pagead/conversion/1063328747/?value=0.00&amp;label=5DWxCLmsTBDrt4T7Aw&amp;script=0">
+    </noscript>
+</div>

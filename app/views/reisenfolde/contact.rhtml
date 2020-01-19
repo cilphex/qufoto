@@ -1,0 +1,35 @@
+<div id="comment">
+    <%= form_remote_tag( 
+        :html => {:id => "comment_form"},
+        :update => "comment", 
+        :url => {:action => "deliver_message"}) %>
+        
+        <textarea id="body" name="body">Dear Reisenfolde:</textarea><br><br>
+        Sincerely,
+        <input type="text" id="name" name="name"></input><br><br>
+        P.s.: You can get back to me at:
+        <input type="text" id="email" name="email"></input>
+        <input id="send_comment" type="submit" value="Deliver >" />
+    </form>
+</div>
+
+<script type="text/javascript">
+    var rainbows = false;
+    function contactColor () {
+		$('body').morph ({color:colors[x]}, {duration:2.0});
+		if (rainbows == true)
+		    setTimeout ("contactColor ()", 2200);
+	}
+	Event.observe ('body', 'focus', function () {
+		if ($('body').value == 'Dear Reisenfolde:') {
+			$('body').value = '';
+		}
+		rainbows = true;
+		contactColor ();
+	});
+	Event.observe ('body', 'blur', function () {
+	   if ($F('body') == '')
+	       $('body').value = 'Dear Reisenfolde:';
+	   rainbows = false;
+	});
+</script>

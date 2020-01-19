@@ -1,0 +1,78 @@
+<li id="portfolio_li_<%= p.id %>" class="hidden_<%= p.hidden %>">
+	<div class="bar">
+		<span class="handle"></span>
+		<a class="expand" href="javascript:void(0)" onclick="$('portfolio_li_<%= p.id %>').toggleClassName('details');"><span id="title_<%= p.id %>"><%= p.title %></span> <span id="saved_<%= p.id %>" class="saved hide">Saved</span></a>
+		<span class="count" title="<%= p.images.length %> images"><%= p.images.length %> images</span>
+		<a href="javascript:Portfolio.toggleVisibility(<%= p.id %>)" class="visibility"><%= p.hidden ? 'Hidden' : 'Visible' %></a>
+	</div>
+	<div class="details clearfix">
+
+		<div style="display: -webkit-box;">
+
+			<form id="options_<%= p.id %>" class="options" target="upload_iframe" method="post" enctype="multipart/form-data" action="/update3/portfolio_attach_audio">
+				<ul>
+					<li>
+						<div>Rename</div>
+						<div>
+							<input id="rename_<%= p.id %>" type="text"/>
+						</div>
+						<a class="save" href="javascript:Portfolio.rename(<%= p.id %>)">Save</a>
+					</li>
+					<li>
+						<div>Private?</div>
+						<div id="privacy_<%= p.id %>" class="<%= 'private' if p.private %>">
+							<label><input type="radio" name="privacy" value="true" <%= 'checked="checked"' if p.private %> onclick="$('privacy_<%= p.id %>').addClassName('private')"/>Yes</label>
+							<label><input type="radio" name="privacy" value="false" <%= 'checked="checked"' unless p.private %> onclick="$('privacy_<%= p.id %>').removeClassName('private')"/>No</label>
+							<input type="text" name="password" placeholder="Password" value="<%= p.password %>" style="margin-left: 10px;"/>
+						</div>
+						<a class="save" href="javascript:Portfolio.setPrivate(<%= p.id %>)">Save</a>
+					</li>
+					<% if current_user.grade == "Pro" %>
+						<li>
+							<div>Audio</div>
+							<div id="audio_upload_<%= p.id %>" style="<%= 'display:none;' if p.audio? %>">
+								None | <a href="javascript:$('audiofile_<%= p.id %>').toggle()">Upload new</a>
+								<div id="audiofile_<%= p.id %>" style="display: none;">
+									<input id="tmp_file_<%= p.id %>" type="file" name="tmp_file"/>
+									<input type="hidden" name="id" value="<%= p.id %>"/>
+									<a href="javascript:$('options_<%= p.id %>').submit()">Upload</a>
+								</div>
+							</div>
+							<div id="audio_uploaded_<%= p.id %>" style="<%= 'display:none;' if !p.audio? %>">
+								<a id="audio_play_<%= p.id %>" href="javascript:Portfolio.playPauseAudio(<%= p.id %>, '<%= s3_file(portfolio_audio_s3_path(p)) %>')">Preview</a> |
+								<a href="javascript:Portfolio.deleteAudio(<%= p.id %>)">Delete</a>
+							</div>
+						</li>
+						<li>
+							<div>Multimedia</div>
+							<div>
+								<select name="multimedia" onchange="Portfolio.setMultimedia(<%= p.id %>)">
+									<option value="false" <%= 'selected="selected"' unless p.slideshow %>>Off</option>
+									<option value="true" <%= 'selected="selected"' if p.slideshow %>>On</option>
+								</select>
+							</div>
+						</li>
+					<% end %>
+				</ul>
+			</form>
+
+			<div>
+				<div class="images">
+					<div class="scroll clearfix">
+						<% p.images.each do |image| %>
+							<div class="image" style="background-image: url(<%= s3_photo(image.id, 'thumb') %>)"></div>
+						<% end %>
+					</div>
+					<% if p.images.empty? %>
+						<div class="empty">empty</div>
+					<% else %>
+						<div class="gradient"></div>
+					<% end %>
+				</div>
+				<a class="delete" href="javascript:Portfolio.remove(<%= p.id %>)">Delete this portfolio</a>
+			</div>
+		</div>
+
+
+	</div>
+</li>

@@ -1,0 +1,32 @@
+<div id="help" style="display: none;">
+    Here you can upload a picture of yourself to be displayed on your biography page.  Your biography picture
+    will be resized to fit in a 300x460 pixel area, but it will appear smaller if you upload a smaller photo.
+</div>
+
+<%
+    bpdtrueblue = current_user.info.biopicdisplay == true ? " blue" : ""
+    bpdfalseblue = current_user.info.biopicdisplay == true ? "" : " blue"
+    biopic = "biopic" + current_user.id.to_s + ".jpg"
+%>
+
+<center>
+    <%# if s3_contains(biopic) %>
+    <% if current_user.info.biopic %>
+        <%= link_to image_tag(s3_file(biopic_s3_path(current_user)), :style => "border: 4px solid #ccc;"), s3_file(biopic_s3_path(current_user)), :popup => true %>
+        <br><br>
+        [<%= link_to "delete", :action => "delete_biopic" %>]
+    <% else %>
+        No biography picture uploaded.
+    <% end %>
+    
+    <%= form_tag({:action => 'update_biopic'}, :multipart => true, :style => "margin: 30px 0;") %>
+        <%= file_field_tag "tmp_file", :size => 42 %><br><br>
+        <%= submit_tag "Upload New", :class => "highlight", :style => "width: 300px;", :onclick => "$('loader').show();" %>
+    </form>
+    
+    <%= form_remote_tag :url => {:action => "biopic_display"}, :update => "status", :loading => "$('loader').show();", :complete => "$('loader').hide();" %>
+        <%= hidden_field_tag "biopicdisplay", current_user.info.biopicdisplay, :id => "biopicdisplay" %>
+        <%= submit_tag "Display bio pic", :onclick => "$('biopicdisplay').value='true'; this.style.background='#D5EBFF'; $('bpdfalse').style.background='none';", :id => "bpdtrue", :class => "clickable#{bpdtrueblue}", :style => "width: 160px; margin-bottom: 4px;" %><br>
+        <%= submit_tag "Keep bio pic hidden", :onclick => "$('biopicdisplay').value='false'; this.style.background='#D5EBFF'; $('bpdtrue').style.background='none';", :id => "bpdfalse", :class => "clickable#{bpdfalseblue}", :style => "width: 160px;" %>
+    </form>
+</center>

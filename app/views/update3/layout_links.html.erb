@@ -1,0 +1,64 @@
+<h1>Site links</h1>
+
+
+<form id="link_form" class="links">
+	<h3>Rename tabs</h3>
+	<table class="dataform">
+		<tr>
+			<td>Portfolios</td>
+			<td><input type="text" name="link_portfolios" maxlength="30" value="<%= current_user.info.link_portfolios %>"/></td>
+		</tr>
+		<tr>
+			<td>Multimedia</td>
+			<td><input type="text" name="link_multimedia" maxlength="30" value="<%= current_user.info.link_multimedia %>"/></td>
+		</tr>
+		<tr>
+			<td>Biography</td>
+			<td><input type="text" name="link_biography" maxlength="30" value="<%= current_user.info.link_biography %>"/></td>
+		</tr>
+		<tr>
+			<td>Contact</td>
+			<td><input type="text" name="link_contact" maxlength="30" value="<%= current_user.info.link_contact %>"/></td>
+		</tr>
+		<tr>
+			<td>Resume</td>
+			<td><input type="text" name="link_resume" maxlength="30" value="<%= current_user.info.link_resume %>"/></td>
+		</tr>
+		<tr>
+			<td>Client Access</td>
+			<td><input type="text" name="link_clientaccess" maxlength="30" value="<%= current_user.info.link_clientaccess %>"/></td>
+		</tr>
+	</table>
+
+	<h3>External links</h3>
+	<table class="dataform">
+		<tr>
+			<td>Link 1</td>
+			<td><input type="text" name="link1" maxlength="30" value="<%= current_user.info.link1 %>"/></td>
+			<td>http://</td>
+			<td><input type="text" name="link1_address" maxlength="255" value="<%= current_user.info.link1_address %>"/></td>
+		</tr>
+		<tr>
+			<td>Link 2</td>
+			<td><input type="text" name="link2" maxlength="30" value="<%= current_user.info.link2 %>"/></td>
+			<td>http://</td>
+			<td><input type="text" name="link2_address" maxlength="255" value="<%= current_user.info.link2_address %>"/></td>
+		</tr>
+		<tr>
+			<td>Link 3</td>
+			<td><input type="text" name="link3" maxlength="30" value="<%= current_user.info.link3 %>"/></td>
+			<td>http://</td>
+			<td><input type="text" name="link3_address" maxlength="255" value="<%= current_user.info.link3_address %>"/></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<a id="save_info" href="javascript:void(0)" onclick="Layout.saveLinks()">Save</a>
+				<span id="saving" class="saving" style="display: none;">Saving...</span>
+				<span id="saved" class="saved" style="display: none;">Saved</span>
+			</td>
+			<td></td>
+			<td></td>
+		</tr>
+	</table>
+</form>

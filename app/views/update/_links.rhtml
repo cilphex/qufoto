@@ -1,0 +1,99 @@
+<div id="help" style="display: none;">
+    Here you can change the text of the pages on your site to whatever you want, to better fit your work.  If no
+    text is specified here, the default page titles are used.  New titles can be a maximum of 30 characters.
+    The "&" character is automatically replaced with "and" for programming purposes.
+    
+    <p>You can also add up to three additional links to appear in the menu on your site.
+    <ul>
+        <li><b>Link <i>X</i>:</b> The text that you want to appear on your menu for this link.</li>
+        <li><b>http://:</b> The web address you want this link to point to.</li>
+    </ul></p>
+</div>
+
+<%= form_remote_tag :url => {:action => "update_links"}, :update => "status", :loading => "$('loader').show();", :complete => "$('loader').hide();" %>
+    <table class="paddedTable" style="margin-bottom: 30px;">
+        <tr>
+            <td>
+                Portfolios
+            </td><td>
+                <%= text_field_tag "link_portfolios", current_user.info.link_portfolios, :style => "width: 100px;", :onfocus => "$('status').innerHTML='';" %>
+            </td>
+        </tr>
+        
+        <% if current_user.grade == "Pro" %>
+            <tr>
+                <td>
+                    Multimedia
+                </td><td>
+                    <%= text_field_tag "link_multimedia", current_user.info.link_multimedia, :style => "width: 100px;", :onfocus => "$('status').innerHTML='';" %>
+                </td>
+            </tr>
+        <% end %>
+        
+        <tr>
+            <td>
+                Biography
+            </td><td>
+                <%= text_field_tag "link_biography", current_user.info.link_biography, :style => "width: 100px;", :onfocus => "$('status').innerHTML='';" %>
+            </td>
+        </tr><tr>
+            <td>
+                Contact
+            </td><td>
+                <%= text_field_tag "link_contact", current_user.info.link_contact, :style => "width: 100px;", :onfocus => "$('status').innerHTML='';" %>
+            </td>
+        </tr><tr>
+            <td>
+                Resume
+            </td><td>
+                <%= text_field_tag "link_resume", current_user.info.link_resume, :style => "width: 100px;", :onfocus => "$('status').innerHTML='';" %>
+            </td><td>
+            
+            </td>
+        </tr><tr>
+            <td>
+                Client Access
+            </td><td>
+                <%= text_field_tag "link_clientaccess", current_user.info.link_clientaccess, :style => "width: 100px;", :onfocus => "$('status').innerHTML='';" %>
+            </td><td>
+            
+            </td>
+        </tr>
+    </table>
+    
+    <table class="paddedTable" style="margin-bottom: 30px;">
+		<tr>
+            <td>
+                Link 1:
+            </td><td>
+                <%= text_field_tag "link1", current_user.info.link1, :style => "width: 100px;", :onfocus => "$('status').innerHTML='';" %>
+            </td><td>
+                http:// <%= text_field_tag "link1_address", current_user.info.link1_address, :style => "width: 200px;", :onfocus => "$('status').innerHTML='';" %>
+            </td><td>
+                &nbsp;
+            </td>
+        </tr><tr>
+            <td>
+                Link 2:
+            </td><td>
+                <%= text_field_tag "link2", current_user.info.link2, :style => "width: 100px;", :onfocus => "$('status').innerHTML='';" %>
+            </td><td>
+                http:// <%= text_field_tag "link2_address", current_user.info.link2_address, :style => "width: 200px;", :onfocus => "$('status').innerHTML='';" %>
+            </td><td>
+                &nbsp;
+            </td>
+        </tr><tr>
+            <td>
+                Link 3:
+            </td><td>
+                <%= text_field_tag "link3", current_user.info.link3, :style => "width: 100px;", :onfocus => "$('status').innerHTML='';" %>
+            </td><td>
+                http:// <%= text_field_tag "link3_address", current_user.info.link3_address, :style => "width: 200px;", :onfocus => "$('status').innerHTML='';" %>
+            </td><td>
+                &nbsp;
+            </td>
+        </tr>
+    </table>
+    
+    <%= submit_tag "Save", :class=> "highlight" %>
+</form>

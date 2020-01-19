@@ -1,0 +1,90 @@
+<div id="help" style="display: none;">
+    Add any JPG image to any of your portfolios.
+    <% if current_user.grade == "Pro" %>
+        The <b>Rollover</b> field is optional.  Use this field to attach a rollover image to the photo you're uploading.
+        When a visitor rolls their mouse over any image on your website that has a rollover image attached to it,
+        the image will disappear and the rollover image will show, until the visitor rolls off of it.  This feature is
+        good for presenting retouches, photo manipulations, or before and after shots.
+    <% end %>
+</div>
+
+<!-- removed , :onsubmit => "UploadProgress.monitor('#{escape_javascript @upid}')" from form_tag -->
+
+<% if current_user.portfolios.length > 0 %>
+    <%= form_tag({:action => 'add_image', :upload_id => @upid}, :id => "uploadForm", :multipart => true, :target => 'uploadframe') %>
+        <table cellspacing=1 cellpadding=4 id="uploadImageTable" style="margin-top: 12px;">
+            <tr>
+                <td valign=top class="label">
+                    Title
+                </td><td>
+                    <%= text_field "image", "title" %>
+                </td><td id="uploadedImageCell" rowspan=8 style="width: 260px; text-align: center; border-bottom: none;">
+                </td>
+            <tr><tr>
+                <td valign=top class="label">
+                    Description
+                </td><td>
+                    <%= text_area "image", "description", :maxlength => 240, :onkeyup => "return ismaxlength(this)" %>
+                </td>
+            </tr><tr>
+                <td valign=top class="label">
+                    Portfolio
+                </td><td>
+                    <%= render :partial => "portfolio_select" %>
+                </td>
+            <tr><tr>
+                <td valign=top class="label">
+                    Image
+                </td><td>
+                    <%= file_field "image", "tmp_file", :size => 30 %>
+                </td>
+            <tr><tr>
+                <% rollover = current_user.grade == "Pro" ? "" : "display: none;"%>
+                <td valign=top class="label" style="<%= rollover %>">
+                    Rollover<br>
+                    <small class="grey">(Optional)</small>
+                </td><td style="<%= rollover %>">
+                    <%= file_field "image", "tmp_file_rollover", :size => 30 %>
+                </td>
+            <tr><tr>
+                <td>
+                    &nbsp;
+                </td><td>
+                    <%= submit_tag "Upload", :id => "uploadButton", :class => "highlight" %>
+                </td>
+            <tr><tr>
+                <td class="label" style="height: 22px; border-bottom: none;">
+                    <span id="results" style="display: none;"></span>
+                </td><td style="border-bottom: none;">
+                    <div id="progress-bar" style="width: 0px; height: 10px; background: #85c3fb;"></div>
+                </td>
+            </tr>
+        </table>
+    </form>
+<% else %>
+    You must create at least one portfolio before you can upload images.
+<% end %>
+
+<script type="text/javascript">
+    function showImage (imageID, rollover) {
+        $('uploadedImageCell').innerHTML = '<img alt="Uploaded Image" id="uploadedImage" src="/image/resize_s3_photo/' + imageID + '?height=210&amp;size=student&amp;width=260" style="display: none;" />';
+        
+        /*  Comment out for now
+        if (rollover) {
+            $('uploadedImageCell').innerHTML += '<img src="/image/render_image/' + imageID + 'r?width=260&amp;height=210.png" id="uploadedRollover" style="display: none;">';
+            $('uploadedImage').observe ('mouseover', function (e) {
+                $('uploadedImage', 'uploadedRollover').invoke ('toggle');
+            });
+            $('uploadedRollover').observe ('mouseout', function (e) {
+                $('uploadedImage', 'uploadedRollover').invoke ('toggle');
+            });
+        }
+        */
+        
+        Event.observe('uploadedImage', 'load', function () {
+            new Effect.Appear ('uploadedImage');
+        });
+    }
+</script>
+
+<iframe id="uploadframe" name="uploadframe" src="about:blank" style="margin: 0; padding: 0; width: 1px; height: 1px; border: none;"></iframe>

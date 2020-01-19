@@ -1,0 +1,372 @@
+body {
+    background: #FFFFFF;
+    font-family: verdana, arial, sans-serif;
+    font-size: 11px;
+    color: #444444;
+}
+a,
+a:link,
+a:visited,
+a:active {
+	color: #228AFF;
+	text-decoration: none;
+}
+a:hover {
+	color: #228AFF;
+	text-decoration: underline;
+}
+h1 {
+	margin: 20px 0;
+	font-size: 20px;
+	font-weight: normal;
+}
+h3 {
+    font-size: 14px;
+}
+h4 {
+    margin: 0;
+    padding: 0;
+    display: inline;
+    font-size: 13px;
+}
+img {
+    border: none;
+}
+form {
+    margin: 0;
+    padding: 0;
+}
+input, textarea, select {
+    border: 1px solid #CBCBCB;
+    font-family: verdana, arial, sans-serif;
+    font-size: 11px;
+    color: #444444;
+}
+input.highlight:hover {
+    cursor: pointer;
+    background: #FFD5EA;
+}
+input.clickable:hover {
+    cursor: pointer;
+}
+hr {
+    height: 1px;
+    color: #FFFFFF;
+    background-color: #FFFFFF;
+    border-top: 1px dotted #DDDDDD;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+}
+table {
+    font-family: verdana, arial, sans-serif;
+    font-size: 11px;
+}
+.success {
+	font-style: italic;
+	color: #00BB00;
+}
+.error {
+	font-weight: bold;
+	font-style: italic;
+	color: #EE0000;
+}
+#profittable {
+    width: 100%;
+}
+#profittable td {
+    border-right: 1px dotted #CCCCCC;
+    border-bottom: 1px solid #CCCCCC;
+}
+#banner {
+    position: absolute;
+    top: 4px;
+    left: 50%;
+    margin-left: 160px;
+    width: 206px;
+    height: 57px;
+}
+#navigation {
+    position: absolute;
+    top: 68px;
+    right: 50%;
+    margin-right: 354px;
+    padding-right: 12px;
+    text-align: right;
+    line-height: 18px;
+    border-right: 1px dotted #CCCCCC;
+}
+#navigation ul {
+    list-style: none;
+    text-align: right;
+    line-height: 20px;
+}
+#navigation li {
+}
+#content {
+    position: absolute;
+    width: 700px;
+    top: 68px;
+    left: 50%;
+    margin-left: -350px;
+    padding-left: 12px;
+    border-left: 1px solid #CCCCCC;
+}
+h5 {
+    margin: 0px 0px 8px 0px;
+    font-size: 11px;
+    font-weight: normal;
+    padding: 2px 4px 2px 4px;
+    background: #F3F3F3;
+}
+.error {
+    font-weight: bold;
+    color: white;
+    background: #FFB3E1;
+    border-top: 1px solid red;
+    border-bottom: 1px solid red;
+}
+.userlist {
+    width: 100%;
+}
+.userlist td {
+    padding: 4px 16px 4px 0px;
+    border-bottom: 1px dotted #CCCCCC;
+}
+.show {
+    display: block;
+}
+.hide {
+    display: none;
+}
+.caption {
+    font-size: 10px; 
+    color: #AAAAAA; 
+    line-height: 20px;
+}
+#online_users {
+    margin: 20px 0 20px 0;
+}
+#recentImagesTable {
+    width: 100%;
+}
+#recentImagesTable td {
+    padding-top: 12px; 
+    text-align: center; 
+}
+#recentImagesTable img {
+    padding: 4px; 
+    border: 1px solid #BBB;
+}
+.clearfix:after {
+	content:".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+/* Hides from IE-Mac \*/
+* html .clearfix {
+	height: 1%;
+}
+div.spacer {
+	height: 40px;
+}
+
+/* User page --------------------------------------------------------------- */
+
+div.next_previous {
+	padding: 0 4px 7px;
+	border-bottom: 1px dotted #ddd;
+	opacity: 0.1;
+}
+div.next_previous:hover {
+	opacity: 1.0;
+}
+div.next_previous a {
+	color: #000;
+}
+div.next_previous:hover a {
+	color: #228AFF;
+}
+div.next_previous a img {
+	margin: 0 6px;
+}
+div.next_previous a.right {
+	float: right;
+}
+form.user_form {
+	margin: 10px 0 0;
+}
+
+/* Interviews -------------------------------------------------------------- */
+
+ul.interviews {
+	padding: 0;
+	list-style-type: none;
+}
+ul.interviews li {
+	position: relative;
+	padding: 8px 0 8px 22px;
+	border-bottom: 1px solid #e8e8e8;
+}
+ul.interviews li:last-child {
+	border-bottom: none;
+}
+ul.interviews li div.handle {
+	position: absolute;
+	top: 4px;
+	left: 0;
+	bottom: 4px;
+	width: 14px;
+	background: url(/images/grip_dot.png);
+	cursor: move;
+}
+ul.interviews li span {
+	float: right;
+}
+ul.interviews li span.enabled {color: #0b0;}
+ul.interviews li span.disabled {color: #aaa;}
+div.images div.image {
+	position: relative;
+	float: left;
+	margin: 0 10px 15px 0;
+	padding: 4px;
+	min-height: 136px;
+	text-align: center;
+	border: 1px solid #ddd;
+}
+div.images div.image div.handle {
+	position: absolute;
+	left: 4px;
+	right: 4px;
+	bottom: 4px;
+	height: 14px;
+	background: url(/images/grip_dot.png);
+	cursor: move;
+}
+div.images div.image img {
+	margin: 0 0 5px;
+	cursor: pointer;
+}
+div.images div.image a {
+	display: block;
+	text-align: center;
+}
+
+/* Interview --------------------------------------------------------------- */
+
+form.interview_form {
+	
+}
+form.interview_form label {
+	display: block;
+	margin: 0 0 3px;
+	cursor: pointer;
+}
+form.interview_form input[type="text"],
+form.interview_form textarea {
+	margin: 0 0 15px;
+	padding: 2px;
+}
+form.interview_form input[type="text"] {
+	width: 300px;
+	font-size: 13px;
+}
+form.interview_form textarea {
+	padding: 2px;
+	width: 700px;
+	height: 100px;
+}
+form.interview_form textarea#body {
+	height: 350px;
+}
+
+/* Examples ---------------------------------------------------------------- */
+
+ul#examples {
+	margin: 20px 0;
+	padding: 0;
+	list-style-type: none;
+}
+ul#examples li {
+	position: relative;
+	margin: 0 0 10px;
+	padding: 0 0 10px 22px;
+	border-bottom: 1px solid #eee;
+}
+ul#examples li:last-child {
+	margin: 0;
+}
+ul#examples li div.handle {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 10px;
+	margin: 0 10px 0 0;
+	width: 14px;
+	background: url(/images/grip_dot.png) 0 0 repeat;
+	cursor: move;
+}
+ul#examples li div.image {
+	float: right;
+	text-align: center;
+	width: 240px;
+}
+ul#examples li div.image div.img {
+	margin: 0 0 5px;
+	width: 240px;
+	font-size: 0;
+	text-align: center;
+	color: #aaa;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+}
+ul#examples li div.image div.img span {
+	font-size: 11px;
+}
+ul#examples li div.image div.img img {
+	max-width: 240px;
+	vertical-align: middle;
+}
+ul#examples li p {
+	margin: 0 0 10px;
+}
+ul#examples li p:last-child {
+	margin: 0;
+}
+ul#examples li p label {
+	display: block;
+	margin: 0 0 2px;
+}
+ul#examples li p textarea {
+	width: 350px;
+	height: 60px;
+}
+ul#examples li p span.saved {
+	padding-left: 5px;
+	font-weight: bold;
+	font-style: italic;
+	color: #00BB00;
+}
+
+/* News & Updates ---------------------------------------------------------- */
+
+#new_post {
+    height: 320px;
+}
+.label {
+    clear: left;
+    float: left;
+    margin: 14px 10px 0 0;
+    padding: 3px 12px 0 0;
+    width: 55px;
+    text-align: right;
+}
+.post {
+    padding: 4px 0 4px 0;
+}
+.post_body {
+    padding: 8px 0 8px 16px;
+}
+
